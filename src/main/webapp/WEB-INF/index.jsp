@@ -9,9 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/main_css.css" />
+
 <style type="text/css">
 	body {
 		width: 100%;
@@ -61,6 +63,7 @@
 		min-height: 650px;
 	}
 </style>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
@@ -71,10 +74,13 @@
 </script>
 
 </head>
+
+
 <body>
 	<div class="wrap" style="min-width: 1000px;">
 		<!-- 헤더 가져오기 -->
 		<jsp:include page="views/pages/header.jsp" />
+		
 		
 		<!-- 메인영역 -->
 		<c:if test="${ empty param.body }">

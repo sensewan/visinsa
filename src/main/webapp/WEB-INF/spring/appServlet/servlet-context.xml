@@ -151,9 +151,10 @@
 		아래는 ContextRoot("/"), ContextRoot/index, ContextRoot/default로
 		들어오는 요청을 게시 글 리스트로 리다이렉트 시키는 예 이다.
 	-->
-	<view-controller path="/" view-name="redirect:/main" />
+	<view-controller path="/" view-name="redirect:/home" />
 	<redirect-view-controller path="/index" redirect-url="/boardList"/>
 	<redirect-view-controller path="/default" redirect-url="/boardList"/>
+	
 	<view-controller path="loginForm" view-name="loginForm" />
 	
 	<!--

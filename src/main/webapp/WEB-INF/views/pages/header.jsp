@@ -25,7 +25,7 @@
 		  <div class="collapse navbar-collapse" id="navbarColor01">
 		    <ul class="navbar-nav mr-auto" id=nav_ul>
 		      <li class="nav-item active">
-		        <a class="nav-link" href="main.mvc">Home</a>
+		        <a class="nav-link" href="home">Home</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="">BEST</a>
@@ -41,6 +41,9 @@
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="">공지사항</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="boardList">테스트</a>
 		      </li>
 		    </ul>
 		    

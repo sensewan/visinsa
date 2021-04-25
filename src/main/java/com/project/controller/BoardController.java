@@ -32,11 +32,11 @@ import com.project.service.BoardService;
 @Controller
 public class BoardController {
 	
-	// 업로드한 파일을 저장할 폴더 위치를 상수로 선언하고 있다.
+	// 업로드한 파일 저장할 폴더 경로
 	private final static String DEFAULT_PATH = "/resources/upload/";	
 	
-	/* 인스턴스 필드에 @Autowired annotation을 사용하면 접근지정자가 
-	 * private이고 setter 메서드가 없다 하더라도 문제없이 주입 된다.
+	/* 인스턴스 필드에 @Autowired을 사용하면 
+	 * 접근지정자가 private이고 setter 메서드가 없다 하더라도 문제없이 주입 된다.
 	 * 하지만 우리는 항상 setter 메서드를 준비하는 습관을 들일 수 있도록 하자.
 	 * 
 	 * setter 주입 방식은 스프링이 기본 생성자를 통해 이 클래스의 인스턴스를
@@ -172,10 +172,15 @@ public class BoardController {
 	 * 받을 수 있도록 하였다.
 	 **/	
 	
-	@RequestMapping("/main")
+	
+	
+	@RequestMapping(value= {"/home", "/main"})
 	public String test_main() {
 		return "main";
 	}
+	
+	
+	
 	
 	@RequestMapping(value= {"/boardList", "/list"})
 	public String boardList(Model model, 
