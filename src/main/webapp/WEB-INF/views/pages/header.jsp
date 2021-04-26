@@ -4,20 +4,24 @@
 
 	<!-- 헤더영역 -->
 	<div class="header" >
-		<div class="login_bar">
-			<c:if test="${ not empty member }">
-				<span>${member.nk}님</span>
-			</c:if>
-			
-			<span class="login_m">${ sessionScope.isLogin == true ?
-				"<a href='logout.mvc'>로그아웃</a>" : "<a href='SignUp.mvc'>회원가입&nbsp;⎥&nbsp;</a><a href='login.mvc'>로그인</a>" }</span>
+		<div>
+			<div class="login_bar" style="float: right;">
+				<c:if test="${ not empty member }">
+					<span>${member.nk}님</span>
+				</c:if>
+				
+				<span class="login_m">${ sessionScope.isLogin == true ?
+					"<a href='logout.mvc'>로그아웃</a>" : "<a href='SignUp.mvc'>회원가입&nbsp;⎥&nbsp;</a><a href='login.mvc'>로그인</a>" }</span>
+			</div>
+			<div style="text-align: center;">
+			  <a class="navbar-brand" href="main" id="logo">
+			  	<img src="resources/images/logo.png" style="width: 200px;">
+			  </a>
+			</div>
 		</div>
 	
 		<!-- 네비게이션 -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		  <a class="navbar-brand" href="main.mvc" id="logo">
-		  	<img src="image/logo.jpg" style="width: 65px;">
-		  </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
