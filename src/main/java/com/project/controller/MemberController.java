@@ -369,4 +369,10 @@ public class MemberController {
 		
 		return "redirect:boardList";
 	}
+	
+	@RequestMapping("/SignUp.mvc")
+	public String SignUp() {
+		
+		return "member/SignUp";
+	}
 }
