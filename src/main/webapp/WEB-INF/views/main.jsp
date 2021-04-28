@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <article>
 
-<h1>테스트 메인 페이지3</h1>
+<h1>테스트 메인 페이지4</h1>
 
 
 </article>
