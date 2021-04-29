@@ -94,7 +94,7 @@ public class MemberDaoImpl implements MemberDao {
 		} 
 		
 		// 로그인 성공
-		if(m.getPass().equals(pass)) {
+		if(m.getPw().equals(pass)) {
 			result = 1;
 		
 		// 비밀번호가 틀리면	
@@ -124,7 +124,23 @@ public class MemberDaoImpl implements MemberDao {
 	// 회원 정보를 회원 테이블에 저장하는 메서드
 	@Override
 	public void addMember(Member member) {
-		sqlSession.insert(NAME_SPACE + ".addMember", member);
+		System.out.println("member.getMedic() = " + member.getMedic());
+		System.out.println("member.getId() = " + member.getId());
+		System.out.println("member.getPw() = " + member.getPw());
+		System.out.println("member.getPwQuestion() = " + member.getPwQuestion());
+		System.out.println("member.getPwAnswer() = " + member.getPwAnswer());
+		System.out.println("member.getNickName() = " + member.getNickName());
+		System.out.println("member.getPhone() = " + member.getPhone());
+		System.out.println("member.getBirth() = " + member.getBirth());
+		System.out.println("member.getName() = " + member.getName());
+		System.out.println("member.getEmail() = " + member.getEmail());
+		System.out.println("member.getAddress() = " + member.getAddress());
+		System.out.println("member.getSeller() = " + member.getSeller());
+		if(member.getMedic() == 0) {
+			sqlSession.insert(NAME_SPACE + ".addMember2", member);
+		} else {
+			sqlSession.insert(NAME_SPACE + ".addMember1", member);
+		}
 	}
 	
 	// 회원 정보 수정 시에 기존 비밀번호가 맞는지 체크하는 메서드

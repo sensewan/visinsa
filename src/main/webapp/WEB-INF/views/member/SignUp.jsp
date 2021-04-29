@@ -129,9 +129,17 @@
 	$(function(){
 		$("#alert-success").hide();
 		$("#alert-danger").hide();
+		$("#alert-danger1").hide();
 		$("input").keyup(function(){
 			var pwd1=$("#pwd1").val();
 			var pwd2=$("#pwd2").val();
+			if(pwd1.length == 0){
+				$("#alert-danger1").hide();
+			} else if(pwd1.length < 4 || pwd1.length > 13) {
+				$("#alert-danger1").show();
+			} else {
+				$("#alert-danger1").hide();
+			}
 			if(pwd1 != "" && pwd2 != ""){
 				if(pwd1 == pwd2){
 					$("#alert-success").show();
@@ -158,17 +166,11 @@
 	});
 	
 	//생년월일
-	
-	$(document).ready(function () {
-		appendYear();
- 	 });
-	
-	function appendYear(){
-		
+	$(function(){
 		var date = new Date();
 		var com_year = date.getFullYear();
 		var year = "";
-		$("#year").append("<option value=''>" + com_year + "</option>");
+		$("#year").append("<option value=''>" + Number(com_year) + "</option>");
 		$("#month").append("<option value=''>" + 01 + "</option>");
 		$("#day").append("<option value=''>" + 01 + "</option>");
 		
@@ -181,16 +183,17 @@
 		for (var d = 2; d <= 31; d++) {
 			$("#day").append("<option value='" + d + "'>" + d + "</option>");
 		}
-	}
+	});
 	
 	//이메일 입력
 	$(function(){
 		$("#selectEmail").change(function(){
 			if($(this).val() == "1"){
 				$("#email3").val("");
-				$("#email3").attr("disabled", false);
+				$("#email3").attr("readonly", false);
 			}else{
-				$("#email3").attr("disabled", true);
+				$("#email3").val($(this).val());
+				$("#email3").attr("readonly", true);
 			}
 		});
 	});
@@ -200,10 +203,12 @@
 		$("#buyer").click(function(){
 			$(this).attr("class", "btn btn-primary")
 			$("#seller").attr("class", "btn btn-secondary")
+			$("#sell").val(0);
 		});
 		$("#seller").click(function(){
 			$(this).attr("class", "btn btn-primary")
 			$("#buyer").attr("class", "btn btn-secondary")
+			$("#sell").val(1);
 		});
 	});
 	
@@ -215,6 +220,7 @@
 			$("#chemist").attr("class", "btn btn-secondary")
 			$("#doctornchemist1").hide();
 			$("#doctornchemist2").hide();
+			$("#medi").val(0);
 		});
 		$("#doctor").click(function(){
 			$(this).attr("class", "btn btn-primary")
@@ -222,6 +228,7 @@
 			$("#chemist").attr("class", "btn btn-secondary")
 			$("#doctornchemist1").show();
 			$("#doctornchemist2").show();
+			$("#medi").val(1);
 		});
 		$("#chemist").click(function(){
 			$(this).attr("class", "btn btn-primary")
@@ -229,6 +236,7 @@
 			$("#general").attr("class", "btn btn-secondary")
 			$("#doctornchemist1").show();
 			$("#doctornchemist2").show();
+			$("#medi").val(2);
 		});
 	});
 
@@ -237,9 +245,11 @@
 <body>
 	<div class="wrap">
 	<div class="container" style="width: 960px;">
-		<form id="SignUpForm" action="SignUpProcess.mvc" method="post">
+		<form id="SignUpForm" action="joinInfo" method="post">
 			<fieldset style="margin-top: 50px;">
 				<legend style="text-align: center">회원가입</legend>
+				<input type="hidden" name="sell" id="sell" value="0">
+				<input type="hidden" name="medi" id="medi" value="0">
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
 					<div class="row">
@@ -270,19 +280,20 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="pwd" class="col-sm-3 col-form-label">비밀번호 : </label>
+					<label for="pwd1" class="col-sm-3 col-form-label">비밀번호 : </label>
 					<div class="row">
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="pwd" id="pwd1" placeholder="PassWord">
+						<input type="password" class="form-control" name="pwd1" id="pwd1" placeholder="PassWord" maxlength=13>
 					</div>
 					</div>
+					<div class="alert alert-danger" id="alert-danger1" style="margin-top: 10px">4~13자를 사용하세요.</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="pwd" class="col-sm-3 col-form-label">비밀번호 확인 : </label>
+					<label for="pwd2" class="col-sm-3 col-form-label">비밀번호 확인 : </label>
 					<div class="row">
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="pwd" id="pwd2" placeholder="PassWord">
+						<input type="password" class="form-control" name="pwd2" id="pwd2" placeholder="PassWord" maxlength=13>
 					</div>
 					</div>
 					<div class="alert alert-success" id="alert-success" style="margin-top: 10px">비밀번호가 일치합니다.</div> 
@@ -290,22 +301,22 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="pwd" class="col-sm-3 col-form-label">비밀번호 질문 : </label>
+					<label for="pwdQuestion" class="col-sm-3 col-form-label">비밀번호 질문 : </label>
 					<div class="row">
 					<div class="col-sm-10">
 						<select class="form-control" name="pwdQuestion" id="pwdQuestion">
-							<option value="1">기억에 남는 추억의 장소는?</option>
-							<option value="2">자신의 인생 좌우명은?</option>
-							<option value="3">자신의 보물 제1호는?</option>
-							<option value="4">가장 기억에 남는 선생님 성함은?</option>
-							<option value="5">인상 깊게 읽은 책 이름은?</option>
+							<option value="기억에 남는 추억의 장소는?">기억에 남는 추억의 장소는?</option>
+							<option value="자신의 인생 좌우명은?">자신의 인생 좌우명은?</option>
+							<option value="자신의 보물 제1호는?">자신의 보물 제1호는?</option>
+							<option value="가장 기억에 남는 선생님 성함은?">가장 기억에 남는 선생님 성함은?</option>
+							<option value="인상 깊게 읽은 책 이름은?">인상 깊게 읽은 책 이름은?</option>
 						</select>
 					</div>
 					</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="pwd" class="col-sm-3 col-form-label">비밀번호 답변 : </label>
+					<label for="pwdAnswer" class="col-sm-3 col-form-label">비밀번호 답변 : </label>
 					<div class="row">
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="pwdAnswer" id="pwdAnswer" placeholder="answer">
@@ -323,10 +334,10 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="phone" class="col-sm-3 col-form-label">핸드폰번호 : </label>
+					<label for="phone0" class="col-sm-3 col-form-label">핸드폰번호 : </label>
 					<div class="row">
 					<div class="col-sm-10" >
-						<select style="width:32%; display:inline; text-align-last: center;" class="form-control">
+						<select style="width:32%; display:inline; text-align-last: center;" class="form-control" name="phone0" id="phone0">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="012">012</option>
@@ -338,12 +349,12 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="birth" class="col-sm-3 col-form-label">생년월일 : </label>
+					<label for="year" class="col-sm-3 col-form-label">생년월일 : </label>
 					<div class="row">
 					<div class="col-sm-10">
-						<select style="width:31%; display:inline; text-align-last: center;" class="form-control" id="year"></select>년   
-						<select style="width:30%; display:inline; text-align-last: center;" class="form-control" id="month"></select>월   
-						<select style="width:30%; display:inline; text-align-last: center;" class="form-control" id="day"></select>일
+						<select style="width:31%; display:inline; text-align-last: center;" class="form-control" name="year" id="year"></select>년   
+						<select style="width:30%; display:inline; text-align-last: center;" class="form-control" name="month" id="month"></select>월   
+						<select style="width:30%; display:inline; text-align-last: center;" class="form-control" name="day" id="day"></select>일
 					</div>
 					</div>
 				</div>
@@ -358,46 +369,46 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="name" class="col-sm-3 col-form-label">이 메 일 : </label>
+					<label for="email1" class="col-sm-3 col-form-label">이 메 일 : </label>
 					<div class="row">
 					<div class="col-sm-10">
 						<input type="text" style="width:33%; display:inline;" class="form-control" name="email1" id="email1" placeholder="email"> @
-						<select style="width:31%; display:inline;" class="form-control" name="selectEmail" id="selectEmail">
+						<select style="width:31%; display:inline;" class="form-control" id="selectEmail">
 							<option value="1">직접 입력</option>
-							<option value="naver">naver.com</option>
-							<option value="google">google.com</option>
-							<option value="daum">daum.net</option>
+							<option value="naver.com">naver.com</option>
+							<option value="google.com">google.com</option>
+							<option value="daum.net">daum.net</option>
 						</select>
-						<input type="text" style="width:31%; display:inline;" class="form-control" name="email3" id="email3">
+						<input type="text" style="width:31%; display:inline;" class="form-control" name="email2" id="email3">
 					</div>
 					</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="address" class="col-sm-3 col-form-label">주 소 : </label>
+					<label class="col-sm-3 col-form-label">주 소 : </label>
 					<div class="row">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample4_postcode" placeholder="우편번호" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="postcode1" id="sample4_postcode" placeholder="우편번호" readonly>
 						<input type="button" style="width: 20%; display:inline;" class="form-control" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 					</div>
 					</div>
 					<div class="row" style="margin-top:10px;">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="roadAddress1" id="sample4_roadAddress" placeholder="도로명주소" readonly>
 						<input type="text" style="width: 49%; display:inline;" class="form-control" id="sample4_jibunAddress" placeholder="지번주소" readonly>
 						<span id="guide" style="color:#999;display:none"></span>
 					</div>
 					</div>
 					<div class="row" style="margin-top:10px;">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample4_detailAddress" placeholder="상세주소">
-						<input type="text" style="width: 49%; display:inline;" class="form-control"  id="sample4_extraAddress" placeholder="참고항목" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="detailAddress1" id="sample4_detailAddress" placeholder="상세주소">
+						<input type="text" style="width: 49%; display:inline;" class="form-control" name="extraAddress1" id="sample4_extraAddress" placeholder="참고항목" readonly>
 					</div>
 					</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px; display:none" id="doctornchemist1" >
-					<label for="name" class="col-sm-3 col-form-label">상 호 명 : </label>
+					<label for="CompanyName" class="col-sm-3 col-form-label">상 호 명 : </label>
 					<div class="row">
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="CompanyName" id="CompanyName" placeholder="Company Name">
@@ -406,24 +417,24 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px; display:none" id="doctornchemist2" >
-					<label for="address" class="col-sm-3 col-form-label">근 무 지 : </label>
+					<label class="col-sm-3 col-form-label">근 무 지 : </label>
 					<div class="row">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample5_postcode" placeholder="우편번호" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="postcode2" id="sample5_postcode" placeholder="우편번호" readonly>
 						<input type="button" style="width: 20%; display:inline;" class="form-control" onclick="sample5_execDaumPostcode()" value="우편번호 찾기"><br>
 					</div>
 					</div>
 					<div class="row" style="margin-top:10px;">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample5_roadAddress" placeholder="도로명주소" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="roadAddress2" id="sample5_roadAddress" placeholder="도로명주소" readonly>
 						<input type="text" style="width: 49%; display:inline;" class="form-control" id="sample5_jibunAddress" placeholder="지번주소" readonly>
 						<span id="guide" style="color:#999;display:none"></span>
 					</div>
 					</div>
 					<div class="row" style="margin-top:10px;">
 					<div class="col-sm-10">
-						<input type="text" style="width: 50%; display:inline;" class="form-control" id="sample5_detailAddress" placeholder="상세주소">
-						<input type="text" style="width: 49%; display:inline;" class="form-control"  id="sample5_extraAddress" placeholder="참고항목" readonly>
+						<input type="text" style="width: 50%; display:inline;" class="form-control" name="detailAddress2" id="sample5_detailAddress" placeholder="상세주소">
+						<input type="text" style="width: 49%; display:inline;" class="form-control" name="extraAddress2" id="sample5_extraAddress" placeholder="참고항목" readonly>
 					</div>
 					</div>
 				</div>

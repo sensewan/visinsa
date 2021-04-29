@@ -44,7 +44,6 @@ import com.project.service.MemberService;
  **/
 @SessionAttributes({"member", "m"})
 public class MemberController {
-	
 	private MemberService memberService;
 	
 	/* @Autowired annotation을 사용해 MemberService 구현체를 셋터 주입하고 있다. 
@@ -230,80 +229,48 @@ public class MemberController {
 	 * 요청이 들어올 때 세션에는 m이라는 이름을 가진 속성이 없기 때문에 에러가 발생한다.
 	 **/	
 	@RequestMapping("/joinInfo")
-	public String joinInfo(Model model, Member member,
-			String pass1, String emailId, String emailDomain,
-			String mobile1, String mobile2, String mobile3,
-			String phone1, String phone2, String phone3,
-			@RequestParam(value="emailGet", required=false, 
-				defaultValue="false")boolean emailGet) {
+	public String joinInfo(Member member,
+			String id, String pwd1, String pwdQuestion, String pwdAnswer,
+			String nk, String phone0, String phone1, String phone2,
+			int year, int month, int day, String name, String email1,
+			String email2, String postcode1, String roadAddress1,
+			String detailAddress1, String extraAddress1,
+			String CompanyName, String postcode2, String roadAddress2,
+			String detailAddress2, String extraAddress2,
+			int sell, int medi) {
+		
 		System.out.println("/joinInfo");
 		
-		member.setPass(pass1);
-		member.setEmail(emailId + "@" + emailDomain);
-		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
-				
-		if(phone2.equals("") || phone3.equals("")) {			
-			member.setPhone("");				
-		} else {			
-			member.setPhone(phone1 + "-" + phone2 + "-" + phone3);
-		}				
-		member.setEmailGet(Boolean.valueOf(emailGet));
 		
-		/* 클래스 레벨에 @SessionAttributes({"member", "m"}) 
-		 * 애노테이션을 지정하고 컨트롤러의 메서드에서 아래와 같이 동일한 
-		 * 이름으로 모델에 추가하면 스프링이 세션 영역에 데이터를 저장해 준다.
-		 **/ 
-		model.addAttribute("m", member);	
-		return "member/memberInfo";
-	}
-	
-	/* 회원이 입력한 정보를 확인한 후 가입완료를 클릭하여 들어오는 요청을 처리하는 메서드
-	 * 
-	 * 클래스 레벨에 @SessionAttributes({"member", "m"})를 지정하고
-	 * Controller 메서드에서 member, m이라는 이름으로 모델에 저장하면
-	 * 이 데이터는 세션 영역의 속성에 저장된다. Controller 메서드의 파라미터에
-	 * 아래와 같이 Controller 메서드의 파라미터에 @ModelAttribute("m")를
-	 * 지정하면 스프링은 세션 영역에서 m이라는 이름을 가진 데이터를 찾아 member
-	 * 변수에 바인딩 시켜 준다. 만약 세션 영역의 속성에 m이라는 이름을 가진 
-	 * 데이터가 존재하지 않으면 Exception이 발생한다.
-	 **/
-	@RequestMapping("/joinResult")
-	public String joinResult(SessionStatus sessionStatus,
-			@ModelAttribute("m") Member member) {
+		member.setId(id);
+		member.setPw(pwd1);
+		member.setPwQuestion(pwdQuestion);
+		member.setPwAnswer(pwdAnswer);
+		member.setNickName(nk);
+		member.setPhone(phone0 + "-" + phone1 + "-" + phone2);
+		int y1 = year % 10;
+		int y2 = year / 10 % 10 * 10;
+		year = y1 + y2;
+		member.setBirth(year*10000 + month*100 + day);
+		member.setName(name);
+		member.setEmail(email1 + "@" + email2);
+		member.setAddress(postcode1 + "-" + roadAddress1 + 
+				"-" + extraAddress1 + "-" + detailAddress1);
 		
-		System.out.println("joinResult : " + member.getName());
+		member.setSeller(sell);
+		member.setMedic(medi);
+		
+		if(medi == 0) {
+		} else {
+			member.setBusinessName(CompanyName);
+			member.setBusinessAdd(postcode2 + "-" + roadAddress2 + 
+					"-" + extraAddress2 + "-" + detailAddress2);
+		}
+
 		memberService.addMember(member);
 		
-		/* 세션 영역에서 객체를 삭제
-		 * 세션 영역에서만 삭제되고 모델에는 삭제되지 않는다.
-		 * 세션을 다시 시작하지 않기 때문에 세션이 계속해서 유지된다.
-		 **/
-		sessionStatus.setComplete();
-		
-		// 현재 세션을 종료하고 새로운 세션을 시작한다.
-		//session.invalidate();
-		
-		return "redirect:boardList";
+		return "redirect:main";
 	}
-	
-	// 회원가입 폼에서 들어오는 중복 아이디 체크 요청을 처리하는 메서드
-	@RequestMapping("/overlapIdCheck")	
-	public String overlapIdCheck(Model model, String id) {		
-		
-		// 회원 아이디 중복 여부를 받아온다.
-		boolean overlap = memberService.overlapIdCheck(id);
-		
-		// model에 id와 회원 아이디 중복 여부를 저장 한다. 
-		model.addAttribute("id", id);
-		model.addAttribute("overlap", overlap);
-		
-		/* 회원 가입 폼에서 아이디 중복확인 버튼을 클릭하면 새창으로 뷰가 보이게
-		 * 해야 하므로 뷰 이름을 반환 할 때 "forward:" 접두어를 사용했다. 
-		 * "forwrad:" 접두어가 있으면 뷰 리졸버 설정에 지정한 prefix, suffix를
-		 * 적용하지 않고 "forwrad:" 뒤에 붙인 뷰 페이지로 포워딩 된다. 
-		 **/
-		return "forward:WEB-INF/views/member/overlapIdCheck.jsp";
-	}	
 
 	// 회원 정보 수정 폼 요청을 처리하는 메서드
 	@RequestMapping("/memberUpdateForm")
@@ -329,16 +296,14 @@ public class MemberController {
 				defaultValue="false")boolean emailGet) {
 		System.out.println("/memberUpdateInfo ");
 		
-		member.setPass(pass1);
+		member.setPw(pass1);
 		member.setEmail(emailId + "@" + emailDomain);
-		member.setMobile(mobile1 + "-" + mobile2 + "-" + mobile3);
 				
 		if(phone2.equals("") || phone3.equals("")) {			
 			member.setPhone("");				
 		} else {			
 			member.setPhone(phone1 + "-" + phone2 + "-" + phone3);
 		}				
-		member.setEmailGet(Boolean.valueOf(emailGet));
 		
 		/* 클래스 레벨에 @SessionAttributes({"member", "m"}) 
 		 * 애노테이션을 지정하고 컨트롤러의 메서드에서 아래와 같이 동일한 
