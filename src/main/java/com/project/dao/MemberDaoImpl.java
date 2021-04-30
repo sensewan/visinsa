@@ -86,7 +86,7 @@ public class MemberDaoImpl implements MemberDao {
 		 * 반환된다. id가 존재하지 않으면 검색된 결과가 없으므로 null이 반환 된다. 
 		 **/
 		Member m = sqlSession.selectOne(NAME_SPACE + ".login", id);
-		int result = -1;		
+		int result = -1;
 		
 		// id가 존재하지 않으면
 		if(m == null) {
@@ -119,6 +119,12 @@ public class MemberDaoImpl implements MemberDao {
 		 * 반환된다. id가 존재하지 않으면 검색된 결과가 없으므로 null이 반환 된다.
 		 **/
 		return sqlSession.selectOne(NAME_SPACE + ".getMember", id);
+	}
+	
+	@Override
+	public Member getMemberNk(String nk) {
+		
+		return sqlSession.selectOne(NAME_SPACE + ".getMemberNk", nk);
 	}
 	
 	// 회원 정보를 회원 테이블에 저장하는 메서드

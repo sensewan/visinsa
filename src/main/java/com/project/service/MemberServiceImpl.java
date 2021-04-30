@@ -38,13 +38,22 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 회원 가입시 아이디 중복을 체크하는 메서드
 	@Override
-	public boolean overlapIdCheck(String id) {
+	public int overlapIdCheck(String id) {
 		Member member = memberDao.getMember(id);
-		System.out.println("overlapIdCheck - member : " + member);
 		if(member == null) {
-			return false;
+			return 0;
 		}
-		return true;
+		return 1;
+	}
+	
+	// 회원 가입시 닉네임 중복을 체크하는 메서드
+	@Override
+	public int overlapNkCheck(String nk) {
+		Member member = memberDao.getMemberNk(nk);
+		if(member == null) {
+			return 0;
+		}
+		return 1;
 	}
 	
 	// 회원 정보를 DAO를 이용해 회원 테이블에 저장하는 메서드

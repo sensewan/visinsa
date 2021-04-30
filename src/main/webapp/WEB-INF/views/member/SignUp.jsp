@@ -124,7 +124,40 @@
         }).open();
     }
 </script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+	
+	//아이디 중복체크
+	$(function(){
+		$("#success-id").hide();
+		$("#danger-id").hide();
+		$("#id").keyup(function(){
+			var check_id = $("#id").val();
+			if(check_id.length != 0){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/idCheck?checkId="+ check_id,
+					type : "get",
+					success : function(data) {
+						console.log("data = " + data);
+						if (data == 1) {
+							$("#danger-id").show();
+							$("#success-id").hide();
+							$("#submit_check_id").val("0");
+						} else {
+							$("#success-id").show();
+							$("#danger-id").hide();
+							$("#submit_check_id").val("1");
+						}
+					}
+				});
+			} else {
+				$("#success-id").hide();
+				$("#danger-id").hide();
+				$("#submit_check_id").val("0");
+			}
+		});
+	});
+	
+	
 	//비밀번호 확인
 	$(function(){
 		$("#alert-success").hide();
@@ -135,6 +168,7 @@
 			var pwd2=$("#pwd2").val();
 			if(pwd1.length == 0){
 				$("#alert-danger1").hide();
+				$("#submit_check_pwd").val("0");
 			} else if(pwd1.length < 4 || pwd1.length > 13) {
 				$("#alert-danger1").show();
 			} else {
@@ -144,13 +178,46 @@
 				if(pwd1 == pwd2){
 					$("#alert-success").show();
 					$("#alert-danger").hide();
+					$("#submit_check_pwd").val("1");
 				}else{
 					$("#alert-success").hide();
 					$("#alert-danger").show();
+					$("#submit_check_pwd").val("0");
 				}
 			} else {
 				$("#alert-success").hide();
 				$("#alert-danger").hide();
+			}
+		});
+	});
+	
+	//닉네임 중복체크
+	$(function(){
+		$("#success-nk").hide();
+		$("#danger-nk").hide();
+		$("#nk").keyup(function(){
+			var check_nk = $("#nk").val();
+			if(check_nk.length != 0){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/nkCheck?checkNk="+ check_nk,
+					type : "get",
+					success : function(data) {
+						console.log("data = " + data);
+						if (data == 1) {
+							$("#danger-nk").show();
+							$("#success-nk").hide();
+							$("#submit_check_nk").val("0");
+						} else {
+							$("#success-nk").show();
+							$("#danger-nk").hide();
+							$("#submit_check_nk").val("1");
+						}
+					}
+				});
+			} else {
+				$("#success-nk").hide();
+				$("#danger-nk").hide();
+				$("#submit_check_nk").val("0");
 			}
 		});
 	});
@@ -170,17 +237,14 @@
 		var date = new Date();
 		var com_year = date.getFullYear();
 		var year = "";
-		$("#year").append("<option value=''>" + Number(com_year) + "</option>");
-		$("#month").append("<option value=''>" + 01 + "</option>");
-		$("#day").append("<option value=''>" + 01 + "</option>");
 		
-		for (var y = com_year - 1; y >= com_year - 100; y--) {
+		for (var y = com_year; y >= com_year - 100; y--) {
 			$("#year").append("<option value='" + y + "'>" + y + "</option>");
 		}
-		for (var m = 2; m <= 12; m++) {
+		for (var m = 1; m <= 12; m++) {
 			$("#month").append("<option value='" + m + "'>" + m + "</option>");
 		}
-		for (var d = 2; d <= 31; d++) {
+		for (var d = 1; d <= 31; d++) {
 			$("#day").append("<option value='" + d + "'>" + d + "</option>");
 		}
 	});
@@ -239,17 +303,84 @@
 			$("#medi").val(2);
 		});
 	});
+	
+	//회원가입 폼체크
+	$(function(){
+		$("#submitForm").on("click", function() {
+			if($('#id').val().length <= 0) {
+				alert("아이디가 입력되지 않았습니다.\n아이디를 입력해 주세요");			
+				$("#id").focus();
+				return false;
+			}
+			if($("#submit_check_id").val() != "1") {
+				alert("아이디를 확인해주세요.");
+				return false;
+			}
+			if($("#pwd1").val().length <= 0) {
+				alert("비밀번호가 입력되지 않았습니다.\n비밀번호를 입력해 주세요");			
+				$("#pwd1").focus();
+				return false;
+			}
+			if($("#pwd2").val().length <= 0) {
+				alert("비밀번호를 확인하지 않았습니다.\n비밀번호를 확인해 주세요");			
+				$("#pwd2").focus();
+				return false;
+			}
+			if($("#nk").val().length <= 0) {
+				alert("닉네임이 입력되지 않았습니다.\n닉네임을 입력해 주세요");			
+				$("#nk").focus();
+				return false;
+			}
+			if($("#submit_check_nk").val() != "1") {
+				alert("닉네임을 확인해주세요.");
+				return false;
+			}
+			if($("#phone1").val().length <= 0) {
+				alert("핸드폰번호가 입력되지 않았습니다.\n핸드폰번호를 입력해 주세요");			
+				$("#phone1").focus();
+				return false;
+			}
+			if($("#phone2").val().length <= 0) {
+				alert("핸드폰번호가 입력되지 않았습니다.\n핸드폰번호를 입력해 주세요");			
+				$("#phone2").focus();
+				return false;
+			}
+			if($("#name").val().length <= 0) {
+				alert("이름이 입력되지 않았습니다.\n이름을 입력해 주세요");			
+				$("#name").focus();
+				return false;
+			}
+			if($("#email1").val().length <= 0) {
+				alert("이메일이 입력되지 않았습니다.\n이메일을 입력해 주세요");			
+				$("#email1").focus();
+				return false;
+			}
+			if($("#email3").val().length <= 0) {
+				alert("이메일이 입력되지 않았습니다.\n이메일을 입력해 주세요");			
+				$("#email3").focus();
+				return false;
+			}
+			if($("#sample4_detailAddress").val().length <= 0 || $("#sample4_postcode").val().length <=0) {
+				alert("주소가 입력되지 않았습니다.\n주소를 입력해 주세요");			
+				$("#sample4_detailAddress").focus();
+				return false;
+			}
+		});
+	});
 
 </script>
 </head>
 <body>
 	<div class="wrap">
 	<div class="container" style="width: 960px;">
-		<form id="SignUpForm" action="joinInfo" method="post">
+		<form name="SignUpForm" id="SignUpForm" action="joinInfo" method="post">
 			<fieldset style="margin-top: 50px;">
 				<legend style="text-align: center">회원가입</legend>
 				<input type="hidden" name="sell" id="sell" value="0">
 				<input type="hidden" name="medi" id="medi" value="0">
+				<input type="hidden" id="submit_check_id" value="0">
+				<input type="hidden" id="submit_check_pwd" value="0">
+				<input type="hidden" id="submit_check_nk" value="0">
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
 					<div class="row">
@@ -277,6 +408,8 @@
 						<input type="text" class="form-control" name="id" id="id" placeholder="Id">
 					</div>
 					</div>
+					<div class="alert alert-success" id="success-id" style="margin-top: 10px">사용가능한 아이디입니다.</div> 
+					<div class="alert alert-danger" id="danger-id" style="margin-top: 10px">사용할수없는 아이디입니다.</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
@@ -331,6 +464,8 @@
 						<input type="text" class="form-control" name="nk" id="nk" placeholder="NickName">
 					</div>
 					</div>
+					<div class="alert alert-success" id="success-nk" style="margin-top: 10px">사용가능한 닉네임입니다.</div> 
+					<div class="alert alert-danger" id="danger-nk" style="margin-top: 10px">사용할수없는 닉네임입니다.</div>
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">

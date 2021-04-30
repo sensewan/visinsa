@@ -19,6 +19,8 @@ public interface MemberDao {
 	 * @return no에 해당하는 회원 정보를 Member 객체로 반환
 	 **/
 	public Member getMember(String id);
+	
+	public Member getMemberNk(String nk);
 
 	// 회원 정보를 회원 테이블에 저장하는 메서드
 	public void addMember(Member member);

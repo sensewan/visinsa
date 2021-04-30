@@ -39,7 +39,7 @@
 		지정하는 이름과 같아야 한다. 
 	-->
 	<select id="login" resultType="Member">
-		SELECT pass FROM member WHERE id = #{id}
+		SELECT pw FROM member WHERE id = #{id}
 	</select>
 	
 	<!--
@@ -55,6 +55,11 @@
 	-->
 	<select id="getMember" resultType="Member">
 		SELECT * FROM member WHERE id = #{id}
+	</select>
+	
+	
+	<select id="getMemberNk" resultType="Member">
+		SELECT * FROM member WHERE nickName = #{nk}
 	</select>
 	
 	<!--

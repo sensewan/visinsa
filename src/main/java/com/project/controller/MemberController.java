@@ -2,6 +2,9 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -93,11 +97,17 @@ public class MemberController {
 	 **/	 
 	@RequestMapping(value="/login", method=RequestMethod.POST)	
 	public String login(Model model, @RequestParam("id") String id, 
-			@RequestParam("pass") String pass, 
+			@RequestParam("pwd") String pwd, 
 			HttpSession session, HttpServletResponse response) 
-					throws ServletException, IOException {
+					throws ServletException, IOException, NoSuchAlgorithmException {
 		
-		int result = memberService.login(id, pass);
+
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		md.update(pwd.getBytes());
+		String hex = String.format("%064x", new BigInteger(1, md.digest()));
+		
+		System.out.println("hex = " + hex);
+		int result = memberService.login(id, hex);
 		
 		if(result == -1) {
 			response.setContentType("text/html; charset=utf-8");
@@ -146,8 +156,8 @@ public class MemberController {
 		 * 되기를 원한다면 redirect:http://사이트 주소를 지정한다.
 		 * 
 		 * 로그인이 성공하면 게시 글 리스트로 리다이렉트 된다.
-		 **/		
-		return "redirect:/boardList";
+		 **/
+		return "redirect:/main";
 	}
 	
 	/* @RequestMapping의 ()에 method 속성을 지정하지 않았으므로 
@@ -160,7 +170,7 @@ public class MemberController {
 		 * 세션 영역에서만 삭제되고 모델에는 삭제되지 않는다.
 		 * 세션을 다시 시작하지 않기 때문에 세션이 계속해서 유지된다.
 		 **/
-		//sessionStatus.setComplete();
+		sessionStatus.setComplete();
 		
 		// 현재 세션을 종료하고 새로운 세션을 시작한다.
 		session.invalidate();
@@ -175,7 +185,7 @@ public class MemberController {
 		 * 
 		 * 로그아웃 되면 게시 글 리스트로 리다이렉트 된다./
 		 **/
-		return "redirect:/boardList";
+		return "redirect:/main";
 	}
 	
 	/* 회원가입 폼, 수정 폼 에서 들어오는 요청을 처리하는 메서드
@@ -227,9 +237,9 @@ public class MemberController {
 	 * Controller 메서드의 파라미터에 @ModelAttribute("m")를 이용해 동일한 이름을
 	 * 지정하게 되면 세션 영역에서 m이라는 이름을 가진 데이터를 찾는데 /joinInfo로
 	 * 요청이 들어올 때 세션에는 m이라는 이름을 가진 속성이 없기 때문에 에러가 발생한다.
-	 **/	
+	 **/
 	@RequestMapping("/joinInfo")
-	public String joinInfo(Member member,
+	public String joinInfo(SessionStatus sessionStatus, HttpSession session, Member member,
 			String id, String pwd1, String pwdQuestion, String pwdAnswer,
 			String nk, String phone0, String phone1, String phone2,
 			int year, int month, int day, String name, String email1,
@@ -237,13 +247,16 @@ public class MemberController {
 			String detailAddress1, String extraAddress1,
 			String CompanyName, String postcode2, String roadAddress2,
 			String detailAddress2, String extraAddress2,
-			int sell, int medi) {
+			int sell, int medi) throws NoSuchAlgorithmException {
 		
 		System.out.println("/joinInfo");
 		
 		
 		member.setId(id);
-		member.setPw(pwd1);
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		md.update(pwd1.getBytes());
+		String hex = String.format("%064x", new BigInteger(1, md.digest()));
+		member.setPw(hex);
 		member.setPwQuestion(pwdQuestion);
 		member.setPwAnswer(pwdAnswer);
 		member.setNickName(nk);
@@ -266,12 +279,33 @@ public class MemberController {
 			member.setBusinessAdd(postcode2 + "-" + roadAddress2 + 
 					"-" + extraAddress2 + "-" + detailAddress2);
 		}
-
+		
+		
 		memberService.addMember(member);
+		
+		// 세션 삭제
+		sessionStatus.setComplete();
 		
 		return "redirect:main";
 	}
 
+	// 회원가입 아이디 체크
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(@RequestParam("checkId") String check_id) {
+		
+		return memberService.overlapIdCheck(check_id);
+	}
+	
+	// 회원가입 닉네임 체크
+	@RequestMapping(value = "/nkCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int nkCheck(@RequestParam("checkNk") String check_nk) {
+		
+		return memberService.overlapNkCheck(check_nk);
+	}
+	
+	
 	// 회원 정보 수정 폼 요청을 처리하는 메서드
 	@RequestMapping("/memberUpdateForm")
 	public String updateForm(Model model, String id) {
@@ -335,9 +369,15 @@ public class MemberController {
 		return "redirect:boardList";
 	}
 	
-	@RequestMapping("/SignUp.mvc")
+	@RequestMapping("/SignUp")
 	public String SignUp() {
 		
 		return "member/SignUp";
+	}
+	
+	@RequestMapping("/login")
+	public String Login() {
+		
+		return "member/Login";
 	}
 }
