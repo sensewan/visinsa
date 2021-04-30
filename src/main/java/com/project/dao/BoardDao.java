@@ -3,7 +3,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.domain.Board;
-import com.project.domain.Reply;
+import com.project.domain.CommunityReply;
 
 public interface BoardDao {
 	
@@ -47,7 +47,7 @@ public interface BoardDao {
 	public abstract int getBoardCount(String type, String keyword);
 	
 	// 게시 글 번호에 해당하는 댓글 리스트를 가져오는 메서드
-	public abstract List<Reply> replyList(int no);
+	public abstract List<CommunityReply> replyList(int no);
 	
 	// 게시 글 번호에 해당하는 추천/땡큐를 업데이트 하는 메서드
 	public abstract void updateRecommend(int no, String recommend);
@@ -56,10 +56,10 @@ public interface BoardDao {
 	public abstract Board getRecommend(int no);
 	
 	// 게시 글 번호에 해당하는 댓글을 DB에 등록하는 메서드
-	public void addReply(Reply reply);
+	public void addReply(CommunityReply reply);
 	
 	// DB에서 댓글 번호에 해당하는 댓글을 수정하는 메서드
-	public void updateReply(Reply reply);
+	public void updateReply(CommunityReply reply);
 
 	// DB에서 댓글 번호에 해당하는 댓글을 삭제하는 메서드
 	public void deleteReply(int no);

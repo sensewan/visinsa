@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springstudy.bbs.mapper.CommunityMapper" >
+
+	<select id="CommunityBoardList" resultType="Community" parameterType="hashmap">
+		SELECT 
+			no, 
+			title, 
+			id, 
+			content, 
+			regdate,
+			readcount,
+			ilike,
+			unlike
+			
+		FROM community
+			<where>	
+			<if test="type == 'title'">
+				title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'id'">
+				id LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'content'">
+				content LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+		</where>
+		ORDER BY no DESC
+		LIMIT #{startRow}, #{num}
+	</select>
+
+	<select id="getCommunityBoardCount" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(no) 
+		FROM community
+		<where>	
+			<if test="type == 'title'">
+				title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'id'">
+				writer LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'content'">
+				content LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+		</where>	
+	</select>
+	
+	<select id="getCommunityBoardDetail" resultType="Community" >
+		SELECT 
+			* 
+		FROM community 
+		WHERE no = #{no}
+	</select>
+	
+		<select id="replyList" resultType="Reply">
+		SELECT 
+			no,
+			bbs_no AS bbsNo,
+			reply_content AS replyContent,
+			replyid,
+			replydate
+		FROM reply
+		WHERE bbs_no = #{no}
+			ORDER BY no DESC
+	</select>
+	
+	<update id="incrementReadCount">
+		UPDATE community
+			SET readcount = readcount + 1
+		WHERE no = #{no}
+	</update>
+	
+	
+		<insert id="insertCommunityBoard" parameterType="Community"
+		useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO community(title, id, content, medic,
+				regdate, readcount, category) VALUES(#{title}, #{id}, #{content}, #{medic}, 
+				DEFAULT, 0, #{category})
+	</insert>
+	
+		
+</mapper>	
+
+
+

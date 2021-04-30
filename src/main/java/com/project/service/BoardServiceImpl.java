@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.BoardDao;
 import com.project.domain.Board;
-import com.project.domain.Reply;
+import com.project.domain.CommunityReply;
 
 // 이 클래스가 서비스 계층(비즈니스 로직)의 컴포넌트(Bean) 임을 선언하고 있다.
 @Service
@@ -192,7 +192,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// 게시 글 번호에 해당하는 댓글 리스트를 반환하는 메서드
-	public List<Reply> replyList(int no) {
+	public List<CommunityReply> replyList(int no) {
 		return boardDao.replyList(no);
 	}
 	
@@ -237,12 +237,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// BoardDao를 이용해 게시 글 번호에 해당하는 댓글을 등록하는 메서드
-	public void addReply(Reply reply) {
+	public void addReply(CommunityReply reply) {
 		boardDao.addReply(reply);
 	}
 	
 	// BoardDao를 이용해 댓글을 수정하는 메서드
-	public void updateReply(Reply reply) {
+	public void updateReply(CommunityReply reply) {
 		boardDao.updateReply(reply);
 	}
 

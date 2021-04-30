@@ -41,7 +41,7 @@
 		        <a class="nav-link" href="">비타민</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">커뮤니티</a>
+		        <a class="nav-link" href="Community">커뮤니티</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="">공지사항</a>

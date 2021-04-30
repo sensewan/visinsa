@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.domain.Board;
-import com.project.domain.Reply;
+import com.project.domain.CommunityReply;
 
 public interface BoardService {
 	
@@ -26,7 +26,7 @@ public interface BoardService {
 	public abstract Board getBoard(int no, boolean isCount);
 	
 	// 게시 글 번호에 해당하는 댓글 리스트를 반환하는 메서드
-	public abstract List<Reply> replyList(int no);
+	public abstract List<CommunityReply> replyList(int no);
 	
 	// BoardDao를 이용해 새로운 게시 글을 추가하는 메서드
 	public abstract void insertBoard(Board board);
@@ -48,10 +48,10 @@ public interface BoardService {
 	public Map<String, Integer> recommend(int no, String recommend);
 	
 	// BoardDao를 이용해 게시 글 번호에 해당하는 댓글을 등록하는 메서드
-	public void addReply(Reply reply);
+	public void addReply(CommunityReply reply);
 	
 	// BoardDao를 이용해 댓글을 수정하는 메서드
-	public void updateReply(Reply reply);
+	public void updateReply(CommunityReply reply);
 	
 	// BoardDao를 이용해 댓글 번호에 해당하는 댓글을 삭제하는 메서드
 	public void deleteReply(int no);
