@@ -20,7 +20,10 @@ public interface MemberService {
 	public Member getMember(String id);
 	
 	// 회원 가입시 DAO를 이용해 아이디 중복을 체크하는 메서드
-	public boolean overlapIdCheck(String id);
+	public int overlapIdCheck(String id);
+	
+	// 회원 가입시 DAO를 이용해 닉네임 중복을 체크하는 메서드
+	public int overlapNkCheck(String nk);
 	
 	// 회원 정보를 DAO를 이용해 회원 테이블에 저장하는 메서드
 	public void addMember(Member member);
