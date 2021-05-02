@@ -9,7 +9,7 @@ import com.project.domain.CommunityReply;
 public interface CommunityService {
 	
 	public abstract Map<String, Object> CommunityBoardList(
-			int pageNum, String type, String keyword);
+			int pageNum, String type, String keyword, String category);
 	 
 	  public abstract List<Community> CommunityBoard();
 	  
@@ -21,13 +21,16 @@ public interface CommunityService {
 	  public abstract void insertBoard(Community board);
 	  
 	  
-	  /*
+	  
 	  public abstract void updateBoard(Community board);
 	  
+	  
+	 
 	  public abstract void deleteBoard(int no);
-	  
+	
 	  public Map<String, Integer> recommend(int no, String recommend);
-	  
+	
+	  /*  
 	  public void addReply(Reply reply);
 	  
 	  public void updateReply(Reply reply);

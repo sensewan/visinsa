@@ -2,12 +2,59 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style type="text/css">
+
+	.leftnav {
+		list-style-type: none;
+		background-color: #ccc;
+		width: 25%;
+		padding: 0;
+		margin:  0;
+		margin-top: 80%;
+		position: fixed;
+		height: 100%;
+		overflow: auto;
+	}
+
+	li a {
+		text-decoration: none;
+		display: block;
+		color: #000;
+		padding: 8px 15px 8px 15px;
+		font-weight: bold;
+	}
+
+	li a.communitycategory {
+		background-color: tomato;
+		color: #fff;
+	}
+
+	li a:hover:not(.communitycategory) {
+		background-color: #333;
+		color: #fff;
+	}
+
+</style>
+<form name="categoryFilterForm"  action="boardList">
+<input type="hidden" name="catcat" id="catcat">
+</form>
 <article>
-<table class="listTable">
+	<form name="btnFilter" id="categoryForm">
+		<input type="button" class="communitycategory" >
+		<button type="button" name="category" id="category" class="categoryFilter">전체 게시판</button>
+		<button type="button"  name="category" id="free" class="categoryFilter">자유 게시판</button>
+		<button type="button"  name="category" id="qna" class="categoryFilter">질문 답변 게시판</button>
+		<button type="button"  name="category" id="chuchu" class="categoryFilter">추천 게시판</button>
+	</form>
+
+
+
+<table class="listTable" style="margin-left: 0px;">
 	<tr>
 		<td class="boardTitle" colspan="5">
 			<h2>게시 글 리스트</h2>
 		</td>
+		
 	</tr>
 	<tr>
 		<td colspan="5">
@@ -31,16 +78,21 @@
 	<tr>
 		<%-- 검색 요청일 경우 일반 게시 글 리스트로 이동할 수 있도록 링크를 설정했다. --%>
 		<td colspan="2" class="boardListLink"><a href="boardList">리스트</a></td>
+		<c:if test="${ sessionScope.isLogin == true}">
 		<td colspan="3" class="listWrite"><a href="writeForm">글쓰기</a></td>
+		</c:if>
 	</tr>	
 	</c:if>
 	<c:if test="${ not searchOption }">
 	<tr>			
-		<td colspan="5" class="listWrite"><a href="writeForm">글쓰기</a></td>
+		<c:if test="${ sessionScope.isLogin == true}">
+		<td colspan="3" class="listWrite"><a href="writeForm">글쓰기</a></td>
+		</c:if>
 	</tr>
 	</c:if>
 	<tr>
 		<th class="listThNo">NO</th>
+		<th class="listThNo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 		<th class="listThTitle">제목</th>
 		<th class="listThWriter">작성자</th>
 		<th class="listThRegDate">작성일</th>
@@ -55,6 +107,18 @@
 	<c:forEach var="b" items="${ CommunityBoardList }" varStatus="status">		
 	<tr class="listTr">
 		<td class="listTdNo">${ b.no  }</td>
+		
+		
+		<c:if test="${b.medic == 0 }">
+		<td class="listTdNo"></td>
+		</c:if>
+		<c:if test="${b.medic == 1 }">
+		<td class="listTdNo"><img src="/resources/images/doctor.png"></td>
+		</c:if>
+		<c:if test="${b.medic == 2 }">
+		<td class="listTdNo"><img src="/resources/images/druggist.png"></td>
+		</c:if>
+		
 		<td class="listTdTitle">
 			<%--  
 			/* IE에서 링크로 요청 시 파라미터에 한글이 포함되면 IE는 URLEncoding을
@@ -67,10 +131,10 @@
 			 * 주소창에는 한글 그대로 표시되지만 UTF-8로 URLEncoding을 해준다.
 			 **/
 			--%>			
-			<a href="boardDetail?no=${ b.no }&pageNum=${ currentPage }
+			<a href="CommunityBoardDetail?no=${ b.no }&pageNum=${ currentPage }
 				&type=${ type }&keyword=${ keyword }">${ b.title }</a>
 		</td>
-		<td class="listTdWriter">${ b.writer }</td>
+		<td class="listTdWriter">${ b.nickName }</td>
 		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>
 		<td class="listTdReadCount">${ b.readCount }</td>
@@ -86,7 +150,7 @@
 		 	 **/
 		 	 --%>
 		 	<c:if test="${ startPage > pageGroup }">
-				<a href="boardList?pageNum=${ startPage - pageGroup }
+				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }
 					&type=${ type }&keyword=${ keyword }">[이전]</a>
 			</c:if>	
 			<%--
@@ -100,7 +164,7 @@
 					[ ${ i } ]
 				</c:if>			
 				<c:if test="${ i != currentPage }">
-					<a href="boardList?pageNum=${ i }&type=${ type }
+					<a href="CommunityBoardList?pageNum=${ i }&type=${ type }
 						&keyword=${ keyword }">[ ${ i } ]</a>
 				</c:if>			
 			</c:forEach>
@@ -112,7 +176,7 @@
 		 	 **/
 		 	 --%>
 			<c:if test="${ endPage < pageCount }">
-				<a href="boardList?pageNum=${ startPage + pageGroup }
+				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }
 					&type=${ type }&keyword=${ keyword }">[다음]</a>
 			</c:if>		
 		</td>
@@ -127,11 +191,21 @@
 	<c:forEach var="b" items="${ CommunityBoardList }" varStatus="status">		
 	<tr class="listTr">
 		<td class="listTdNo">${ b.no  }</td>
+		<c:if test="${b.medic == 0 }">
+		<td class="listTdNo"></td>
+		</c:if>
+		<c:if test="${b.medic == 1 }">
+		<td class="listTdNo"><img src="resources/images/doctor.png"></td>
+		</c:if>
+		<c:if test="${b.medic == 2 }">
+		<td class="listTdNo"><img src="resources/images/drug.png"></td>
+		</c:if>
+		
 		<td class="listTdTitle">
 			<a href="CommunityBoardDetail?no=
 				${ b.no }&pageNum=${ currentPage }" >${ b.title }</a>
 		</td>
-		<td class="listTdWriter">${ b.id }</td>
+		<td class="listTdWriter">${ b.nickName }</td>
 		<td class="listTdRegDate"><fmt:formatDate value="${ b.regdate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>
 		<td class="listTdReadCount">${ b.readcount }</td>
@@ -147,7 +221,7 @@
 		 	 **/
 		 	 --%>
 		 	<c:if test="${ startPage > pageGroup }"> 
-				<a href="boardList?pageNum=${ startPage - pageGroup }">
+				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }">
 					[이전]</a>
 			</c:if>	
 			<%--
@@ -161,7 +235,7 @@
 					[ ${ i } ]
 				</c:if>			
 				<c:if test="${ i != currentPage }">
-					<a href="boardList?pageNum=${ i }">[ ${ i } ]</a>
+					<a href="CommunityBoardList?pageNum=${ i }">[ ${ i } ]</a>
 				</c:if>			
 			</c:forEach>
 			<%-- 
@@ -172,7 +246,7 @@
 		 	 **/
 		 	 --%>
 			<c:if test="${ endPage < pageCount }">
-				<a href="boardList?pageNum=${ startPage + pageGroup }">
+				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }">
 					[다음]</a>
 			</c:if>		
 		</td>

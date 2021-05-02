@@ -9,23 +9,23 @@ public class CommunityReply {
 	private int no;
 	private int bbsNo;
 	private String replyContent;
-	private String replyWriter;
-	private Timestamp regDate;
+	private String replynk;
+	private Timestamp replydate;
 	
 	public CommunityReply() { }
-	public CommunityReply(int bbsNo, String replyContent, String replyWriter) {
+	public CommunityReply(int bbsNo, String replyContent, String replynk) {
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replyWriter = replyWriter;
+		this.replynk = replynk;
 	}	
 	public CommunityReply(int no, int bbsNo, String replyContent, 
-			String replyWriter, Timestamp regDate) {
+			String replynk, Timestamp replydate) {
 		
 		this.no = no;
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replyWriter = replyWriter;
-		this.regDate = regDate;
+		this.replynk = replynk;
+		this.replydate = replydate;
 	}
 	public int getNo() {
 		return no;
@@ -45,16 +45,20 @@ public class CommunityReply {
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
 	}
-	public String getReplyWriter() {
-		return replyWriter;
+
+	public String getReplynk() {
+		return replynk;
 	}
-	public void setReplyWriter(String replyWriter) {
-		this.replyWriter = replyWriter;
+	public void setReplynk(String replynk) {
+		this.replynk = replynk;
 	}
-	public Timestamp getRegDate() {
-		return regDate;
+	public Timestamp getReplydate() {
+		return replydate;
 	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
-	}			
+	public void setReplydate(Timestamp replydate) {
+		this.replydate = replydate;
+	}
+
+	
+
 }

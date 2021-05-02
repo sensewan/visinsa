@@ -39,10 +39,13 @@ public class CommunityController {
 			@RequestParam(value="type", required=false,  
 						defaultValue="null") String type,
 			@RequestParam(value="keyword", required=false,
-						defaultValue="null") String keyword) {		
+						defaultValue="null") String keyword,
+			@RequestParam(value="category", required=false,
+						defaultValue="Community") String category
+			) {		
 
 		Map<String, Object> modelMap = 
-				CommunityService.CommunityBoardList(pageNum, type, keyword);
+				CommunityService.CommunityBoardList(pageNum, type, keyword, category);
 
 		model.addAllAttributes(modelMap);		
 
@@ -86,12 +89,12 @@ public class CommunityController {
 	  
 	  @RequestMapping(value="/CommunitywriteProcess", method=RequestMethod.POST)
 	  public String insertBoard( HttpServletRequest request, String title, String
-	  id, String content, int medic, String category) throws IOException {
+			  nickName, String content, int medic, String category) throws IOException {
 	  
 	  Community board = new Community();
 	  
 	  board.setTitle(title);
-	  board.setId(id); 
+	  board.setNickName(nickName); 
 	  board.setContent(content);
 	  board.setMedic(medic);
 	  board.setCategory(category);
@@ -109,7 +112,7 @@ public class CommunityController {
 	   
 	   Community board = new Community();
 	   board.setTitle(request.getParameter("title"));
-	   board.setId(request.getParameter("writer"));
+	   board.setNickName(request.getParameter("nickName"));
 	   board.setContent(request.getParameter("content"));
 	   
 	   
@@ -118,44 +121,38 @@ public class CommunityController {
 	   return "redirect:CommunityBoardList"; }
 	  
 	  
-	  /*
+	  
 	   
-	   @RequestMapping(value="/Communityupdate") public String updateBoard(Model
-	   model, HttpServletResponse response, PrintWriter out, int no, String pass,
-	   
+	   @RequestMapping(value="/Communityupdate") 
+	   public String updateBoard(Model model, HttpServletResponse response, PrintWriter out, int no,
 	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
-	   
 	   @RequestParam(value="type", required=false, defaultValue="null") String type,
-	   
-	   @RequestParam(value="keyword", required=false, defaultValue="null") String
-	   keyword) throws Exception {
+	   @RequestParam(value="keyword", required=false, defaultValue="null") String keyword) throws Exception {
 	   
 	   
 	   boolean searchOption = (type.equals("null") || keyword.equals("null")) ?
 	   false : true;
 	   
-	   
 	   Community board = CommunityService.getBoard(no, false);
 	   
 	   
-	   model.addAttribute("board", board); model.addAttribute("pageNum", pageNum);
+	   model.addAttribute("board", board); 
+	   model.addAttribute("pageNum", pageNum);
 	   model.addAttribute("searchOption", searchOption);
 	   
 	   if(searchOption) {
-	   
 	   model.addAttribute("keyword", URLEncoder.encode(keyword, "utf-8"));
 	   model.addAttribute("type", type); model.addAttribute("word", keyword); }
 	   
-	   return "updateForm"; }
+	   return "updateForm"; 
 	   
-	   @RequestMapping(value="Communityupdate", method=RequestMethod.POST) public
-	   String updateBoard(HttpServletResponse response, PrintWriter out, Community
+	   }
+	   
+	   @RequestMapping(value="Communityupdate", method=RequestMethod.POST) 
+	   public  String updateBoard(HttpServletResponse response, PrintWriter out, Community
 	   board, RedirectAttributes reAttrs,
-	   
 	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
-	   
 	   @RequestParam(value="type", required=false, defaultValue="null") String type,
-	   
 	   @RequestParam(value="keyword", required=false, defaultValue="null") String
 	   keyword) throws Exception {
 	   
@@ -169,15 +166,17 @@ public class CommunityController {
 	   
 	   if(searchOption) {
 	   
-	   reAttrs.addAttribute("keyword", keyword); reAttrs.addAttribute("type", type);
+	   reAttrs.addAttribute("keyword", keyword); 
+	   reAttrs.addAttribute("type", type);
 	   }
 	   
-	   reAttrs.addAttribute("pageNum", pageNum); return
-	   "redirect:CommunityBoardList"; }
+	   reAttrs.addAttribute("pageNum", pageNum); 
+	   return  "redirect:CommunityBoardList"; 
+	   }
 	   
-	   @RequestMapping({"/Communitydelete", "CommunitydeleteBoard"}) public String
-	   deleteBoard(HttpServletResponse response, PrintWriter out, int no, String
-	   pass, RedirectAttributes reAttrs,
+	   
+	   @RequestMapping({"/delete", "deleteBoard"}) 
+	   public String deleteBoard(HttpServletResponse response, PrintWriter out, int no, RedirectAttributes reAttrs,
 	   
 	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
 	   
@@ -201,6 +200,7 @@ public class CommunityController {
 	   }
 	   
 	   reAttrs.addAttribute("pageNum", pageNum); return
-	   "redirect:CommunityBoardList"; }
-	  */
+	   "redirect:CommunityBoardList";
+	   }
+	  
 }

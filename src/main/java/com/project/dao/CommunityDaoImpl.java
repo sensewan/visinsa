@@ -25,13 +25,14 @@ public class CommunityDaoImpl implements CommunityDao {
 
 	@Override
 	public List<Community> CommunityBoardList(int startRow,
-			int num, String type, String keyword) {
+			int num, String type, String keyword, String category) {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("startRow", startRow);
 		params.put("num", num);
 		params.put("type", type);
 		params.put("keyword", keyword);
+		params.put("category", category);
 
 		return sqlSession.selectList(NAME_SPACE + ".CommunityBoardList", params);
 	}
@@ -59,7 +60,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	  
 	  
 	  
-	  public List<CommunityReply> replyList(int no) { 
+	  public List<CommunityReply> replyList(int no) {
 		  return sqlSession.selectList(NAME_SPACE + ".replyList", no);
 		  }
 	  
@@ -68,11 +69,35 @@ public class CommunityDaoImpl implements CommunityDao {
 	  @Override 
 	  public void insertBoard(Community board) {
 	  
-	  sqlSession.insert(NAME_SPACE + ".insertCommunityBoard", board); }
+	  sqlSession.insert(NAME_SPACE + ".insertCommunityBoard", board); 
+	  }
 	  
 	  
+	  public void updateBoard(Community board) {
+		  
+	  sqlSession.update(NAME_SPACE + ".updateCommunityBoard", board); 
+	  }
+	  
+	  @Override 
+	  public void deleteBoard(int no) {
+	  
+	  sqlSession.delete(NAME_SPACE + ".deleteBoard", no); }
+	  
+	  
+	  public void updateRecommend(int no, String recommend) {
+		  
+		  Map<String, Object> params = new HashMap<String, Object>(); 
+		  params.put("no",no);
+		  params.put("recommend", recommend);
+		  sqlSession.update(NAME_SPACE + ".updateRecommend", params); 
+	  }
+	  
+	  public Community getRecommend(int no) { 
+		  return sqlSession.selectOne(NAME_SPACE + ".getRecommend", no); 
+		  }
 	  
 	  /*
+	  
 	  public boolean isPassCheck(int no, String pass) {
 	  
 	  boolean result = false;
@@ -82,26 +107,15 @@ public class CommunityDaoImpl implements CommunityDao {
 	  if(dbPass.equals(pass)) { result = true; } return result; }
 	  
 	  @Override 
-	  public void updateBoard(Community board) {
+
 	  
-	  sqlSession.update(NAME_SPACE + ".updateBoard", board); }
-	  
-	  @Override 
-	  public void deleteBoard(int no) {
-	  
-	  sqlSession.delete(NAME_SPACE + ".deleteBoard", no); }
+
 	  
 
 	  
 	  
-	  public void updateRecommend(int no, String recommend) {
+
 	  
-	  Map<String, Object> params = new HashMap<String, Object>(); params.put("no",
-	  no); params.put("recommend", recommend); sqlSession.update(NAME_SPACE +
-	  ".updateRecommend", params); }
-	  
-	  public Community getRecommend(int no) { return
-	  sqlSession.selectOne(NAME_SPACE + ".getRecommend", no); }
 	   public void addReply(Reply reply) { sqlSession.insert(NAME_SPACE +
 	  ".addReply", reply); }
 	  

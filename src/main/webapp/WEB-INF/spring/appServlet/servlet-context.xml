@@ -27,7 +27,7 @@
 	
 	
 	<view-controller path="/boardWrite" view-name="writeForm" />
-	
+	<view-controller path="/Communityupdate" view-name="updateForm" />
 	<view-controller path="/" view-name="redirect:/home" />
 	<redirect-view-controller path="/index" redirect-url="/boardList"/>
 	<redirect-view-controller path="/default" redirect-url="/boardList"/>

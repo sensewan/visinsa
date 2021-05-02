@@ -3,8 +3,8 @@
 <article>
 <form name="writeForm" action="CommunitywriteProcess" id="writeForm" 
 	method="post" enctype="multipart/form-data">
-	
-	
+<input type="hidden" id="nickName" name="nickName" value="${member.nickName}">
+<input type="hidden" id="medic" name="medic" value="${member.medic}">	
 	
 	<table class="readTable">
 		<tr>
@@ -17,21 +17,13 @@
 		</tr>
 		<tr>
 			<td class="readTh"> 
-				<input type="radio" value=0 name="medic" id="medic" checked> 일반인
-				<input type="radio" value=1 name="medic" id="medic" > 약사
-				<input type="radio" value=2 name="medic" id="medic" > 의사
-				<br/>
 				게시할 곳 : 
 				<input type="radio" value="board" name="category" id="category" checked> 자유게시판
 				<input type="radio" value="qna" name="category" id="category" > Q&A 게시판
 				<input type="radio" value="chuchu" name="category" id="category" > 추천게시판
 				
 			</td>
-			<td class="readTh">글쓴이</td>
-			<td class="readTd">
-				<input type="text" name="id" size="30" id="id" maxlength="10"/>
-			</td>
-			<td class="readTh">비밀번호</td>
+			
 		</tr>		
 		<tr>
 			<td class="readTh">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>

@@ -29,7 +29,7 @@ public class CommunityServiceImpl implements CommunityService {
 	
 	@Override
 	public Map<String, Object> CommunityBoardList(
-			int pageNum, String type, String keyword) {
+			int pageNum, String type, String keyword, String category) {
 		
 		int currentPage = pageNum;
 				
@@ -51,7 +51,7 @@ public class CommunityServiceImpl implements CommunityService {
 			
 
 			List<Community> CommunityBoardList = CommunityDao.CommunityBoardList(
-					startRow, PAGE_SIZE, type, keyword);
+					startRow, PAGE_SIZE, type, keyword, category);
 
 			int pageCount = 
 					listCount / PAGE_SIZE + (listCount % PAGE_SIZE == 0 ? 0 : 1);
@@ -99,7 +99,7 @@ public class CommunityServiceImpl implements CommunityService {
 	
 	  @Override 
 	  public List<Community> CommunityBoard() {
-		  return  CommunityDao.CommunityBoardList(0, 10, "null", "null"); }
+		  return  CommunityDao.CommunityBoardList(0, 10, "null", "null", "CommunityBoardList"); }
 	  
 	  
 	  @Override 
@@ -117,21 +117,29 @@ public class CommunityServiceImpl implements CommunityService {
 	  CommunityDao.insertBoard(board); 
 	  }
 	  
-	  /*
+	  
 	  
 	  @Override public void updateBoard(Community board) {
-	  CommunityDao.updateBoard(board); }
+	  CommunityDao.updateBoard(board); 
+	  }
+	  
 	  
 	  @Override public void deleteBoard(int no) { CommunityDao.deleteBoard(no); }
 	  
+	  
+	  
 	  public Map<String, Integer> recommend(int no, String recommend) {
 	  
-	  CommunityDao.updateRecommend(no, recommend); Community board =
-	  CommunityDao.getRecommend(no);
+	  CommunityDao.updateRecommend(no, recommend);
+	  Community board = CommunityDao.getRecommend(no);
 	  
 	  Map<String, Integer> map = new HashMap<String, Integer>();
-	  map.put("recommend", board.getLike()); map.put("thank", board.getUnlike());
-	  return map; }
+	  map.put("recommend", board.getRecommend());
+	  
+	  return map; 
+	  }
+	  
+	  /*
 	  
 	  public void addReply(Reply reply) { CommunityDao.addReply(reply); }
 	  
