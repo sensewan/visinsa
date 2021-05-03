@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="resources/js/formcheck.js"></script>
 <style type="text/css">
 
 	.leftnav {
@@ -35,17 +36,15 @@
 	}
 
 </style>
-<form name="categoryFilterForm"  action="boardList">
-<input type="hidden" name="catcat" id="catcat">
-</form>
 <article>
-	<form name="btnFilter" id="categoryForm">
-		<input type="button" class="communitycategory" >
-		<button type="button" name="category" id="category" class="categoryFilter">전체 게시판</button>
-		<button type="button"  name="category" id="free" class="categoryFilter">자유 게시판</button>
+	<form name="categoryForm" id="categoryForm" action="CommunityBoardList">
+		<input type="hidden" name="category" id="catfilter" >
+	</form>
+		<button type="button" name="category" id="" class="categoryFilter">전체 게시판</button>
+		<button type="button"  name="category" id="board" class="categoryFilter">자유 게시판</button>
 		<button type="button"  name="category" id="qna" class="categoryFilter">질문 답변 게시판</button>
 		<button type="button"  name="category" id="chuchu" class="categoryFilter">추천 게시판</button>
-	</form>
+
 
 
 
@@ -77,8 +76,8 @@
 	</tr>
 	<tr>
 		<%-- 검색 요청일 경우 일반 게시 글 리스트로 이동할 수 있도록 링크를 설정했다. --%>
-		<td colspan="2" class="boardListLink"><a href="boardList">리스트</a></td>
-		<c:if test="${ sessionScope.isLogin == true}">
+		<td colspan="2" class="boardListLink"><a href="CommunityBoardList">리스트</a></td>
+		<c:if test="${ sessionScope.isLogin == true }">
 		<td colspan="3" class="listWrite"><a href="writeForm">글쓰기</a></td>
 		</c:if>
 	</tr>	
@@ -96,7 +95,8 @@
 		<th class="listThTitle">제목</th>
 		<th class="listThWriter">작성자</th>
 		<th class="listThRegDate">작성일</th>
-		<th class="listThReadCount">조회수</th>
+		<th class="listThReadCount">조회 수</th>
+		<th class="listThReadCount">추천 수</th>
 	</tr>
 <%-- 
 	검색 요청 이면서 검색된 리스트가 존재할 경우
@@ -131,10 +131,10 @@
 			 * 주소창에는 한글 그대로 표시되지만 UTF-8로 URLEncoding을 해준다.
 			 **/
 			--%>			
-			<a href="CommunityBoardDetail?no=${ b.no }&pageNum=${ currentPage }
+			<a href="CommunityBoardDetail?no=${ b.no }&pageNum=${ currentPage }&category=${ b.category }
 				&type=${ type }&keyword=${ keyword }">${ b.title }</a>
 		</td>
-		<td class="listTdWriter">${ b.nickName }</td>
+		<td class="listTdWriter">${ b.id }</td>
 		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>
 		<td class="listTdReadCount">${ b.readCount }</td>
@@ -150,7 +150,7 @@
 		 	 **/
 		 	 --%>
 		 	<c:if test="${ startPage > pageGroup }">
-				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }
+				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }&category=${ category }
 					&type=${ type }&keyword=${ keyword }">[이전]</a>
 			</c:if>	
 			<%--
@@ -164,7 +164,7 @@
 					[ ${ i } ]
 				</c:if>			
 				<c:if test="${ i != currentPage }">
-					<a href="CommunityBoardList?pageNum=${ i }&type=${ type }
+					<a href="CommunityBoardList?pageNum=${ i }&type=${ type }&category=${ category }
 						&keyword=${ keyword }">[ ${ i } ]</a>
 				</c:if>			
 			</c:forEach>
@@ -176,7 +176,7 @@
 		 	 **/
 		 	 --%>
 			<c:if test="${ endPage < pageCount }">
-				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }
+				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }&category=${ category }
 					&type=${ type }&keyword=${ keyword }">[다음]</a>
 			</c:if>		
 		</td>
@@ -203,12 +203,13 @@
 		
 		<td class="listTdTitle">
 			<a href="CommunityBoardDetail?no=
-				${ b.no }&pageNum=${ currentPage }" >${ b.title }</a>
+				${ b.no }&pageNum=${ currentPage }&category=${ b.category }" >${ b.title }</a>
 		</td>
-		<td class="listTdWriter">${ b.nickName }</td>
+		<td class="listTdWriter">${ b.id }</td>
 		<td class="listTdRegDate"><fmt:formatDate value="${ b.regdate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-		<td class="listTdReadCount">${ b.readcount }</td>
+		<td class="listTdReadCount">&nbsp;&nbsp;${ b.readcount }</td>
+		<td class="listTdReadCount">&nbsp;&nbsp;${ b.recommend }</td>
 	</tr>
 	</c:forEach>
 	<tr>
@@ -266,6 +267,8 @@
 	</tr>
 </c:if>
 </table>
+
+
 </article>
 
 

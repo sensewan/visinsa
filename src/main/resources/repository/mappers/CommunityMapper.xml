@@ -8,9 +8,10 @@
 		SELECT 
 			no, 
 			title, 
-			nickName, 
+			id, 
 			content, 
 			regdate,
+			category,
 			readcount,
 			recommend,
 			medic
@@ -20,27 +21,25 @@
 			<if test="type == 'title'">
 				title LIKE CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="type == 'nickName'">
-				nickName LIKE CONCAT('%', #{keyword}, '%')
+			<if test="type == 'id'">
+				id LIKE CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test="type == 'content'">
 				content LIKE CONCAT('%', #{keyword}, '%')
 			</if>	
+			
+			<if test="category == 'board'">
+				category LIKE CONCAT('%', 'board', '%')
+			</if>
+			<if test="category == 'chuchu'">
+				category LIKE CONCAT('%', 'chuchu', '%')
+			</if>
+			<if test="category == 'qna'">
+				category LIKE CONCAT('%', 'qna', '%')
+			</if>
+			
 		</where>
-		
-		<choose>
-			<when test="category == free">
-				 AND category='board'
-			</when>
-			
-			<when test="category == qna">
-				 AND category='qna'
-			</when>
-			
-			<when test="category == chuchu">
-				 AND category='chuchu'
-			</when>
-		</choose>
+
 		
 		
 		
@@ -57,8 +56,8 @@
 			<if test="type == 'title'">
 				title LIKE CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="type == 'nickName'">
-				nickName LIKE CONCAT('%', #{keyword}, '%')
+			<if test="type == 'id'">
+				id LIKE CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test="type == 'content'">
 				content LIKE CONCAT('%', #{keyword}, '%')
@@ -78,7 +77,7 @@
 			no,
 			bbs_no AS bbsNo,
 			reply_content AS replyContent,
-			replynk,
+			replyid,
 			replydate
 		FROM reply
 		WHERE bbs_no = #{no}
@@ -94,8 +93,8 @@
 	
 		<insert id="insertCommunityBoard" parameterType="Community"
 		useGeneratedKeys="true" keyProperty="no">
-		INSERT INTO community(title, nickName, content, medic,regdate, readcount, category) 
-				VALUES(#{title}, #{nickName}, #{content}, #{medic}, DEFAULT, 0, #{category})
+		INSERT INTO community(title, id, content, medic,regdate, readcount, category) 
+				VALUES(#{title}, #{id}, #{content}, #{medic}, DEFAULT, 0, #{category})
 	</insert>
 	
 	<update id="updateBoard" parameterType="Board">
@@ -124,6 +123,47 @@
 		FROM community
 		WHERE no = #{no}
 	</select>
+	
+	<insert id="addReply" parameterType="Reply">
+		INSERT INTO reply(bbs_no, reply_content, replyid, replydate)
+		VALUES(#{bbsNo}, #{replyContent}, #{replyid}, NOW())
+	</insert>
+
+	<!--
+		댓글을 수정하는 맵핑 구문		  
+	-->
+	<update id="updateReply" parameterType="Reply">
+		UPDATE reply
+			SET reply_content = #{replyContent}, 
+				replydate = NOW()
+		WHERE no = #{no}
+	</update>
+
+	<!--
+		댓글을 삭제하는 맵핑 구문		  
+	-->
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE no = #{no}
+	</delete>	
+	
+	
+	<update id="updatereplyRecommend">
+		UPDATE reply
+			SET
+			<if test="replyrecommend == 'replyrecommend'">		
+				replyrecommend=replyrecommend + 1
+			</if>
+
+		WHERE no = #{no}
+	</update>
+	
+	<select id="getreplyRecommend" resultType="Reply">
+		SELECT replyrecommend
+		FROM reply
+		WHERE no = #{no}
+	</select>
+	
 	
 	
 		

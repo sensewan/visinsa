@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.domain.Board;
-import com.project.domain.CommunityReply;
+import com.project.domain.Reply;
 
 // 이 클래스가 데이터 액세스(데이터 저장소) 계층의 컴포넌트(Bean) 임을 선언한다.
 @Repository
@@ -166,7 +166,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	// 게시 글 번호에 해당하는 댓글 리스트를 가져오는 메서드
-	public List<CommunityReply> replyList(int no) {
+	public List<Reply> replyList(int no) {
 		return sqlSession.selectList(NAME_SPACE + ".replyList", no);
 	}
 	
@@ -186,12 +186,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	// 게시 글 번호에 해당하는 댓글을 DB에 등록하는 메서드
-	public void addReply(CommunityReply reply) {
+	public void addReply(Reply reply) {
 		sqlSession.insert(NAME_SPACE + ".addReply", reply);
 	}
 	
 	// DB에서 댓글 번호에 해당하는 댓글을 수정하는 메서드
-	public void updateReply(CommunityReply reply) {
+	public void updateReply(Reply reply) {
 		sqlSession.update(NAME_SPACE + ".updateReply", reply);
 	}
 

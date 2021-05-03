@@ -9,23 +9,25 @@ public class Reply {
 	private int no;
 	private int bbsNo;
 	private String replyContent;
-	private String replynk;
+	private String replyid;
 	private Timestamp replydate;
+	private int replyrecommend;
 	
 	public Reply() { }
-	public Reply(int bbsNo, String replyContent, String replynk) {
+	public Reply(int bbsNo, String replyContent, String replyid) {
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replynk = replynk;
+		this.replyid = replyid;
 	}	
 	public Reply(int no, int bbsNo, String replyContent, 
-			String replyid, Timestamp replydate) {
+			String replyid, Timestamp replydate, int replyrecommend) {
 		
 		this.no = no;
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replynk = replynk;
+		this.replyid = replyid;
 		this.replydate = replydate;
+		this.replyrecommend = replyrecommend;
 	}
 	public int getNo() {
 		return no;
@@ -46,11 +48,11 @@ public class Reply {
 		this.replyContent = replyContent;
 	}
 
-	public String getReplynk() {
-		return replynk;
+	public String getReplyid() {
+		return replyid;
 	}
-	public void setReplynk(String replynk) {
-		this.replynk = replynk;
+	public void setReplyid(String replyid) {
+		this.replyid = replyid;
 	}
 	public Timestamp getReplydate() {
 		return replydate;
@@ -58,7 +60,15 @@ public class Reply {
 	public void setReplydate(Timestamp replydate) {
 		this.replydate = replydate;
 	}
+	public int getReplyrecommend() {
+		return replyrecommend;
+	}
+	public void setReplyrecommend(int replyrecommend) {
+		this.replyrecommend = replyrecommend;
+	}
 
+	
+	
 	
 
 }

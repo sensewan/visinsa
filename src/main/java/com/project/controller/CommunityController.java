@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.Community;
-import com.project.domain.CommunityReply;
+import com.project.domain.Reply;
 import com.project.service.CommunityService;
 
 @Controller
@@ -32,7 +32,7 @@ public class CommunityController {
 		CommunityService = communityService;
 	}
 
-	@RequestMapping(value= {"/Community", "/Communitylist", "/CommunityBoardList"})
+	@RequestMapping(value= {"/Community", "/CommunityBoardList"})
 	public String CommunityBoardList(Model model, 
 			@RequestParam(value="pageNum", required=false, 
 						defaultValue="1") int pageNum,
@@ -49,7 +49,7 @@ public class CommunityController {
 
 		model.addAllAttributes(modelMap);		
 
-		return "CommunityBoardList";
+		return "/community/CommunityBoardList";
 	}
 	
 	
@@ -57,18 +57,19 @@ public class CommunityController {
 	  public String boardDetail(Model model,int no,
 		  @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
 		  @RequestParam(value="type", required=false, defaultValue="null") String type,
-		  @RequestParam(value="keyword", required=false, defaultValue="null") String
-	  keyword) throws Exception {
+		  @RequestParam(value="keyword", required=false, defaultValue="null") String keyword, 
+		  @RequestParam(value="category", required=false, defaultValue="null") String category
+		  ) throws Exception {
 	  
 	  
 	  boolean searchOption = (type.equals("null") || keyword.equals("null")) ?
 	  false : true;
 	  
 	  
-	  Community board = CommunityService.getBoard(no, true);
+	  Community board = CommunityService.getBoard(no, true, category);
 	  
 	  
-	  List<CommunityReply> replyList = CommunityService.replyList(no);
+	  List<Reply> replyList = CommunityService.replyList(no);
 	  
 	  model.addAttribute("board", board); 
 	  model.addAttribute("replyList", replyList);
@@ -80,21 +81,24 @@ public class CommunityController {
 	  
 	  
 	  model.addAttribute("keyword", URLEncoder.encode(keyword, "utf-8"));
-	  model.addAttribute("type", type); model.addAttribute("word", keyword); }
+	  model.addAttribute("type", type);
+	  model.addAttribute("word", keyword);
+	  model.addAttribute("category", category);
+	  }
 	  
-	  return "CommunityBoardDetail"; 
+	  return "/community/CommunityBoardDetail"; 
 	  }
 	  
 	  
 	  
 	  @RequestMapping(value="/CommunitywriteProcess", method=RequestMethod.POST)
 	  public String insertBoard( HttpServletRequest request, String title, String
-			  nickName, String content, int medic, String category) throws IOException {
+			  id, String content, int medic, String category) throws IOException {
 	  
 	  Community board = new Community();
 	  
 	  board.setTitle(title);
-	  board.setNickName(nickName); 
+	  board.setId(id); 
 	  board.setContent(content);
 	  board.setMedic(medic);
 	  board.setCategory(category);
@@ -102,7 +106,7 @@ public class CommunityController {
 	  
 	  CommunityService.insertBoard(board);
 	  
-	  return "redirect:CommunityBoardList";
+	  return "redirect:/community/CommunityBoardList";
 	  
 	  }
 	  
@@ -112,13 +116,13 @@ public class CommunityController {
 	   
 	   Community board = new Community();
 	   board.setTitle(request.getParameter("title"));
-	   board.setNickName(request.getParameter("nickName"));
+	   board.setId(request.getParameter("id"));
 	   board.setContent(request.getParameter("content"));
 	   
 	   
 	   CommunityService.insertBoard(board);
 	   
-	   return "redirect:CommunityBoardList"; }
+	   return "redirect:/community/CommunityBoardList"; }
 	  
 	  
 	  
@@ -127,13 +131,16 @@ public class CommunityController {
 	   public String updateBoard(Model model, HttpServletResponse response, PrintWriter out, int no,
 	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
 	   @RequestParam(value="type", required=false, defaultValue="null") String type,
-	   @RequestParam(value="keyword", required=false, defaultValue="null") String keyword) throws Exception {
+	   @RequestParam(value="keyword", required=false, defaultValue="null") String keyword,
+	   @RequestParam(value="category", required=false, defaultValue="null") String category
+	   ) throws Exception 
+	   {
 	   
 	   
 	   boolean searchOption = (type.equals("null") || keyword.equals("null")) ?
 	   false : true;
 	   
-	   Community board = CommunityService.getBoard(no, false);
+	   Community board = CommunityService.getBoard(no, false, category);
 	   
 	   
 	   model.addAttribute("board", board); 
@@ -144,7 +151,7 @@ public class CommunityController {
 	   model.addAttribute("keyword", URLEncoder.encode(keyword, "utf-8"));
 	   model.addAttribute("type", type); model.addAttribute("word", keyword); }
 	   
-	   return "updateForm"; 
+	   return "/community/updateForm"; 
 	   
 	   }
 	   
@@ -171,7 +178,7 @@ public class CommunityController {
 	   }
 	   
 	   reAttrs.addAttribute("pageNum", pageNum); 
-	   return  "redirect:CommunityBoardList"; 
+	   return  "redirect:/community/CommunityBoardList"; 
 	   }
 	   
 	   
@@ -200,7 +207,7 @@ public class CommunityController {
 	   }
 	   
 	   reAttrs.addAttribute("pageNum", pageNum); return
-	   "redirect:CommunityBoardList";
+	   "redirect:/community/CommunityBoardList";
 	   }
 	  
 }

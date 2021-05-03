@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.domain.Community;
-import com.project.domain.CommunityReply;
+import com.project.domain.Reply;
 
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
@@ -38,17 +38,18 @@ public class CommunityDaoImpl implements CommunityDao {
 	}
 	
 	  @Override 
-	  public int getCommunityBoardCount(String type, String keyword) {
+	  public int getCommunityBoardCount(String type, String keyword, String category) {
 		  Map<String, String> params = new HashMap<String, String>();	
 	 params.put("type", type); 
 	 params.put("keyword",	  keyword);
+	 params.put("category",	  category);
 	  
 	  return sqlSession.selectOne(NAME_SPACE + ".getCommunityBoardCount", params);
 	  }
 	  
 	  
 	  @Override 
-	  public Community getBoard(int no, boolean isCount) {
+	  public Community getBoard(int no, boolean isCount, String category) {
 	  
 	  if(isCount) { sqlSession.update(NAME_SPACE + ".incrementReadCount", no); 
 		  	}
@@ -60,7 +61,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	  
 	  
 	  
-	  public List<CommunityReply> replyList(int no) {
+	  public List<Reply> replyList(int no) {
 		  return sqlSession.selectList(NAME_SPACE + ".replyList", no);
 		  }
 	  
@@ -95,27 +96,7 @@ public class CommunityDaoImpl implements CommunityDao {
 	  public Community getRecommend(int no) { 
 		  return sqlSession.selectOne(NAME_SPACE + ".getRecommend", no); 
 		  }
-	  
-	  /*
-	  
-	  public boolean isPassCheck(int no, String pass) {
-	  
-	  boolean result = false;
-	  
-	  String dbPass = sqlSession.selectOne( NAME_SPACE + ".isPassCheck", no);
-	  
-	  if(dbPass.equals(pass)) { result = true; } return result; }
-	  
-	  @Override 
 
-	  
-
-	  
-
-	  
-	  
-
-	  
 	   public void addReply(Reply reply) { sqlSession.insert(NAME_SPACE +
 	  ".addReply", reply); }
 	  
@@ -124,6 +105,32 @@ public class CommunityDaoImpl implements CommunityDao {
 	  
 	  public void deleteReply(int no) { sqlSession.delete(NAME_SPACE +
 	  ".deleteReply", no); }
-	  */
 	
+	
+	  
+	  public void updatereplyRecommend(int no, String replyrecommend) {
+		  
+		  Map<String, Object> params = new HashMap<String, Object>(); 
+		  params.put("no",no);
+		  params.put("replyrecommend", replyrecommend);
+		  sqlSession.update(NAME_SPACE + ".updatereplyRecommend", params); 
+	  }
+	  
+	  public Reply getreplyRecommend(int no) { 
+		  return sqlSession.selectOne(NAME_SPACE + ".getreplyRecommend", no); 
+		  }
+	  
+	  
+	
+	  /*
+	  public boolean isPassCheck(int no, String pass) {
+		  
+	  boolean result = false;
+	  
+	  String dbPass = sqlSession.selectOne( NAME_SPACE + ".isPassCheck", no);
+	  
+	  if(dbPass.equals(pass)) { result = true; } return result; }
+	  
+	  */
+	  
 }

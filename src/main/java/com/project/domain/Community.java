@@ -7,7 +7,7 @@ public class Community {
 
 	// 게시판 domain 정보
 	private int no;
-	private String nickName;
+	private String id;
 	private String category;
 	private String title;
 	private String content;
@@ -27,10 +27,10 @@ public class Community {
 	
 	public Community() {}
 	
-	public Community(int no, String nickName, String category, String title, String content, int medic, Timestamp regdate,
+	public Community(int no, String id, String category, String title, String content, int medic, Timestamp regdate,
 			int readcount, int recommend, int unlike, Timestamp replydate) {
 		this.no = no;
-		this.nickName = nickName;
+		this.id = id;
 		this.category = category;
 		this.title = title;
 		this.content = content;
@@ -48,12 +48,12 @@ public class Community {
 		this.no = no;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getId() {
+		return id;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getCategory() {

@@ -9,6 +9,7 @@ String seid = (String) session.getAttribute("sessionID");
 <article>
 <form name="checkForm" id="checkForm">
 	<input type="hidden" name="no" id="no" value="${ board.no }"/>
+	<input type="hidden" name="replyno" id="replyno" value="${reply.no }" />
 	<input type="hidden" name="pass" id="rPass" />
 	<input type="hidden" name="pageNum" value="${ pageNum }" />	
 
@@ -32,7 +33,7 @@ String seid = (String) session.getAttribute("sessionID");
 	</tr>
 	<tr>
 		<td class="contentTh">글쓴이</td>
-		<td class="contentTd">${ board.nickName }</td>
+		<td class="contentTd">${ board.id }</td>
 		<td class="contentTh">작성일</td>
 		<td class="contentTd"><fmt:formatDate value="${ board.regdate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>		
@@ -53,14 +54,14 @@ String seid = (String) session.getAttribute("sessionID");
 		<td colspan="4" class="tdSpan">
 			<input type="button" id="detailUpdate" value="수정하기"/>
 			&nbsp;&nbsp;
-			<c:if test="${board.nickName == member.nickName}">
+			<c:if test="${board.id == member.id}">
 			<input type="button" id="detailDelete" value="삭제하기" />
 			</c:if>			
 			<%-- 일반 게시 글 리스트에서 온 요청이면 일반 게시 글 리스트로 돌려 보낸다. --%>
 			<c:if test="${ not searchOption }">		
 				&nbsp;&nbsp;<input type="button" value="목록보기" 
 					onclick="javascript:window.location.href=
-						'boardList?pageNum=${ pageNum }'"/>
+						'CommunityBoardList?pageNum=${ pageNum }'"/>
 			</c:if>
 			<%-- 
 				검색 리스트에서 온 요청이면 검색 리스트의 동일한 페이지로 돌려보낸다. 
@@ -68,7 +69,7 @@ String seid = (String) session.getAttribute("sessionID");
 			<c:if test="${ searchOption }">
 				&nbsp;&nbsp;<input type="button" value="목록보기" 
 					onclick="javascript:window.location.href=
-						'CommunityboardList?pageNum=${ pageNum }&type=${ type }&keyword=${ keyword }'"/>
+						'CommunityBoardList?pageNum=${ pageNum }&type=${ type }&keyword=${ keyword }'"/>
 				<%-- 
 					위의 쿼리 스트링을 작성할 때 같은 줄에서 띄어쓰기 하는 것은 문제되지
 					않지만 줄 바꿔서 작성하게 되면 스크립트 에러가 발생한다.
@@ -76,6 +77,8 @@ String seid = (String) session.getAttribute("sessionID");
 			</c:if>				
 		</td>
 	</tr>
+	
+
 	<tr>
 		<td colspan="4" class="replyHeader">
 		<div id="recommend">
@@ -107,7 +110,7 @@ String seid = (String) session.getAttribute("sessionID");
 			<tr id="reply_${ reply.no }">
 				<td>									
 				<div class="replyUser">						
-					<span class="member">${ reply.replynk }</span>	
+					<span class="member">${ reply.replyid }</span>	
 				</div>
 				<div class="replyModify">
 					<span class="reply_date">
@@ -117,8 +120,15 @@ String seid = (String) session.getAttribute("sessionID");
 						<img src="resources/images/reply_btn_modify.gif" alt="댓글 수정하기"/></a>
 					<a href="#" class=deleteReply data-no="${ reply.no }">
 						<img src="resources/images/reply_btn_delete.gif" alt="댓글 삭제하기"/></a>
-					<a href="javascript:reportReply('${ reply.no }')">
-						<img src="resources/images/reply_btn_notify.gif" alt="신고하기"/></a>
+							<div id="recommend">
+				</div>
+						<div id="replyrecommend">
+							<span id="replycommend" style="cursor: pointer;">
+							<img src="resources/images/recommend.png" alt="추천하기" />&nbsp;추천
+							<span class="replyrecommend" >(${ reply.replyrecommend })</span>
+							</span>
+						</div>
+							
 				</div>	
 				<div class="replyContent" id="div_${ reply.no }">
 					<pre><span>${ reply.replyContent }</span></pre>
@@ -136,6 +146,7 @@ String seid = (String) session.getAttribute("sessionID");
 			<input type="hidden" name="bbsNo" value="${ board.no }"/>
 			<input type="hidden" name="replyid" 
 				value="${ sessionScope.member.id }" />			
+			<c:if test="${ sessionScope.isLogin == true }">
 			<table id="replyWriteTable">
 				<tr>
 					<td id="replyWriteTitle" colspan="2">
@@ -152,6 +163,7 @@ String seid = (String) session.getAttribute("sessionID");
 					</td>
 				</tr>
 			</table>
+			</c:if>
 		</form>	
 	</div>	
 </article>

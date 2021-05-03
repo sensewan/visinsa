@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.Board;
-import com.project.domain.CommunityReply;
+import com.project.domain.Reply;
 import com.project.service.BoardService;
 
 //스프링 MVC의 컨트롤러임을 선언하고 있다.
@@ -260,7 +260,7 @@ public class BoardController {
 		// Board board = boardService.getBoardCode(no, true);
 		
 		// 현재 게시 글에 해당하는 댓글 리스트
-		List<CommunityReply> replyList = boardService.replyList(no);
+		List<Reply> replyList = boardService.replyList(no);
 		
 		/* 파라미터로 받은 모델 객체에 뷰로 보낼 모델을 저장한다.
 		 * 모델에는 도메인 객체나 비즈니스 로직을 처리한 결과를 저장한다. 

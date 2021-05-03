@@ -26,7 +26,7 @@ public class BoardAjaxController {
 		return CommunityService.recommend(no, recommend);		
 	}
 	
-	/*
+
 	
 	// 댓글 쓰기 요청을 처리하는 메서드
 	
@@ -65,5 +65,17 @@ public class BoardAjaxController {
 		return CommunityService.replyList(bbsNo);
 	}
 	
-	*/
+	
+	@RequestMapping("/replyrecommend.ajax")
+	@ResponseBody
+	public Map<String, Integer> replyrecommend(int no, String recommend) {
+		
+				
+		return CommunityService.replyrecommend(no, recommend);		
+	}
+	
+	
+
+	
+	
 }

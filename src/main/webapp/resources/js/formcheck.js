@@ -63,9 +63,9 @@ $(function() {
 		$(this).attr("action", "boardList");		
 	});	
 	
-	$("#categoryFilter").on("click", function() {
-		$("#catcat").val($(this).attr("id"));
-		$("#categoryFilterForm").submit();
+	$(".categoryFilter").on("click", function() {
+		$("#catfilter").val($(this).attr("id"));
+		$("#categoryForm").submit();
 				
 	});	
 });

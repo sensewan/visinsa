@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.dao.CommunityDao;
 import com.project.domain.Community;
-import com.project.domain.CommunityReply;
+import com.project.domain.Reply;
 
 @Service
 public class CommunityServiceImpl implements CommunityService {
@@ -42,7 +42,7 @@ public class CommunityServiceImpl implements CommunityService {
 				|| keyword.equals("null")) ? false : true; 
 		
 
-		listCount = CommunityDao.getCommunityBoardCount(type, keyword);		
+		listCount = CommunityDao.getCommunityBoardCount(type, keyword, category);		
 		System.out.println("listCount : " + listCount + ", type : " 
 					+ type + ", keyword : " + keyword);
 		
@@ -77,6 +77,7 @@ public class CommunityServiceImpl implements CommunityService {
 			modelMap.put("listCount", listCount);
 			modelMap.put("pageGroup", PAGE_GROUP);
 			modelMap.put("searchOption", searchOption);
+			modelMap.put("category", category);
 			
 			if(searchOption) {
 				
@@ -88,6 +89,7 @@ public class CommunityServiceImpl implements CommunityService {
 				}
 				modelMap.put("word", keyword);
 				modelMap.put("type", type);
+				modelMap.put("category", category);
 			}
 			
 			return modelMap;			
@@ -101,13 +103,12 @@ public class CommunityServiceImpl implements CommunityService {
 	  public List<Community> CommunityBoard() {
 		  return  CommunityDao.CommunityBoardList(0, 10, "null", "null", "CommunityBoardList"); }
 	  
-	  
-	  @Override 
-	  public Community getBoard(int no, boolean isCount) { 
-		  return  CommunityDao.getBoard(no, isCount); 
+	  @Override
+	  public Community getBoard(int no, boolean isCount, String category) { 
+		  return  CommunityDao.getBoard(no, isCount, category); 
 		  }
 	  
-	  public List<CommunityReply> replyList(int no) {
+	  public List<Reply> replyList(int no) {
 		  return CommunityDao.replyList(no); 
 		  }
 	  
@@ -139,13 +140,26 @@ public class CommunityServiceImpl implements CommunityService {
 	  return map; 
 	  }
 	  
-	  /*
-	  
+
 	  public void addReply(Reply reply) { CommunityDao.addReply(reply); }
 	  
 	  public void updateReply(Reply reply) { CommunityDao.updateReply(reply); }
 	  
 	  public void deleteReply(int no) { CommunityDao.deleteReply(no); }
-	 */
+	 
+	  
+
+	  public Map<String, Integer> replyrecommend(int no, String replyrecommend) {
+		  
+	  CommunityDao.updatereplyRecommend(no, replyrecommend);
+	  Reply board = CommunityDao.getreplyRecommend(no);
+	  
+	  Map<String, Integer> map = new HashMap<String, Integer>();
+	  map.put("recommend", board.getReplyrecommend());
+	  
+	  return map; 
+	  }
+	  
+	  
 	
 }

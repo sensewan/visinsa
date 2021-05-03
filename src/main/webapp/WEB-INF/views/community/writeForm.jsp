@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <article>
 <form name="writeForm" action="CommunitywriteProcess" id="writeForm" 
 	method="post" enctype="multipart/form-data">
-<input type="hidden" id="nickName" name="nickName" value="${member.nickName}">
+<input type="hidden" id="id" name="id" value="${member.id}">
 <input type="hidden" id="medic" name="medic" value="${member.medic}">	
 	
 	<table class="readTable">
@@ -20,8 +22,9 @@
 				게시할 곳 : 
 				<input type="radio" value="board" name="category" id="category" checked> 자유게시판
 				<input type="radio" value="qna" name="category" id="category" > Q&A 게시판
+				<c:if test="${member.medic != 0}">
 				<input type="radio" value="chuchu" name="category" id="category" > 추천게시판
-				
+				</c:if>
 			</td>
 			
 		</tr>		
