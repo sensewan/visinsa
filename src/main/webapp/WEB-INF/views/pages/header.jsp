@@ -44,7 +44,7 @@
 		        <a class="nav-link" href="">커뮤니티</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">공지사항</a>
+		        <a class="nav-link" href="noticeList">공지사항</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="boardList">테스트</a>
