@@ -12,8 +12,12 @@
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000007",
 			type : "get",
-			success : function() {
+			beforeSend : function(xhr){
+				xhr.setRequestHeader("content-type" , "application/json; charset=UTF-8");
+			},
+			success : function(data) {
 				console.log("갔다왔어");
+				console.log(data);
 			}
 		});
 	}
@@ -56,7 +60,6 @@
 		</map>
 	</div>
 	
-	
 	<div class="modal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -67,10 +70,10 @@
 					<form action="">
 						<div>
 							<c:if test="${ mainBody == null}">
-								<div>없어${mainBody }zz</div>
+								<div>없어${ mainBody }zz</div>
 							</c:if>
-			  				<c:forEach var="mb" items="${mainBody }">
-								<li class="list-group-item">${ mb.symptomName }d</li>					 
+			  				<c:forEach var="mb" items="${ mainBody }">
+								<li class="list-group-item">${ mb.symptomName }</li>					 
 							</c:forEach>
 						</div>
 					</form>
