@@ -7,17 +7,27 @@
 </style>
 <script>
 	function map1(){
+		var dd = "";
 		$(".modal").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000007",
 			type : "get",
-			beforeSend : function(xhr){
-				xhr.setRequestHeader("content-type" , "application/json; charset=UTF-8");
-			},
 			success : function(data) {
 				console.log("갔다왔어");
 				console.log(data);
+				console.log(data[0]);
+				for(i=0; i < data.length; i++){
+					if(i % 10 == 0) {
+						dd += "<div>";
+					}
+					dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName;
+					if (i % 10 == 9) {
+						dd += "</div>";
+					}
+				}
+				console.log(dd);
+				$("#modalForm").append(dd);
 			}
 		});
 	}
@@ -67,15 +77,7 @@
 					<h5 class="modal-title">제목</h5>
 				</div>
 				<div class="modal-body">
-					<form action="">
-						<div>
-							<c:if test="${ mainBody == null}">
-								<div>없어${ mainBody }zz</div>
-							</c:if>
-			  				<c:forEach var="mb" items="${ mainBody }">
-								<li class="list-group-item">${ mb.symptomName }</li>					 
-							</c:forEach>
-						</div>
+					<form action="" id="modalForm">
 					</form>
 				</div>
 				<div class="modal-footer">
