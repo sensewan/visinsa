@@ -183,6 +183,17 @@
 		</where>	
 	</select>
 	
+	<select id="mainBody" resultType="MainBody" parameterType="String">
+		SELECT 
+			symptomName
+		FROM symptom
+		WHERE symptomCode in 
+		(SELECT
+			symptomCode
+		FROM body_symptom1
+		WHERE bodyCode = #{code})
+	</select>
+	
 	<!--
 		no에 해당하는 게시 글 하나를 가져오는 맵핑 구문
 		

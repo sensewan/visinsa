@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.domain.Board;
+import com.project.domain.MainBody;
 import com.project.domain.Reply;
 
 public interface BoardDao {
@@ -23,6 +24,9 @@ public interface BoardDao {
 	 * 게시 글쓰기 요청 시 게시 글 내용을 Board 객체로 받아 DB에 추가하는 메서드 
 	 **/
 	public abstract void insertBoard(Board board);
+	
+	// 메인페이지 사람 클릭
+	public abstract List<MainBody> mainBody(String code);
 	
 	/* 게시 글 수정, 삭제 시 비밀번호 입력을 체크하는 메서드
 	 * 

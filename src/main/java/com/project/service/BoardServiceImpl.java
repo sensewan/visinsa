@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.BoardDao;
 import com.project.domain.Board;
+import com.project.domain.MainBody;
 import com.project.domain.Reply;
 
 // 이 클래스가 서비스 계층(비즈니스 로직)의 컴포넌트(Bean) 임을 선언하고 있다.
@@ -181,7 +182,15 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> boardList() {
 		return boardDao.boardList(0, 10, "null", "null");
 	}
-
+	
+	// 메인페이지 사람 클릭
+	@Override
+	public List<MainBody> mainBody(String code) {
+		
+		return boardDao.mainBody(code);
+	}
+	
+	
 	/* BoardDao를 이용해 게시판 테이블에서
 	 * no에 해당하는 게시 글 을 읽어와 반환하는 메서드 
  	 * isCount == true 면 게시 상세보기, false 면 게시 글 수정 폼 요청임 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.domain.Board;
+import com.project.domain.MainBody;
 import com.project.domain.Reply;
 
 // 이 클래스가 데이터 액세스(데이터 저장소) 계층의 컴포넌트(Bean) 임을 선언한다.
@@ -123,6 +124,13 @@ public class BoardDaoImpl implements BoardDao {
 		
 		// insertBoard 맵핑 구문을 호출하면서 Board 객체를 파라미터로 지정했다.
 		sqlSession.insert(NAME_SPACE + ".insertBoard", board);
+	}
+	
+	// 메인페이지 사람 클릭
+	public List<MainBody> mainBody(String code) {
+
+		
+		return sqlSession.selectList(NAME_SPACE + ".mainBody", code);
 	}
 	
 	/* 게시 글 수정, 삭제 시 비밀번호 입력을 체크하는 메서드
