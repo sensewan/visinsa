@@ -35,9 +35,10 @@ $(document).ready(function() {
 	
 	
 	
-	$("#replycommend").click(function() {		
+	$(".replycommend").click(function() {		
 		//alert($(this).attr("data-no"));
 		
+		var my = this;
 		
 		$.ajax({			
 			url: "replyrecommend.ajax",
@@ -58,7 +59,9 @@ $(document).ready(function() {
 				 * 응답으로 받은 갱신된 추천하기 데이터를 화면에 표시한다.
 				 **/ 
 				alert("추천하기가 반영 되었습니다.");
-				$("#replycommend > .replyrecommend").text(" (" + data.replyrecommend + ")");
+				$(my).find(".replyrecommend").text(" (" + data.replyrecommend + ")");
+				/*$("#replycommend > .replyrecommend").text(" (" + data.replyrecommend + ")");*/
+				console.log(my);
 			},
 			error: function(xhr, status, error) {
 				alert("error : " + xhr.statusText + ", " + status + ", " + error);

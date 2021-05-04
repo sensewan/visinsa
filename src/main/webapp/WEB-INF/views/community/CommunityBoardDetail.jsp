@@ -122,9 +122,9 @@ String seid = (String) session.getAttribute("sessionID");
 						
 						
 						<div id="replyrecommend">
-							<span id="replycommend" style="cursor: pointer;"  data-no="${ reply.no }">
-							<img src="resources/images/replyrecommend.png" alt="추천하기" />&nbsp;추천
-							<span class="replyrecommend" >(${ reply.replyrecommend })</span>
+							<span id="replycommend" class="replycommend" style="cursor: pointer;"  data-no="${ reply.no }">
+								<img src="resources/images/replyrecommend.png" alt="추천하기" />&nbsp;추천
+								<span class="replyrecommend" >(${ reply.replyrecommend })</span>
 							</span>
 						</div>
 						
@@ -134,6 +134,7 @@ String seid = (String) session.getAttribute("sessionID");
 				</div>
 				</td>
 			</tr>	
+			
 			</c:forEach>
 		</table>				
 		</td>
