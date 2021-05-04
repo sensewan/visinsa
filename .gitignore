@@ -3,3 +3,4 @@ target/**/*.properties
 target/**/*.MF
 src/**/*.properties
 .DS_Store
+target/classes/.gitignore
