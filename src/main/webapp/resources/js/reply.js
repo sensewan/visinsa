@@ -36,12 +36,15 @@ $(document).ready(function() {
 	
 	
 	$("#replycommend").click(function() {		
+		//alert($(this).attr("data-no"));
+		
+		
 		$.ajax({			
 			url: "replyrecommend.ajax",
 			
 			type: "post",
 			
-			data : { replyrecommend: "replyrecommend", no : $("#replyno").val()},
+			data : {replyrecommend: "replyrecommend", no : $(this).attr("data-no")},
 
 			/* RecommendAction 클래스에서 Gson 라이브러리를 이용해
 			 * 응답 데이터를 json 형식으로 출력했기 때문에 dataType을 json

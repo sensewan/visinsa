@@ -148,7 +148,7 @@ public class CommunityServiceImpl implements CommunityService {
 	  public void deleteReply(int no) { CommunityDao.deleteReply(no); }
 	 
 	  
-
+	  // no=
 	  public Map<String, Integer> replyrecommend(int no, String replyrecommend) {
 		  
 	  CommunityDao.updatereplyRecommend(no, replyrecommend);

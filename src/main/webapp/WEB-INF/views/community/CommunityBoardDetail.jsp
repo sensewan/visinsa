@@ -8,8 +8,7 @@ String seid = (String) session.getAttribute("sessionID");
 <script src="resources/js/reply.js"></script>
 <article>
 <form name="checkForm" id="checkForm">
-	<input type="hidden" name="no" id="no" value="${ board.no }"/>
-	<input type="hidden" name="replyno" id="replyno" value="${reply.no }" />
+	<input type="hidden" name="no" id="no" value="${ board.no }"/>	
 	<input type="hidden" name="pass" id="rPass" />
 	<input type="hidden" name="pageNum" value="${ pageNum }" />	
 
@@ -123,7 +122,7 @@ String seid = (String) session.getAttribute("sessionID");
 						
 						
 						<div id="replyrecommend">
-							<span id="replycommend" style="cursor: pointer;">
+							<span id="replycommend" style="cursor: pointer;"  data-no="${ reply.no }">
 							<img src="resources/images/replyrecommend.png" alt="추천하기" />&nbsp;추천
 							<span class="replyrecommend" >(${ reply.replyrecommend })</span>
 							</span>

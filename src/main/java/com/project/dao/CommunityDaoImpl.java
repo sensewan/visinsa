@@ -111,6 +111,8 @@ public class CommunityDaoImpl implements CommunityDao {
 	  
 	  public void updatereplyRecommend(int no, String replyrecommend) {
 		  
+		  System.out.println("cmd : " + replyrecommend );
+		  
 		  Map<String, Object> params = new HashMap<String, Object>(); 
 		  params.put("no",no);
 		  params.put("replyrecommend", replyrecommend);

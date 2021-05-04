@@ -68,10 +68,10 @@ public class BoardAjaxController {
 	
 	@RequestMapping("/replyrecommend.ajax")
 	@ResponseBody
-	public Map<String, Integer> replyrecommend(int no, String recommend) {
+	public Map<String, Integer> replyrecommend(int no, String replyrecommend) {
 		
 				
-		return CommunityService.replyrecommend(no, recommend);		
+		return CommunityService.replyrecommend(no, replyrecommend);		
 	}
 	
 	
