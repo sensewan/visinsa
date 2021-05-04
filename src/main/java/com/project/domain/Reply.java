@@ -29,6 +29,17 @@ public class Reply {
 		this.replydate = replydate;
 		this.replyrecommend = replyrecommend;
 	}
+	
+	public Reply(int bbsNo, String replyContent, 
+			String replyid, Timestamp replydate, int replyrecommend) {
+		
+		this.bbsNo = bbsNo;
+		this.replyContent = replyContent;
+		this.replyid = replyid;
+		this.replydate = replydate;
+		this.replyrecommend = replyrecommend;
+	}
+	
 	public int getNo() {
 		return no;
 	}

@@ -106,7 +106,7 @@ public class CommunityController {
 	  
 	  CommunityService.insertBoard(board);
 	  
-	  return "redirect:/community/CommunityBoardList";
+	  return "redirect:CommunityBoardList";
 	  
 	  }
 	  
@@ -122,7 +122,7 @@ public class CommunityController {
 	   
 	   CommunityService.insertBoard(board);
 	   
-	   return "redirect:/community/CommunityBoardList"; }
+	   return "redirect:CommunityBoardList"; }
 	  
 	  
 	  
