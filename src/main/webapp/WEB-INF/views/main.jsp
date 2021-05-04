@@ -8,6 +8,14 @@
 <script>
 	function map1(){
 		$(".modal").show();
+		console.log("여기까지");
+		$.ajax({
+			url : "${pageContext.request.contextPath}/mainBody?code=B000007",
+			type : "get",
+			success : function() {
+				console.log("갔다왔어");
+			}
+		});
 	}
 	function map2(){
 		alert("목")
@@ -48,21 +56,31 @@
 		</map>
 	</div>
 	
+	
 	<div class="modal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">제목</h5>
-	      </div>
-	      <div class="modal-body">
-	        <p>제발 떠라</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">확인</button>
-	        <button type="button" class="btn btn-secondary" id="modalClose">취소</button>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">제목</h5>
+				</div>
+				<div class="modal-body">
+					<form action="">
+						<div>
+							<c:if test="${ mainBody == null}">
+								<div>없어${mainBody }zz</div>
+							</c:if>
+			  				<c:forEach var="mb" items="${mainBody }">
+								<li class="list-group-item">${ mb.symptomName }d</li>					 
+							</c:forEach>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">확인</button>
+					<button type="button" class="btn btn-secondary" id="modalClose">취소</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	

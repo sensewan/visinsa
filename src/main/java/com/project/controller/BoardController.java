@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,11 +21,13 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.Board;
+import com.project.domain.MainBody;
 import com.project.domain.Reply;
 import com.project.service.BoardService;
 
@@ -176,9 +179,25 @@ public class BoardController {
 	
 	@RequestMapping(value= {"/home", "/main"})
 	public String test_main() {
+		
+		
 		return "main";
 	}
 	
+	@RequestMapping(value = "/mainBody", method = RequestMethod.GET)
+	@ResponseBody
+	public String idCheck(@RequestParam("code") String code,Model model) {
+		System.out.println("여기까진 왔어");
+		List<MainBody> mainBody = boardService.mainBody(code);
+		System.out.println("code = " + code);
+		System.out.println("mainBody = " + mainBody.isEmpty());
+		model.addAttribute("mainBody", mainBody);
+		System.out.println("메인바디-> "+ mainBody);
+		System.out.println("mainBodyType = " + mainBody.getClass().getName());
+	
+		
+		return "/main";
+	}
 	
 	
 	
