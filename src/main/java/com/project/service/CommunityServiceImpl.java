@@ -155,7 +155,7 @@ public class CommunityServiceImpl implements CommunityService {
 	  Reply board = CommunityDao.getreplyRecommend(no);
 	  
 	  Map<String, Integer> map = new HashMap<String, Integer>();
-	  map.put("recommend", board.getReplyrecommend());
+	  map.put("replyrecommend", board.getReplyrecommend());
 	  
 	  return map; 
 	  }

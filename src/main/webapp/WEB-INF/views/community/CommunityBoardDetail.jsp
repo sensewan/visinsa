@@ -120,15 +120,15 @@ String seid = (String) session.getAttribute("sessionID");
 						<img src="resources/images/reply_btn_modify.gif" alt="댓글 수정하기"/></a>
 					<a href="#" class=deleteReply data-no="${ reply.no }">
 						<img src="resources/images/reply_btn_delete.gif" alt="댓글 삭제하기"/></a>
-							<div id="recommend">
-				</div>
+						
+						
 						<div id="replyrecommend">
 							<span id="replycommend" style="cursor: pointer;">
-							<img src="resources/images/recommend.png" alt="추천하기" />&nbsp;추천
+							<img src="resources/images/replyrecommend.png" alt="추천하기" />&nbsp;추천
 							<span class="replyrecommend" >(${ reply.replyrecommend })</span>
 							</span>
 						</div>
-							
+						
 				</div>	
 				<div class="replyContent" id="div_${ reply.no }">
 					<pre><span>${ reply.replyContent }</span></pre>

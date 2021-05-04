@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,8 @@ public class CommunityDaoImpl implements CommunityDao {
 		  params.put("no",no);
 		  params.put("replyrecommend", replyrecommend);
 		  sqlSession.update(NAME_SPACE + ".updatereplyRecommend", params); 
+		  
+		  System.out.println("replyrecommend : " + replyrecommend);
 	  }
 	  
 	  public Reply getreplyRecommend(int no) { 

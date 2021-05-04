@@ -78,7 +78,8 @@
 			bbs_no AS bbsNo,
 			reply_content AS replyContent,
 			replyid,
-			replydate
+			replydate,
+			replyrecommend
 		FROM reply
 		WHERE bbs_no = #{no}
 			ORDER BY no DESC
