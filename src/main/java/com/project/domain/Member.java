@@ -1,83 +1,153 @@
 package com.project.domain;
 
-import java.sql.Timestamp;
-
 /* 한 명의 회원 정보를 저장하는 클래스(VO, Beans, DTO)
  * 회원 정보를 저장하고 있는 테이블의 필드와 1:1 맵핑되는 Domain 클래스
  **/
 public class Member {	
 	
-	private String name, id, pass, email, mobile;
-	private String phone, zipcode, address1, address2;
-	private boolean  emailGet;
-	private Timestamp regDate;		
+	private String id, pw, pwQuestion, pwAnswer, name, nickName;
+	private String address, email, phone, businessName, businessAdd;
+	private int seller, birth, medic, del;
 	
-	public Member() { }	
+	public Member() { }
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
+	public Member(String id, int seller, String pw, String pwQuestion, String pwAnswer, String name, String nickName,
+			String address, String email, int birth, String phone, int medic, String businessName, String businessAdd) {
+		this.id = id;
+		this.pw = pw;
+		this.pwQuestion = pwQuestion;
+		this.pwAnswer = pwAnswer;
 		this.name = name;
+		this.nickName = nickName;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.businessName = businessName;
+		this.businessAdd = businessAdd;
+		this.seller = seller;
+		this.birth = birth;
+		this.medic = medic;
 	}
+
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPass() {
-		return pass;
+
+	public String getPw() {
+		return pw;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
+
+	public String getPwQuestion() {
+		return pwQuestion;
+	}
+
+	public void setPwQuestion(String pwQuestion) {
+		this.pwQuestion = pwQuestion;
+	}
+
+	public String getPwAnswer() {
+		return pwAnswer;
+	}
+
+	public void setPwAnswer(String pwAnswer) {
+		this.pwAnswer = pwAnswer;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getZipcode() {
-		return zipcode;
+
+	public String getBusinessName() {
+		return businessName;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
 	}
-	public String getAddress1() {
-		return address1;
+
+	public String getBusinessAdd() {
+		return businessAdd;
 	}
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+
+	public void setBusinessAdd(String businessAdd) {
+		this.businessAdd = businessAdd;
 	}
-	public String getAddress2() {
-		return address2;
+
+	public int getSeller() {
+		return seller;
 	}
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+
+	public void setSeller(int seller) {
+		this.seller = seller;
 	}
-	public boolean isEmailGet() {
-		return emailGet;
+
+	public int getBirth() {
+		return birth;
 	}
-	public void setEmailGet(boolean emailGet) {
-		this.emailGet = emailGet;
+
+	public void setBirth(int birth) {
+		this.birth = birth;
 	}
-	public Timestamp getRegDate() {
-		return regDate;
+
+	public int getMedic() {
+		return medic;
 	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
-	}	
+
+	public void setMedic(int medic) {
+		this.medic = medic;
+	}
+
+	public int getDel() {
+		return del;
+	}
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
 }
