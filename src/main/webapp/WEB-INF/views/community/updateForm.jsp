@@ -4,7 +4,7 @@
 
 
 <article>
-<form name="updateForm" id="updateForm" action="update" method="post">
+<form name="updateForm" id="updateForm" action="Communityupdate" method="post">
 
 
 	<%--

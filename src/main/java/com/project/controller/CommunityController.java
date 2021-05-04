@@ -128,11 +128,11 @@ public class CommunityController {
 	  
 	   
 	   @RequestMapping(value="/Communityupdate") 
-	   public String updateBoard(Model model, HttpServletResponse response, PrintWriter out, int no,
-	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
-	   @RequestParam(value="type", required=false, defaultValue="null") String type,
-	   @RequestParam(value="keyword", required=false, defaultValue="null") String keyword,
-	   @RequestParam(value="category", required=false, defaultValue="null") String category
+	   public String updateBoard(Model model, HttpServletResponse response,  int no,
+		   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
+		   @RequestParam(value="type", required=false, defaultValue="null") String type,
+		   @RequestParam(value="keyword", required=false, defaultValue="null") String keyword,
+		   @RequestParam(value="category", required=false, defaultValue="null") String category
 	   ) throws Exception 
 	   {
 	   
@@ -148,14 +148,14 @@ public class CommunityController {
 	   model.addAttribute("searchOption", searchOption);
 	   
 	   if(searchOption) {
-	   model.addAttribute("keyword", URLEncoder.encode(keyword, "utf-8"));
-	   model.addAttribute("type", type); model.addAttribute("word", keyword); }
-	   
-	   return "/community/updateForm"; 
+		   model.addAttribute("keyword", URLEncoder.encode(keyword, "utf-8"));
+		   model.addAttribute("type", type); model.addAttribute("word", keyword); }
+		   
+		   return "/community/updateForm"; 
 	   
 	   }
 	   
-	   @RequestMapping(value="Communityupdate", method=RequestMethod.POST) 
+	   @RequestMapping(value= {"Communityupdate", "/update"}, method=RequestMethod.POST) 
 	   public  String updateBoard(HttpServletResponse response, PrintWriter out, Community
 	   board, RedirectAttributes reAttrs,
 	   @RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum,
