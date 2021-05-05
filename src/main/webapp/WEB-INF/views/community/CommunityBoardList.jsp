@@ -34,45 +34,110 @@
 		background-color: #333;
 		color: #fff;
 	}
+	
+	input[id="menuicon"] {
+		display:none;
+	}
+	input[id="menuicon"] + label {
+		display:block;
+		width:60px;
+		height:40px;
+		position:relative;
+		cursor:pointer;
+	}
+	input[id="menuicon"] + label span {
+		display:block;
+		position:absolute;
+		width:100%;
+		height:5px;
+		border-radius:30px;
+		background:#000;
+		transition:all .35s;
+	}
+	input[id="menuicon"] + label span:nth-child(1) {
+		top:0;
+	}
+	input[id="menuicon"] + label span:nth-child(2) {
+		top:50%;
+		transform:translateY(-50%);
+	}
+	input[id="menuicon"] + label span:nth-child(3) {
+		bottom:0;
+	}
+	
+	input[id="menuicon"]:checked + label span:nth-child(1) {
+		top:50%;
+		transform:translateY(-50%) rotate(45deg);
+	}
+	input[id="menuicon"]:checked + label span:nth-child(2) {
+		opacity:0;	
+	}
+	input[id="menuicon"]:checked + label span:nth-child(3) {
+		bottom:50%;
+		transform:translateY(50%) rotate(-45deg);	
+	}
+	
+	input[id="menuicon"] {display:none;}
+	input[id="menuicon"] + label {display:block;margin:30px;width:60px;height:50px;position:relative;cursor:pointer;}
+	input[id="menuicon"] + label span {display:block;position:absolute;width:100%;height:5px;border-radius:30px;background:#000;transition:all . 35s;}
+	input[id="menuicon"] + label span:nth-child(1) {top:0;}
+	input[id="menuicon"] + label span:nth-child(2) {top:50%;transform:translateY(-50%);}
+	input[id="menuicon"] + label span:nth-child(3) {bottom:0;}
+	input[id="menuicon"]:checked + label {z-index:2;}
+	input[id="menuicon"]:checked + label span {background:#fff;}
+	input[id="menuicon"]:checked + label span:nth-child(1) {top:50%;transform:translateY(-50%) rotate(45deg);}
+	input[id="menuicon"]:checked + label span:nth-child(2) {opacity:0;}
+	input[id="menuicon"]:checked + label span:nth-child(3) {bottom:50%;transform:translateY(50%) rotate(-45deg);}
+	
+	
+	div[class="sidebar"] {
+		width:300px;
+		height:100%;
+		background:white;
+		position:fixed;
+		top:0;
+		left:-300px;
+		z-index:1;
+		transition:all .35s;
+		margin-top:20%;
+		text-align:center;
+		
+	}
+	input[id="menuicon"]:checked + label + div {
+		left:0;
+	}
+	
 
 </style>
-<article>
 	<form name="categoryForm" id="categoryForm" action="CommunityBoardList">
 		<input type="hidden" name="category" id="catfilter" >
 	</form>
-		<button type="button" name="category" id="" class="categoryFilter">전체 게시판</button>
-		<button type="button"  name="category" id="board" class="categoryFilter">자유 게시판</button>
-		<button type="button"  name="category" id="qna" class="categoryFilter">질문 답변 게시판</button>
-		<button type="button"  name="category" id="chuchu" class="categoryFilter">추천 게시판</button>
+<article class="body">
+	<input type="checkbox" id="menuicon">
+	<label for="menuicon">
+		<span></span>
+		<span></span>
+		<span></span>
+	</label>
+	<div class="sidebar">
+		<p style="line-height:250%;">
+		<br/>
+		<button type="button" name="category" id="" class="categoryFilter btn btn-primary btn-lg" style="width:150px;">전체 게시판</button><br/><br/>
+		<button type="button"  name="category" id="board" class="categoryFilter btn btn-primary btn-lg" style="width:150px;">자유 게시판</button><br/><br/>
+		<button type="button"  name="category" id="qna" class="categoryFilter btn btn-primary btn-lg" style="width:150px;">Q&A 게시판</button><br/><br/>
+		<button type="button"  name="category" id="chuchu" class="categoryFilter btn btn-primary btn-lg" style="width:150px;">추천 게시판</button><br/>
+		</p>
+	</div>
 
+<div style="width:1080px;margin-left:25%;">
+<h2 style="font-color:blue;">게시 글 리스트</h2>
+<table class="table table-hover" style="margin-left: 0px;">
 
-
-
-<table class="listTable" style="margin-left: 0px;">
-	<tr>
-		<td class="boardTitle" colspan="5">
-			<h2>게시 글 리스트</h2>
-		</td>
-		
-	</tr>
-	<tr>
-		<td colspan="5">
-			<form name="searchForm" id="searchForm">
-				<select name="type" id="type">						
-					<option value="title">제목</option>
-					<option value="id">아이디</option>
-					<option value="content">내용</option>
-				</select>
-				<input type="text" name="keyword" id="keyword" />
-				<input type="submit" value="검색" />
-			</form>
-		</td>
-	</tr>
 	<%-- 검색 요청일 경우만 아래를 화면에 표시 한다. --%>
 	<c:if test="${ searchOption }">
 	<tr>
 		<td colspan="5" id="searchComment">
-			"${ word  }" 검색 결과</td>
+			"${ keyword  }" 검색 결과</td>
 	</tr>
 	<tr>
 		<%-- 검색 요청일 경우 일반 게시 글 리스트로 이동할 수 있도록 링크를 설정했다. --%>
@@ -107,16 +172,14 @@
 	<c:forEach var="b" items="${ CommunityBoardList }" varStatus="status">		
 	<tr class="listTr">
 		<td class="listTdNo">${ b.no  }</td>
-		
-		
 		<c:if test="${b.medic == 0 }">
 		<td class="listTdNo"></td>
 		</c:if>
 		<c:if test="${b.medic == 1 }">
-		<td class="listTdNo"><img src="/resources/images/doctor.png"></td>
+		<td class="listTdNo"><img src="resources/images/doctor.png"></td>
 		</c:if>
 		<c:if test="${b.medic == 2 }">
-		<td class="listTdNo"><img src="/resources/images/druggist.png"></td>
+		<td class="listTdNo"><img src="resources/images/druggist.png"></td>
 		</c:if>
 		
 		<td class="listTdTitle">
@@ -135,20 +198,15 @@
 				&type=${ type }&keyword=${ keyword }">${ b.title }</a>
 		</td>
 		<td class="listTdWriter">${ b.id }</td>
-		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" 
+		<td class="listTdRegDate"><fmt:formatDate value="${ b.regdate }" 
 			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-		<td class="listTdReadCount">${ b.readCount }</td>
+		<td class="listTdReadCount">${ b.readcount }</td>
+		<td class="listTdReadCount">&nbsp;&nbsp;${b.recommend }</td>
 	</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5" class="listPage">
-			<%--
-			/* 현재 페이지 그룹의 시작 페이지가 pageGroup보다 크다는 것은
-			 * 이전 페이지 그룹이 존재한다는 것으로 현재 페이지 그룹의 시작 페이지에
-			 * pageGroup을 마이너스 하여 링크를 설정하면 이전 페이지 그룹의
-			 * startPage로 이동할 수 있다.
-		 	 **/
-		 	 --%>
+		<td colspan="5">
+
 		 	<c:if test="${ startPage > pageGroup }">
 				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }&category=${ category }
 					&type=${ type }&keyword=${ keyword }">[이전]</a>
@@ -180,6 +238,19 @@
 					&type=${ type }&keyword=${ keyword }">[다음]</a>
 			</c:if>		
 		</td>
+		
+		<td colspan="5">
+			<form name="searchForm" id="searchForm" >
+				<select name="type" id="type">						
+					<option value="title">제목</option>
+					<option value="id">아이디</option>
+					<option value="content">내용</option>
+				</select>
+				<input type="text" name="keyword" id="keyword" />
+				<input type="submit" value="검색" />
+			</form>
+		</td>
+		
 	</tr>
 </c:if>	
 <%-- 
@@ -213,7 +284,7 @@
 	</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5" class="listPage">
+		<td colspan="5" >
 			<%--
 			/* 현재 페이지 그룹의 시작 페이지가 pageGroup보다 크다는 것은
 			 * 이전 페이지 그룹이 존재한다는 것으로 현재 페이지 그룹의 시작 페이지에
@@ -251,23 +322,36 @@
 					[다음]</a>
 			</c:if>		
 		</td>
+		
+		<td colspan="5">
+			<form name="searchForm" id="searchForm" >
+				<select name="type" id="type">						
+					<option value="title">제목</option>
+					<option value="id">아이디</option>
+					<option value="content">내용</option>
+				</select>
+				<input type="text" name="keyword" id="keyword" />
+				<input type="submit" value="검색" />
+			</form>
+		</td>
+		
 	</tr>
 </c:if>
 <%-- 검색 요청이면서 검색된 리스트가 존재하지 않을 경우 --%>
-<c:if test="${ searchOption and empty boardList }">
+<c:if test="${ searchOption and empty CommunityBoardList }">
 	<tr>
 		<td colspan="5" class="listTdSpan">
 			"${ keyword }"가 포함된 게시 글이 존재하지 않습니다.</td>
 	</tr>
 </c:if>
 <%-- 일반 게시 글 리스트 요청이면서 게시 글 리스트가 존재하지 않을 경우 --%>
-<c:if test="${ not searchOption and empty boardList }">
+<c:if test="${ not searchOption and empty CommunityBoardList }">
 	<tr>
 		<td colspan="5" class="listTdSpan">게시 글이 존재하지 않습니다.</td>
 	</tr>
 </c:if>
 </table>
-
+</div>
 
 </article>
 

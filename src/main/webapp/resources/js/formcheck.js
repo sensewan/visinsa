@@ -60,7 +60,7 @@ $(function() {
 			return false;
 		}		
 		$(this).attr("method", "post");
-		$(this).attr("action", "boardList");		
+		$(this).attr("action", "CommunityBoardList");		
 	});	
 	
 	$(".categoryFilter").on("click", function() {

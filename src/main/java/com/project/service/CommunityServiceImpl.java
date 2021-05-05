@@ -87,7 +87,7 @@ public class CommunityServiceImpl implements CommunityService {
 				} catch (UnsupportedEncodingException e) {					
 					e.printStackTrace();
 				}
-				modelMap.put("word", keyword);
+				modelMap.put("keyword", keyword);
 				modelMap.put("type", type);
 				modelMap.put("category", category);
 			}
