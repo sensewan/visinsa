@@ -1,9 +1,12 @@
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.dao.MemberDao;
+import com.project.domain.Basket;
 import com.project.domain.Member;
 
 
@@ -70,5 +73,15 @@ public class MemberServiceImpl implements MemberService {
 	// 회원 정보를 DAO를 이용해 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member) {
 		memberDao.updateMember(member);
+	}
+
+	@Override
+	public void addBasket(Basket basket) {
+		memberDao.addBasket(basket);
+	}
+
+	@Override
+	public List<Basket> getBasket(String id) {
+		return memberDao.getBasket(id);
 	}
 }

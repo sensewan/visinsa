@@ -1,9 +1,12 @@
 package com.project.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.domain.Basket;
 import com.project.domain.Member;
 
 
@@ -167,5 +170,15 @@ public class MemberDaoImpl implements MemberDao {
 	// 회원 정보를 DAO를 이용해 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member) {
 		sqlSession.update(NAME_SPACE + ".updateMember",	member);
+	}
+
+	@Override
+	public void addBasket(Basket basket) {
+		sqlSession.insert(NAME_SPACE + ".addBasket", basket);
+	}
+
+	@Override
+	public List<Basket> getBasket(String id) {
+		return sqlSession.selectList(NAME_SPACE + ".getBasket", id);
 	}
 }

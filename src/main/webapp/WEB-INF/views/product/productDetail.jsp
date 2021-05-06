@@ -14,6 +14,21 @@ $(function() {
 		$("#checkForm").submit();
 	});
 	
+	//장바구니 담기
+	$("#basket").on("click", function() {
+		var count = $("#count").val();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/addBasket?num=${ product.no }&id=${ member.id }&count=" + count,
+			type : "get",
+			success : function(data) {
+				var result = confirm("장바구니에 담았습니다.\n장바구니를 확인하시겠습니까?");
+				if(result) {
+					location.href="basket";
+				}
+			}
+		});
+	});
+	
 });
 </script>
 
@@ -85,10 +100,11 @@ $(function() {
 	<tr>
 		<td colspan="4" class="tdSpan">
 			<input type="button" id="detailProductUpdate" value="수정하기"/>
+			<input type="button" id="basket" value="장바구니 담기"/>
 			&nbsp;&nbsp;<input type="button" id="detailDelete" value="삭제하기" />
 			<%-- 일반 게시 글 리스트에서 온 요청이면 일반 게시 글 리스트로 돌려 보낸다. --%>
-			<c:if test="${ not searchOption }">		
-				&nbsp;&nbsp;<input type="button" value="목록보기" 
+			<c:if test="${ not searchOption }">
+				&nbsp;&nbsp;<input type="button" value="목록보기"
 					onclick="javascript:window.location.href=
 						'productList?pageNum=${ pageNum }'"/>
 			</c:if>
@@ -96,7 +112,7 @@ $(function() {
 				검색 리스트에서 온 요청이면 검색 리스트의 동일한 페이지로 돌려보낸다. 
 			--%>
 			<c:if test="${ searchOption }">
-				&nbsp;&nbsp;<input type="button" value="목록보기" 
+				&nbsp;&nbsp;<input type="button" value="목록보기"
 					onclick="javascript:window.location.href=
 						'productList?pageNum=${ pageNum }&type=${ type }&keyword=${ keyword }'"/>
 				<%-- 
@@ -104,6 +120,9 @@ $(function() {
 					않지만 줄 바꿔서 작성하게 되면 스크립트 에러가 발생한다.
 				--%>		
 			</c:if>				
+		</td>
+		<td>
+			<input type="number" id="count" value="1">
 		</td>
 	</tr>
 </table>

@@ -1,5 +1,8 @@
 package com.project.service;
 
+import java.util.List;
+
+import com.project.domain.Basket;
 import com.project.domain.Member;
 
 public interface MemberService {
@@ -18,6 +21,12 @@ public interface MemberService {
 	 * @return no에 해당하는 회원 정보를 Member 객체로 반환
 	 **/
 	public Member getMember(String id);
+	
+	// 장바구니 담기
+	public void addBasket(Basket basket);
+	
+	// 내 장바구니 확인
+	public List<Basket> getBasket(String id);
 	
 	// 회원 가입시 DAO를 이용해 아이디 중복을 체크하는 메서드
 	public int overlapIdCheck(String id);
