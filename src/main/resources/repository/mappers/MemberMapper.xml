@@ -80,6 +80,22 @@
 				#{birth}, #{phone}, #{medic} , null, null, 0)
 	</insert>
 	
+	
+	<!-- 장바구니 담기 -->
+	<insert id="addBasket" parameterType="Basket">
+		INSERT INTO basket
+			(num, id, count)
+		VALUES(#{num}, #{id}, #{count})
+	</insert>
+	
+	<!-- 내 장바구니 확인 -->
+	<select id="getBasket" resultType="Basket">
+		SELECT
+			b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
+		FROM basket b, product p
+		WHERE b.num = p.no AND b.id = #{id}
+	</select>
+	
 	<!--
 		회원 테이블에서 id에 해당하는 비밀번호를 가져오는 맵핑 구문
 	

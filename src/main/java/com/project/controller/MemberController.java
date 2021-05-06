@@ -5,8 +5,10 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.project.domain.MainBody;
 import com.project.domain.Member;
+import com.project.domain.Basket;
 import com.project.service.MemberService;
 
 // 스프링 MVC의 컨트롤러임을 선언하고 있다.
@@ -138,7 +142,7 @@ public class MemberController {
 		}		
 		
 		Member member = memberService.getMember(id);
-		session.setAttribute("isLogin", true);		
+		session.setAttribute("isLogin", true);
 		
 		/* 클래스 레벨에 @SessionAttributes("member") 애노테이션을
 		 * 지정하고 컨트롤러의 메서드에서 아래와 같이 동일한 이름으로 모델에
@@ -288,6 +292,7 @@ public class MemberController {
 		
 		return "redirect:main";
 	}
+	
 
 	// 회원가입 아이디 체크
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
@@ -368,7 +373,38 @@ public class MemberController {
 		
 		return "redirect:boardList";
 	}
-
+	
+	// 장바구니 담기
+	@RequestMapping(value = "/addBasket", method = RequestMethod.GET)
+	@ResponseBody
+	public void Basket(@RequestParam("num") int num, 
+			@RequestParam("id") String id, @RequestParam("count") int count,
+			Basket basket) {
+		System.out.println("여기까진 왔어");
+		System.out.println("id = " + id);
+		System.out.println("num = " + num);
+		System.out.println("count = " + count);
+		
+		basket.setNum(num);
+		basket.setId(id);
+		basket.setCount(count);
+		
+		memberService.addBasket(basket);
+	}
+	
+	
+	@RequestMapping("/basket")
+	public String Basket(HttpServletRequest request,Model model) {
+		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		List<Basket> basket = memberService.getBasket(id);
+		model.addAttribute("basket", basket);
+		System.out.println("장바구니 id = " + id);
+		return "member/Basket";
+	}
+	
 	@RequestMapping("/MyPage")
 	public String MyPage() {
 		

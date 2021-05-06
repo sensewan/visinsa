@@ -12,7 +12,13 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/main_css.css" />
 <script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/member.js"></script>
+<script>
+	$(function(){
+		$("#Basket").on("click", function(){
+			location.href="basket";
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -22,7 +28,7 @@
 		<div class="btn-group-vertical" id="button" style="margin: 10px;">
 			<button type="button" name="MemberUpdate" id="MemberUpdate" class="btn btn-primary">개인정보 변경하기</button>
 			<button type="button" name="MyContent" id="MyContent" class="btn btn-primary">나의 작성글</button>
-			<button type="button" class="btn btn-primary">장바구니</button>
+			<button type="button" class="btn btn-primary" id="Basket">장바구니</button>
 			<button type="button" name="MemberDel" id="MemberDel" class="btn btn-primary">회원 탈퇴</button>
 		</div>
 	</div>

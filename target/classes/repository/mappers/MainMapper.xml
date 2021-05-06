@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springstudy.bbs.mapper.MainMapper" >
+	
+	<select id="mainBody" resultType="MainBody" parameterType="String">
+		SELECT
+			s.symptomName
+		FROM
+		(SELECT
+			s.*, b.bodyCode
+		FROM symptom s, body_symptom1 b
+		WHERE s.symptomCode in
+		(SELECT
+			symptomCode
+		FROM body_symptom1
+		WHERE bodyCode REGEXP #{code}) and s.symptomCode = b.symptomCode) s
+		WHERE bodyCode REGEXP #{code}
+	</select>
+	
+</mapper>	

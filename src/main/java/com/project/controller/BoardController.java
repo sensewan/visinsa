@@ -185,40 +185,6 @@ public class BoardController {
 		return "main";
 	}
 	
-//	@RequestMapping(value = "/mainBody", method = RequestMethod.GET)
-//	@ResponseBody
-//	public String idCheck(@RequestParam("code") String code,Model model) {
-//		System.out.println("여기까진 왔어");
-//		List<MainBody> mainBody = boardService.mainBody(code);
-//		
-//		System.out.println("code = " + code);
-//		System.out.println("mainBody = " + mainBody.isEmpty());
-//		
-//		model.addAttribute("mainBody", mainBody);
-//		System.out.println("메인바디-> "+ mainBody);
-//		System.out.println("mainBodyType = " + mainBody.getClass().getName());
-//	
-//		
-//		return "/main";
-//	}
-	
-	@RequestMapping(value = "/mainBody", method = RequestMethod.GET)
-	@ResponseBody
-	public List<MainBody> idCheck(@RequestParam("code") String code, Model model) {
-		System.out.println("여기까진 왔어");
-		
-		List<MainBody> mainBody = boardService.mainBody(code);
-		model.addAttribute("mainBody", mainBody);
-		
-		System.out.println("code = " + code);
-		System.out.println("mainBody = " + mainBody.isEmpty());
-		System.out.println("메인바디-> "+ mainBody);
-		System.out.println("mainBodyType = " + mainBody.getClass().getName());
-		
-		return mainBody;
-	}
-	
-	
 	
 	@RequestMapping(value= {"/boardList", "/list"})
 	public String boardList(Model model, 
