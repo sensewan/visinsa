@@ -228,6 +228,16 @@
 
 
 
+	<!--
+		게시판 테이블에서 no에 해당하는 게시 글을 삭제하는 맵핑 구문
+	-->
+	<delete id="deleteProduct">
+		DELETE FROM product
+		WHERE no = #{no}
+	</delete>
+
+
+
 
 </mapper>	
 

@@ -40,6 +40,9 @@ public class ProductDaoImpl implements ProductDao {
 	}	
 	
 	
+	
+	
+	
 	// 현재 페이지에 해당하는 게시 글 리스트를 DB에서 읽어와 반환 하는 메소드
 	@Override
 	public List<Product> productList(int startRow, int num, String type, String keyword) {
@@ -80,7 +83,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	
-	
+	// 상품 게시글 총 갯수 구하기
 	@Override
 	public int getProductCount(String type, String keyword) {
 		
@@ -105,7 +108,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 
-//	게시글 쓰기 (DB에 추가하기)
+	// 게시글 쓰기 (DB에 추가하기)
 	@Override
 	public void insertProduct(Product product) {
 		
@@ -120,6 +123,13 @@ public class ProductDaoImpl implements ProductDao {
 		
 		sqlSession.update(NAME_SPACE+".updateProduct", product);
 		
+	}
+
+
+	// 상품 삭제하기
+	@Override
+	public void deleteProduct(int no) {
+		sqlSession.delete(NAME_SPACE+".deleteProduct", no);
 	}
 
 	

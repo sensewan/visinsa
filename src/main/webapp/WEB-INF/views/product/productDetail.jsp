@@ -5,9 +5,8 @@
 <script>
 $(function() {
 
-	/* 게시 글 상세보기에서 게시 글 수정 폼 요청 처리
-	 * 아래와 같이 hidden 폼을 통해 post 방식으로 처리 할 수 있다.
-	 **/
+
+	// 게시글 수정버튼 클릭시
 	$("#detailProductUpdate").on("click", function() {
 		
 		$("#checkForm").attr("action", "updateProduct");
@@ -27,6 +26,21 @@ $(function() {
 				}
 			}
 		});
+	});
+	
+
+	// 게시글 삭제하기
+	$("#detailDelete").on("click", function() {
+			
+/* 		var pass = $("#pass").val();
+		if(pass.length <= 0) {
+			alert("게시 글을 수정하려면 비밀번호를 입력해주세요");
+			return false;
+		} */
+		
+		$("#checkForm").attr("action", "deleteProduct");
+		$("#checkForm").attr("method", "post");
+		$("#checkForm").submit();
 	});
 	
 });

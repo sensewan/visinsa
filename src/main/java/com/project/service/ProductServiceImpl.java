@@ -217,6 +217,14 @@ public class ProductServiceImpl implements ProductService {
 		productDao.updateProduct(product);
 		
 	}
+
+	
+	// 상품 삭제하
+	@Override
+	public void deleteProduct(int no) {
+		productDao.deleteProduct(no);
+		
+	}
 	
 
 	
