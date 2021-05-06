@@ -140,8 +140,8 @@
 		
 		여러 개의 요청 URI에 같은 뷰를 적용하려면 아래와 같이 여러 번 지정하면 된다.
 	-->
-	<view-controller path="/writeForm" view-name="writeForm" />
-	<view-controller path="/boardWrite" view-name="writeForm" />
+	<view-controller path="/noticewriteForm" view-name="noticewriteForm" />
+	<view-controller path="/noticeWrite" view-name="noticewriteForm" />
 	
 	<!--
 		Redirect View 설정
@@ -155,13 +155,12 @@
 	<redirect-view-controller path="/index" redirect-url="/boardList"/>
 	<redirect-view-controller path="/default" redirect-url="/boardList"/>
 	
-	<view-controller path="loginForm" view-name="loginForm" />
 	
 	<!--
 		아래는 ContextRoot/write로 들어오는 요청을 위에서 view-controller에
 		설정한 /writeForm 으로 리다이렉트 하는 예 이다.
 	-->
-	<redirect-view-controller path="/write" redirect-url="/writeForm"/>
+	<redirect-view-controller path="/noticewrite" redirect-url="/noticewriteForm"/>
 	
 	<!-- 회원가입 폼 요청을 처리하는 뷰 전용 컨트롤러 설정 -->
 	<view-controller path="/joinForm" view-name="member/memberJoinForm" />
@@ -174,7 +173,7 @@
 	-->
 	<beans:bean id="loginCheckInterceptor" 
 		class="com.project.interceptor.LoginCheckInterceptor" />
-	<interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/boardDetail" />
 			<mapping path="/add*" />
@@ -183,13 +182,13 @@
 			<mapping path="/memberUpdate*" />
 			<beans:ref bean="loginCheckInterceptor" />			
 		</interceptor>		
-		<!--  
+		 
 		<interceptor>
 			<mapping path="/member/*" />
 			<mapping path="/board/*" />
 			<beans:bean class=
 				"com.springstudy.bbs.interceptor.LoginCheckInterceptor" />
 		</interceptor>
-		-->
-	</interceptors>	
+		
+	</interceptors>	 -->
 </beans:beans>
