@@ -38,7 +38,7 @@
 		        <a class="nav-link" href="">건강정보</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">비타민</a>
+		        <a class="nav-link" href="productList">비타민</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="">커뮤니티</a>
