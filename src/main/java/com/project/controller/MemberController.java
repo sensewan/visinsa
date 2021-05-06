@@ -368,6 +368,12 @@ public class MemberController {
 		
 		return "redirect:boardList";
 	}
+
+	@RequestMapping("/MyPage")
+	public String MyPage() {
+		
+		return "member/MyPage";
+	}
 	
 	@RequestMapping("/SignUp")
 	public String SignUp() {
