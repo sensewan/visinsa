@@ -23,9 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.project.domain.MainBody;
-import com.project.domain.Member;
 import com.project.domain.Basket;
+import com.project.domain.Member;
 import com.project.service.MemberService;
 
 // 스프링 MVC의 컨트롤러임을 선언하고 있다.
