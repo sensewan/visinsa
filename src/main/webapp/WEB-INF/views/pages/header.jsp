@@ -11,7 +11,7 @@
 				</c:if>
 				
 				<span class="login_m">${ sessionScope.isLogin == true ?
-					"<a href='logout'>로그아웃</a>" : "<a href='SignUp'>회원가입&nbsp;⎥&nbsp;</a><a href='login'>로그인</a>" }</span>
+					"<a href='MyPage'>MyPage&nbsp;⎥&nbsp;</a><a href='logout'>로그아웃</a>" : "<a href='SignUp'>회원가입&nbsp;⎥&nbsp;</a><a href='login'>로그인</a>" }</span>
 			</div>
 			<div style="text-align: center;">
 			  <a class="navbar-brand" href="main" id="logo">
