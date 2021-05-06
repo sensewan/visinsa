@@ -181,4 +181,9 @@ public class MemberDaoImpl implements MemberDao {
 	public List<Basket> getBasket(String id) {
 		return sqlSession.selectList(NAME_SPACE + ".getBasket", id);
 	}
+
+	@Override
+	public int countBasket(String id) {
+		return sqlSession.selectOne(NAME_SPACE + ".countBasket", id);
+	}
 }

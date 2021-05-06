@@ -50,7 +50,7 @@ import com.project.service.MemberService;
  * 
  * @SessionAttributes()를 사용해 member와 m 두 개의 모델 이름을 지정했다. 
  **/
-@SessionAttributes({"member", "m"})
+@SessionAttributes({"member", "m", "countBasket"})
 public class MemberController {
 	private MemberService memberService;
 	
@@ -105,7 +105,7 @@ public class MemberController {
 			HttpSession session, HttpServletResponse response) 
 					throws ServletException, IOException, NoSuchAlgorithmException {
 		
-
+		
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.update(pwd.getBytes());
 		String hex = String.format("%064x", new BigInteger(1, md.digest()));
@@ -140,6 +140,11 @@ public class MemberController {
 			
 			return null;
 		}		
+		
+		int countBasket = memberService.countBasket(id);
+		System.out.println("countBasket = " + countBasket);
+		
+		model.addAttribute("countBasket", countBasket);
 		
 		Member member = memberService.getMember(id);
 		session.setAttribute("isLogin", true);
@@ -401,7 +406,15 @@ public class MemberController {
 		String id = member.getId();
 		List<Basket> basket = memberService.getBasket(id);
 		model.addAttribute("basket", basket);
+		int total = 0;
+		for(int i=0; i < basket.size(); i++) {
+			total += basket.get(i).getPrice();
+		}
+		System.out.println("basket.get(0).getPrice() = " + basket.get(0).getPrice());
+		System.out.println("total = " + total);
 		System.out.println("장바구니 id = " + id);
+		
+		model.addAttribute("total", total);
 		return "member/Basket";
 	}
 	

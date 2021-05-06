@@ -30,6 +30,9 @@ public interface MemberDao {
 	// 내 장바구니 확인
 	public List<Basket> getBasket(String id);
 	
+	// 장바구니 개수 확인
+	public int countBasket(String id);
+	
 	// 회원 정보를 회원 테이블에 저장하는 메서드
 	public void addMember(Member member);
 	

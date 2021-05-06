@@ -28,6 +28,9 @@ public interface MemberService {
 	// 내 장바구니 확인
 	public List<Basket> getBasket(String id);
 	
+	// 장바구니 개수 확인
+	public int countBasket(String id);
+	
 	// 회원 가입시 DAO를 이용해 아이디 중복을 체크하는 메서드
 	public int overlapIdCheck(String id);
 	

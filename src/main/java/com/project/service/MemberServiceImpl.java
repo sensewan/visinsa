@@ -84,4 +84,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<Basket> getBasket(String id) {
 		return memberDao.getBasket(id);
 	}
+
+	@Override
+	public int countBasket(String id) {
+		return memberDao.countBasket(id);
+	}
 }
