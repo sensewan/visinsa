@@ -35,7 +35,7 @@
 		        <a class="nav-link" href="">BEST</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">건강정보</a>
+		        <a class="nav-link" href="kakao">건강정보</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="productList">비타민</a>
