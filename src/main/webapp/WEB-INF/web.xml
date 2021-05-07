@@ -31,18 +31,32 @@
 	</servlet-mapping>
 
 	<filter>
-   			<filter-name>encodingFilter</filter-name>
-    		<filter-class>
-   			 	org.springframework.web.filter.CharacterEncodingFilter
-    	</filter-class>
+   		<filter-name>encodingFilter</filter-name>
+    	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     	<init-param>
     			<param-name>encoding</param-name>
     			<param-value>UTF-8</param-value>
-   			 </init-param>
+   		</init-param>
 	</filter>
 	<filter-mapping>
    		<filter-name>encodingFilter</filter-name>
     	<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+
+
+  	<init-param>
+  		<param-name>forceEncoding</param-name>
+  		<param-value>true</param-value>
+  	</init-param>  	
+
+
+	  <resource-ref>
+	    <description>DBCP Connection 정의</description>
+	    <res-ref-name>jdbc/springDBPool</res-ref-name>
+	    <res-type>javax.sql.DataSource</res-type>
+	    <res-auth>Container</res-auth>
+	  </resource-ref>    
+	  
 </web-app>
+

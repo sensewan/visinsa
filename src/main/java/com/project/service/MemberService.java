@@ -42,4 +42,6 @@ public interface MemberService {
 	
 	// 회원 정보를 DAO를 이용해 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member);
+	
+	
 }
