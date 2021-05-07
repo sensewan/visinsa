@@ -12,6 +12,9 @@ public class Reply {
 	private String replyid;
 	private Timestamp replydate;
 	private int replyrecommend;
+	private int replymedic;
+	private String replybusinessName;
+	private String replybusinessAdd;
 	
 	public Reply() { }
 	public Reply(int bbsNo, String replyContent, String replyid) {
@@ -40,6 +43,21 @@ public class Reply {
 		this.replyrecommend = replyrecommend;
 	}
 	
+	
+	
+	public Reply(int no, int bbsNo, String replyContent, String replyid, Timestamp replydate, int replyrecommend,
+			int replymedic, String replybusinessName, String replybusinessAdd) {
+		super();
+		this.no = no;
+		this.bbsNo = bbsNo;
+		this.replyContent = replyContent;
+		this.replyid = replyid;
+		this.replydate = replydate;
+		this.replyrecommend = replyrecommend;
+		this.replymedic = replymedic;
+		this.replybusinessName = replybusinessName;
+		this.replybusinessAdd = replybusinessAdd;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -76,6 +94,24 @@ public class Reply {
 	}
 	public void setReplyrecommend(int replyrecommend) {
 		this.replyrecommend = replyrecommend;
+	}
+	public int getReplymedic() {
+		return replymedic;
+	}
+	public void setReplymedic(int replymedic) {
+		this.replymedic = replymedic;
+	}
+	public String getReplybusinessName() {
+		return replybusinessName;
+	}
+	public void setReplybusinessName(String replybusinessName) {
+		this.replybusinessName = replybusinessName;
+	}
+	public String getReplybusinessAdd() {
+		return replybusinessAdd;
+	}
+	public void setReplybusinessAdd(String replybusinessAdd) {
+		this.replybusinessAdd = replybusinessAdd;
 	}
 
 	

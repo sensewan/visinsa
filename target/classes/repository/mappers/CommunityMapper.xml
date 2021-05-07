@@ -79,7 +79,10 @@
 			reply_content AS replyContent,
 			replyid,
 			replydate,
-			replyrecommend
+			replyrecommend,
+			replymedic,
+			replybusinessAdd,
+			replybusinessName
 		FROM reply
 		WHERE bbs_no = #{no}
 			ORDER BY no DESC
@@ -126,8 +129,8 @@
 	</select>
 	
 	<insert id="addReply" parameterType="Reply">
-		INSERT INTO reply(bbs_no, reply_content, replyid, replydate)
-		VALUES(#{bbsNo}, #{replyContent}, #{replyid}, NOW())
+		INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)
+		VALUES(#{bbsNo}, #{replyContent}, #{replyid}, NOW(), #{replymedic}, #{replybusinessName}, #{replybusinessAdd})
 	</insert>
 
 	<!--

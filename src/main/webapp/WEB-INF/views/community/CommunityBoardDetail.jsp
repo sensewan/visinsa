@@ -6,6 +6,7 @@
 String seid = (String) session.getAttribute("sessionID");
 %>
 <script src="resources/js/reply.js"></script>
+<script src="resources/js/modal.js"></script>
 <style type="text/css">
 	input[id="menuicon"] {
 		display:none;
@@ -106,6 +107,10 @@ String seid = (String) session.getAttribute("sessionID");
 		</p>
 	</div>
 	
+	
+			<div id="map" style="width:480px;height:350px;"></div>
+			
+			
 	<div class="jumbotron" style="margin-left:20%; margin-right:10%;">
   <h1 class="display-3">제목 : ${ board.title }</h1>
   <p class="lead">	글쓴이 : ${board.id}<br/>
@@ -159,8 +164,78 @@ String seid = (String) session.getAttribute("sessionID");
 			<c:forEach var="reply" items="${ replyList }" >
 			<tr id="reply_${ reply.no }" style="border-color: white; border-top:1px dashed;">
 				<td>									
-				<div class="replyUser">						
-					<span class="member">작성자 : ${ reply.replyid }</span>	
+				<div class="replyUser">		
+					<span class="member">작성자 : ${ reply.replyid }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+						<c:if test="${reply.replymedic == 1 || reply.replymedic == 2}">
+							<button type="button"  name="openModalBtn" id="openModalBtn" class="btn btn-primary btn-lg openModalBtn" 
+							style="width:150px; height:50px;" data-toggle="modal" data-target="#myModal">지도보기</button><br/>
+						</c:if>
+					</span>	
+					
+					<div id="modalBox" class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  						<div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">~~위치보기~~</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true"></span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					 		<div id="map" style="width:480px;height:350px;"></div>
+					 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6d600eed28af612923a6c9f56c899713"></script>
+<script>
+
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+    
+    var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('해남군 송지면', function(result, status) {
+	
+	console.log('가나다라마바사', result)
+    // 정상적으로 검색이 완료됐으면 
+     if (status == kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        console.log(result[0].x)
+        console.log(result[0].y)
+        
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    }  
+}
+
+</script>		
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary" id="closeModalBtn">확인</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+
+					
+					
 				</div>
 				<div class="replyModify">
 					<span class="reply_date">
@@ -194,9 +269,17 @@ String seid = (String) session.getAttribute("sessionID");
 	</table>	
 	<div id="replyForm">
 		<form name="replyWriteForm" id="replyWriteForm">				
+			
 			<input type="hidden" name="bbsNo" value="${ board.no }"/>
-			<input type="hidden" name="replyid" 
-				value="${ sessionScope.member.id }" />			
+			<input type="hidden" name="replyid" value="${ sessionScope.member.id }" />
+			<input type="hidden" name="replymedic" value="${sessionScope.member.medic }" />
+			<input type="hidden" name="replybusinessName" value="${sessionScope.member.businessName }" />
+			<input type="hidden" name="replybusinessAdd" value="${sessionScope.member.businessAdd }" />
+			
+			
+			
+			
+			
 			<c:if test="${ sessionScope.isLogin == true }">
 			<table id="replyWriteTable">
 				<tr>
@@ -217,7 +300,9 @@ String seid = (String) session.getAttribute("sessionID");
 			</c:if>
 		</form>	
 </div>
-
-
 	</div>	
+	<!-- 모달 창 -->
+	
+
+
 </article>
