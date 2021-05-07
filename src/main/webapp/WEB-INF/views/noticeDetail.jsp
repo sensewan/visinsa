@@ -6,7 +6,7 @@
 <article>
 	<form name="checkForm" id="checkForm">
 		<input type="hidden" name="no" id="no" value="${ notice.no }"/>
-		<input type="hidden" name="pass" id="rPass" />
+		<input type="hidden" name="pass" id="rPass"/>
 		<input type="hidden" name="pageNum" value="${ pageNum }" />
 		
 		<c:if test="${ searchOption }">
@@ -14,7 +14,7 @@
 			<input type="hidden" name="keyword" value="${ word }" />
 		</c:if>
 	</form>	
-	<table class="contentTable">
+	<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td colspan="4" class="boardTitle">
 				<h2>게시 글 상세보기</h2>

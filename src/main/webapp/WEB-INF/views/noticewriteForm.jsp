@@ -4,7 +4,7 @@
 <article>
 <form name="noticewriteForm" action="noticewriteProcess" id="noticewriteForm" 
 	method="post">
-	<table class="readTable">
+	<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td colspan="4" class="boardTitle">
 				<h2>게시 글 쓰기</h2>
@@ -14,10 +14,10 @@
 			<td colspan="4">&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="readTh">글쓴이</td>
+			<td class="readTh">작성자</td>
 			<td class="readTd">
 				<input type="text" name="writer" size="30" id="writer" maxlength="10"/>
-			</td>
+			</td> 
 			<td class="readTh">비밀번호</td>
 			<td class="readTd">
 				<input type="password" name="pass" size="30" id="pass" 
@@ -36,6 +36,20 @@
 				<textarea name="content" id="content" rows="20" cols="80"></textarea>
 			</td>
 		</tr>		
+		<tr>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+		<tr>
+			<td class=".radio-inline">
+  				<input type="radio" name="state" id="inlineRadio1" value="1"> 필독 게시글
+			</td>
+			<td class=".radio-inline">
+  				<input type="radio" name="state" id="inlineRadio2" value="2"> 공지 게시글
+			</td>
+			<td class=".radio-inline">
+  				<input type="radio" name="state" id="inlineRadio3" value="0"> 일반 게시글
+			</td>
+		</tr>
 		<tr>
 			<td colspan="4">&nbsp;</td>
 		</tr>

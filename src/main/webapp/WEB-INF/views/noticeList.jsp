@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <article>
-<table class="listTable">
+<table class="table .table-striped" style="text-align:center; margin-left: auto; margin-right: auto;">
 	<tr>
 		<td class="boardTitle" colspan="5">
 			<h2>공 지 사 항</h2>
@@ -31,20 +31,21 @@
 	<tr>
 		<%-- 검색 요청일 경우 일반 게시 글 리스트로 이동할 수 있도록 링크를 설정했다. --%>
 		<td colspan="2" class="noticeListLink"><a href="noticeList">리스트</a></td>
-		<td colspan="3" class="listWrite"><a href="noticewriteForm">글쓰기</a></td>
+	 	<td colspan="3" class="listWrite text-left"><a href="noticewriteForm">공지사항 작성</a></td>
+	 	
 	</tr>	
 	</c:if>
 	<c:if test="${ not searchOption }">
 	<tr>			
-		<td colspan="5" class="listWrite"><a href="noticewriteForm">글쓰기</a></td>
+		 <td colspan="5" class="listWrite text-left"><a href="noticewriteForm">공지사항 작성</a></td>
 	</tr>
 	</c:if>
 	<tr>
-		<th class="listThNo">NO</th>
-		<th class="listThTitle">제목</th>
-		<th class="listThWriter">작성자</th>
-		<th class="listThRegDate">작성일</th>
-		<th class="listThHits">조회수</th>
+		<th class="listThNo text-center"></th>
+		<th class="listThTitle text-center">제목</th>
+		<th class="listThWriter text-center">작성자</th>
+		<th class="listThRegDate text-center">작성일</th>
+		<th class="listThHits text-center">조회수</th>
 	</tr>
 <%-- 
 	검색 요청 이면서 검색된 리스트가 존재할 경우
@@ -114,13 +115,13 @@
 			<c:if test="${ endPage < pageCount }">
 				<a href="noticeList?pageNum=${ startPage + pageGroup }
 				&type=${ type }&keyword=${ keyword }">[다음]</a>
-			</c:if>	
-			<pre>운영 원칙과 맞지 않는 글은 게시판 관리자에 의해 글목록에서 제외될 수 있습니다.</pre>	
+			</c:if>		
 		</td>
 	</tr>
 </c:if>	
 
 <c:if test="${ not searchOption and not empty noticeList }">
+	
 	<c:forEach var="n" items="${ noticeList }" varStatus="status">
 	<tr class="listTr">
 		<td class="listTdNo">${ n.no }</td>
@@ -155,6 +156,9 @@
 		<a href="noticeList?pageNum=${ startPage + pageGroup }">
 			[다음]</a>
 			</c:if>
+			<div class = "article_list_message">
+				<p class = "message">운영 원칙과 맞지 않는 글은 게시판 관리자에 의해 글목록에서 제외될 수 있습니다.</p>
+			</div>
 		</td>
 	</tr>
 </c:if>

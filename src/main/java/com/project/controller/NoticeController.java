@@ -27,7 +27,7 @@ public class NoticeController {
 	this.noticeService = noticeService;
 	}
 	
-	@RequestMapping(value= {"/noticeList", "/list"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/noticeList", "/list"}/*method=RequestMethod.GET*/)
 	public String noticeList(Model model,
 			@RequestParam(value="pageNum", required=false,
 			defaultValue="1") int pageNum,
@@ -80,7 +80,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/updateNotice")
 	public String updateNotice(Model model, HttpServletResponse response,
-				int no, String pass,
+			PrintWriter out, int no, String pass,
 	@RequestParam(value="pageNum", required=false, defaultValue="1")
 	int pageNum,
 	@RequestParam(value="type", required=false,
@@ -91,9 +91,9 @@ public class NoticeController {
 		boolean result = noticeService.isPassCheck(no, pass);
 		
 		if(! result) {
-			response.setContentType("text/html; charset=utf-8");
 			
-			PrintWriter out = response.getWriter();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 			out.println("<script>");
 			out.println(" alert('비밀번호가 맞지 않습니다.');");
 			out.println(" history.back();");
@@ -121,7 +121,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="updateNotice", method=RequestMethod.POST)
 	public String updateNotice(HttpServletResponse response,
-	PrintWriter out, Notice notice, RedirectAttributes reAttrs,
+			PrintWriter out, Notice notice, RedirectAttributes reAttrs,
 	@RequestParam(value="pageNum", required=false, defaultValue="1")
 	int pageNum,
 	@RequestParam(value="type", required=false,
@@ -132,7 +132,9 @@ public class NoticeController {
 		boolean result = noticeService.isPassCheck(notice.getNo(), notice.getPass());
 		
 		if(! result) {
-			response.setContentType("text/html; charset=utf-8");
+		
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 			out.println("<script>");
 			out.println(" alert('비밀번호가 맞지 않습니다.');");
 			out.println(" history.back();");
@@ -168,6 +170,7 @@ public class NoticeController {
 	defaultValue="null") String keyword) throws Exception {
 		
 		boolean result = noticeService.isPassCheck(no, pass);
+		response.setCharacterEncoding("UTF-8");
 		
 		if(! result) {
 			response.setContentType("text/html; charset=utf-8");

@@ -31,6 +31,7 @@ $(function() {
 		$("#checkForm").attr("action", "deletenotice");
 		$("#checkForm").attr("method", "post");
 		$("#checkForm").submit();
+		
 	});
 	
 	// 게시 글쓰기 폼 유효성 검사
@@ -89,6 +90,6 @@ $(function() {
 			return false;
 		}		
 		$(this).attr("method", "post");
-		$(this).attr("action", "boardList");		
+		$(this).attr("action", "noticeList");		
 	});	
 });
