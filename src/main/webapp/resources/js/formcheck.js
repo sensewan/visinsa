@@ -77,12 +77,11 @@ $(function() {
 	 * 아래와 같이 hidden 폼을 통해 post 방식으로 처리 할 수 있다.
 	 **/
 	$("#noticeUpdate").on("click", function() {
-			
 		var pass = $("#pass").val();
 		if(pass.length <= 0) {
 			alert("게시 글을 수정하려면 비밀번호를 입력해주세요");
 			return false;
-		}		
+		}
 		
 		$("#rPass").val(pass);
 		$("#checkForm").attr("action", "updateNotice");
@@ -92,23 +91,26 @@ $(function() {
 	/* 게시 글 상세보기에서 게시 글 삭제 요청 처리
 	 * 아래와 같이 hidden 폼을 통해 post 방식으로 처리 할 수 있다.
 	 **/
+	
 	$("#noticeDelete").on("click", function() {
-			
 		var pass = $("#pass").val();
 		if(pass.length <= 0) {
 			alert("게시 글을 삭제하려면 비밀번호를 입력해주세요");
 			return false;
 		}
 		
+		var del = confirm("정말로 삭제 하시겠습니까?");
+		
+		if(del) {
 		$("#rPass").val(pass);
 		$("#checkForm").attr("action", "deletenotice");
 		$("#checkForm").attr("method", "post");
 		$("#checkForm").submit();
+		}
 		
 	});
 
 	
-
 	// 게시 글 수정 폼 유효성 검사
 	$("#noticeupdateForm").on("submit", function() {
 		if($("#writer").val().length <= 0) {

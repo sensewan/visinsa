@@ -97,7 +97,7 @@
 		<div>
 			<jsp:include page="${ param.body }" />
 		</div>
-		</c:if>	
+		</c:if>
 	</div>
 </body>
 </html>
