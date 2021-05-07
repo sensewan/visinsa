@@ -52,9 +52,15 @@
 	파라미터를 적용해 링크를 설정한다. 
 --%>	
 <c:if test="${ searchOption and not empty boardList }">
-	<c:forEach var="b" items="${ boardList }" varStatus="status">		
-	<tr class="listTr">
-		<td class="listTdNo">${ b.no  }</td>
+	<c:forEach var="b" items="${ boardList }" varStatus="status">	
+	<tr class="table-primary">
+      <th scope="row">Primary</th>
+      <td class="listTdNo" value=>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>	
+	<%-- <tr class="listTr">
+		<td class="listTdNo">${ b.no  }</td> --%>
 		<td class="listTdTitle">
 			<%--  
 			/* IE에서 링크로 요청 시 파라미터에 한글이 포함되면 IE는 URLEncoding을
