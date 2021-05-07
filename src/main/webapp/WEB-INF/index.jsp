@@ -13,6 +13,9 @@
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/main_css.css" />
+<script src="resources/js/jquery-3.2.1.min.js"></script>
+<script src="resources/js/formcheck.js"></script>
+<script src="resources/js/member.js"></script>
 
 <style type="text/css">
 	body {

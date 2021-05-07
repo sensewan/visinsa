@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springstudy.bbs.mapper.CommunityMapper" >
+
+	<select id="CommunityBoardList" resultType="Community" parameterType="hashmap">
+		SELECT 
+			no, 
+			title, 
+			id, 
+			content, 
+			regdate,
+			category,
+			readcount,
+			recommend,
+			medic
+			
+		FROM community
+		<where>	
+			<if test="type == 'title'">
+				title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'id'">
+				id LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'content'">
+				content LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+			
+			<if test="category == 'board'">
+				category LIKE CONCAT('%', 'board', '%')
+			</if>
+			<if test="category == 'chuchu'">
+				category LIKE CONCAT('%', 'chuchu', '%')
+			</if>
+			<if test="category == 'qna'">
+				category LIKE CONCAT('%', 'qna', '%')
+			</if>
+			
+		</where>
+
+		
+		
+		
+		
+		ORDER BY no DESC
+		LIMIT #{startRow}, #{num}
+	</select>
+
+	<select id="getCommunityBoardCount" parameterType="hashmap" resultType="int">
+		SELECT 
+			COUNT(no) 
+		FROM community
+		<where>	
+			<if test="type == 'title'">
+				title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'id'">
+				id LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="type == 'content'">
+				content LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+		</where>	
+	</select>
+	
+	<select id="getCommunityBoardDetail" resultType="Community" >
+		SELECT 
+			* 
+		FROM community 
+		WHERE no = #{no}
+	</select>
+	
+		<select id="replyList" resultType="Reply">
+		SELECT 
+			no,
+			bbs_no AS bbsNo,
+			reply_content AS replyContent,
+			replyid,
+			replydate,
+			replyrecommend
+		FROM reply
+		WHERE bbs_no = #{no}
+			ORDER BY no DESC
+	</select>
+	
+	<update id="incrementReadCount">
+		UPDATE community
+			SET readcount = readcount + 1
+		WHERE no = #{no}
+	</update>
+	
+	
+		<insert id="insertCommunityBoard" parameterType="Community"
+		useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO community(title, id, content, medic,regdate, readcount, category) 
+				VALUES(#{title}, #{id}, #{content}, #{medic}, DEFAULT, 0, #{category})
+	</insert>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE community SET title = #{title}, content = #{content},
+				regdate = Now()
+		WHERE no = #{no}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM community
+		WHERE no = #{no}
+	</delete>
+	
+	<update id="updateRecommend">
+		UPDATE community
+			SET
+			<if test="recommend == 'recommend'">		
+				recommend=recommend + 1
+			</if>
+
+		WHERE no = #{no}
+	</update>
+	
+	<select id="getRecommend" resultType="Community">
+		SELECT recommend
+		FROM community
+		WHERE no = #{no}
+	</select>
+	
+	<insert id="addReply" parameterType="Reply">
+		INSERT INTO reply(bbs_no, reply_content, replyid, replydate)
+		VALUES(#{bbsNo}, #{replyContent}, #{replyid}, NOW())
+	</insert>
+
+	<!--
+		댓글을 수정하는 맵핑 구문		  
+	-->
+	<update id="updateReply" parameterType="Reply">
+		UPDATE reply
+			SET reply_content = #{replyContent}, 
+				replydate = NOW()
+		WHERE no = #{no}
+	</update>
+
+	<!--
+		댓글을 삭제하는 맵핑 구문		  
+	-->
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE no = #{no}
+	</delete>	
+	
+	
+	<update id="updatereplyRecommend">
+		UPDATE reply
+			SET
+			<if test="replyrecommend == 'replyrecommend'">		
+				replyrecommend=replyrecommend + 1
+			</if>
+
+		WHERE no = #{no}
+	</update>
+	
+	<select id="getreplyRecommend" resultType="Reply">
+		SELECT replyrecommend
+		FROM reply
+		WHERE no = #{no}
+	</select>
+	
+	
+	
+		
+</mapper>	
+
+
+

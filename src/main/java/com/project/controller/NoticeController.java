@@ -2,7 +2,6 @@ package com.project.controller;
 
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
