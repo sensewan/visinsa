@@ -6,6 +6,17 @@
 
 </style>
 <script>
+
+	$(function(){
+		$("#symptomCheck").on("click", function(){
+			var symptom = [];
+			$("input[id=symptom]:checked").each(function(){
+				var chk = $(this).val();
+				symptom.push(chk);
+			});
+			console.log(symptom);
+		});
+	});
 	// 머리 클릭 이벤트
 	function map1(){
 		var dd = "";
@@ -33,12 +44,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 144) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -54,12 +65,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 77) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -557,7 +568,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">확인</button>
+					<button type="button" class="btn btn-primary" id="symptomCheck">확인</button>
 					<button type="button" class="btn btn-secondary" id="modalClose">취소</button>
 				</div>
 			</div>

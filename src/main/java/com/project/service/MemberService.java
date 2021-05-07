@@ -22,6 +22,9 @@ public interface MemberService {
 	 **/
 	public Member getMember(String id);
 	
+	// 장바구니 삭제
+	public void deleteBasket(Basket basket);
+	
 	// 장바구니 담기
 	public void addBasket(Basket basket);
 	

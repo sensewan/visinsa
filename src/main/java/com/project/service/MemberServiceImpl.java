@@ -89,4 +89,9 @@ public class MemberServiceImpl implements MemberService {
 	public int countBasket(String id) {
 		return memberDao.countBasket(id);
 	}
+
+	@Override
+	public void deleteBasket(Basket basket) {
+		memberDao.deleteBasket(basket);
+	}
 }

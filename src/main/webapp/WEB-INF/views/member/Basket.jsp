@@ -18,13 +18,23 @@
 	var IMP = window.IMP;
 	IMP.init('imp19285602');
 	$(function(){
+		$("#test").on("click", function(){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/deleteBasket?id=${ member.id }",
+				type : "get",
+				success : function(data) {
+					alert("결제가 완료되었습니다.");
+					location.href="basket"
+				}
+			});
+		});
 		$("#pay").on("click", function(){
 			IMP.request_pay({
 			    pg : 'kakaopay',
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '주문명:결제테스트',
-			    amount : ${total},
+			    amount : ${total} ,
 			    buyer_email : 'sju04015@naver.com',
 			    buyer_name : '우광현',
 			    buyer_tel : '010-6414-9034',
@@ -56,6 +66,14 @@
 			    			//[3] 아직 제대로 결제가 되지 않았습니다.
 			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 			    		}
+			    	}).always(function() {		
+			    		$.ajax({
+							url : "${pageContext.request.contextPath}/deleteBasket?id=${ member.id }",
+							type : "get",
+							success : function(data) {
+								alert("결제가 완료되었습니다.");
+							}
+						});
 			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
@@ -82,7 +100,9 @@
 		<div class="container" style="width: 860px; min-width:400px; margin-top: -140px;">
 			<div id="h2" class="row" style="text-align:center; margin:0 auto;">
 				<h2 class="col-sm-8" style="margin-bottom: 30px;">장바구니</h2>
-				<h6 class="col-sm-4" style="padding-top: 10px;">총 금액 : <fmt:formatNumber value="${ total }" type="currency"/></h6>
+				<c:if test="${ not empty basket }">
+					<h6 class="col-sm-4" style="padding-top: 10px;">총 금액 : <fmt:formatNumber value="${ total }" type="currency"/></h6>
+				</c:if>
 			</div>
 			<div id="content">
 				<table class="table table-hover">
@@ -111,9 +131,12 @@
 				</tr>
 				</c:if>
 			</table>
-			<div>
-				<input type="button" class="btn btn-primary" id="pay" value="결제하기">
-			</div>
+			<c:if test="${ not empty basket }">
+				<div>
+					<input type="button" class="btn btn-primary" id="pay" value="결제하기">
+					<input type="button" class="btn btn-primary" id="test" value="테스트">
+				</div>
+			</c:if>
 			</div>
 		</div>
 	</div>

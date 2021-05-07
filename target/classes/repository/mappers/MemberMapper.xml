@@ -85,6 +85,14 @@
 				#{birth}, #{phone}, #{medic} , null, null, 0)
 	</insert>
 	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteBasket" parameterType="Basket">
+		DELETE FROM basket
+		WHERE id = #{id}
+		<if test="num != 0">
+			AND num = #{num}
+		</if>
+	</delete>	
 	
 	<!-- 장바구니 담기 -->
 	<insert id="addBasket" parameterType="Basket">

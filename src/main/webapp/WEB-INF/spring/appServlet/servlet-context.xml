@@ -48,7 +48,8 @@
 		정적 컨텐츠를 포함한 모든 요청을 처리할 수 있도록 설정해야 제대로 동작한다.
 	-->
 	<resources mapping="/resources/**" location="/resources/" />
-	
+
+
 	<!-- 
 		<context:component-scan /> 태그는 base-package에 지정한 패키지를 
 		기준으로 스프링이 컴포넌트를 스캔하여 자동으로 bean을 생성해 주는 설정으로

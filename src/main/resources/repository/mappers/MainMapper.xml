@@ -6,7 +6,7 @@
 	
 	<select id="mainBody" resultType="MainBody" parameterType="String">
 		SELECT
-			s.symptomName
+			s.*
 		FROM
 		(SELECT
 			s.*, b.bodyCode

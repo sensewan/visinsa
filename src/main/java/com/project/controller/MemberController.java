@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,10 @@ import com.project.domain.MainBody;
 import com.project.domain.Member;
 import com.project.domain.Basket;
 import com.project.service.MemberService;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 // 스프링 MVC의 컨트롤러임을 선언하고 있다.
 @Controller
@@ -53,6 +60,12 @@ import com.project.service.MemberService;
 @SessionAttributes({"member", "m", "countBasket"})
 public class MemberController {
 	private MemberService memberService;
+	private IamportClient api;
+	
+	public MemberController() {
+		this.api = new IamportClient("8134985003699769",
+				"7BWxqsSezbExZaA3whZw1EucBL0ao6rwHo37QVmp70W6bxaHOadQOI3pu3zS91pRptZfolFwmCDy9OfY");
+	}
 	
 	/* @Autowired annotation을 사용해 MemberService 구현체를 셋터 주입하고 있다. 
 	 * 스프링이 기본 생성자를 통해 이 클래스의 인스턴스를 생성한 후 setter 주입
@@ -396,7 +409,17 @@ public class MemberController {
 		
 		memberService.addBasket(basket);
 	}
-	
+	// 장바구니 삭제
+	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
+	@ResponseBody
+	public void Basket(@RequestParam("id") String id,
+			Basket basket) {
+		int num = 0;
+		basket.setNum(num);
+		basket.setId(id);
+		
+		memberService.deleteBasket(basket);
+	}
 	
 	@RequestMapping("/basket")
 	public String Basket(HttpServletRequest request,Model model) {
@@ -405,16 +428,18 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("member");
 		String id = member.getId();
 		List<Basket> basket = memberService.getBasket(id);
-		model.addAttribute("basket", basket);
-		int total = 0;
-		for(int i=0; i < basket.size(); i++) {
-			total += basket.get(i).getPrice();
+		if(basket.size() != 0) {
+			System.out.println("basket" + basket);
+			model.addAttribute("basket", basket);
+			int total = 0;
+			for(int i=0; i < basket.size(); i++) {
+				total += basket.get(i).getPrice();
+			}
+			System.out.println("total = " + total);
+			System.out.println("장바구니 id = " + id);
+			
+			model.addAttribute("total", total);
 		}
-		System.out.println("basket.get(0).getPrice() = " + basket.get(0).getPrice());
-		System.out.println("total = " + total);
-		System.out.println("장바구니 id = " + id);
-		
-		model.addAttribute("total", total);
 		return "member/Basket";
 	}
 	
@@ -434,5 +459,16 @@ public class MemberController {
 	public String Login() {
 		
 		return "member/Login";
+	}
+	
+	//결제 확인
+	@ResponseBody
+	@RequestMapping("/payments/complete")
+	public IamportResponse<Payment> paymentByImpUid(Model model,
+			Locale locale, HttpSession session,
+			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException,
+	IOException{
+		System.out.println("컨트롤러까진 오냐?");
+		return api.paymentByImpUid(imp_uid);
 	}
 }

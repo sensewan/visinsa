@@ -24,6 +24,10 @@ public interface MemberDao {
 	public Member getMember(String id);
 	
 	public Member getMemberNk(String nk);
+	
+	// 장바구니 삭제
+	public void deleteBasket(Basket basket);
+	
 	// 장바구니 넣기
 	public void addBasket(Basket basket);
 	
