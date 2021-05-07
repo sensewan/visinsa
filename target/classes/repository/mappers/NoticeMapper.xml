@@ -7,7 +7,7 @@
 <mapper namespace="com.project.mapper.NoticeMapper">
 
 
-	<select id="noticeList" resultType="Notice" parameterType="hashmap">
+	<select id="noticeList" resultType="Notice" parameterType="hashmap" resultMap="noticeResultMap">
 			SELECT
 			*
 			FROM VisinsaNotice

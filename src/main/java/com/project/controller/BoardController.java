@@ -210,7 +210,7 @@ public class BoardController {
 		 * 
 		 * 아래와 같이 뷰 이름을 반환하면 포워드 되어 제어가 뷰 페이지로 이동한다.
 		 **/
-		return "boardList";
+		return "test/boardList";
 	}
 	
 	/* 게시 글 상세보기 요청을 처리하는 메서드
@@ -301,7 +301,7 @@ public class BoardController {
 		 * 
 		 * 아래와 같이 뷰 이름을 반환하면 포워드 되어 제어가 뷰 페이지로 이동한다. 
 		 **/
-		return "boardDetail";
+		return "test/boardDetail";
 	}
 	
 	/* 게시 글쓰기 폼에서 들어오는 게시 글쓰기 요청을 처리하는 메서드
@@ -603,7 +603,7 @@ public class BoardController {
 		 * 
 		 * 아래와 같이 뷰 이름을 반환하면 포워드 되어 제어가 뷰 페이지로 이동한다. 
 		 **/
-		return "updateForm";
+		return "test/updateForm";
 	}
 	
 	/* 게시 글 수정 폼에서 들어오는 게시 글 수정 요청을 처리하는 메서드

@@ -8,7 +8,6 @@
 	}
 
 </style>
-<!-- 쓰기는 관리자 모드에서 보이게 하고 세부 정보 보기의 하단부에 수정, 삭제 버튼과 같이 있음 -->
 <div class="container">
 	<c:if test="${ not empty productList }">
 		
@@ -21,9 +20,12 @@
 		      <div class="card-header"><h6 class="card-title">${ b.productName }</h6></div>
 		      		    	
 		      <div class="card-body">		       
-		        <p><img src="resources/upload/${ b.image }" class="card-img-top" alt="..."></p>
+		        <a href="productDetail?no=${ b.no }&pageNum=${ currentPage }">
+		        	<img src="resources/upload/${ b.image }" class="card-img-top" alt="..."/>
+		        </a>		        
 		        <p class="card-text">${ b.productExplain }</p>
-		        <a class="btn btn-success" href="productDetail?no=${ b.no }&pageNum=${ currentPage }">내용보기 >></a>		        
+		        <p class="card-text">${ b.productPrice }</p>
+		        
 		      </div>
 		      
 		    </div>
@@ -38,8 +40,8 @@
 		</div>
 	</c:if>
 	
-	<!-- 아래는 관리자 모드에서만 보임 -->
-	<c:if test="${sessionScope.member.id == 'admin' && sessionScope.member.seller == '1'}">
+	<!-- 아래는 관리자 모드 및 판매자에서만 보임 -->
+	<c:if test="${sessionScope.member.id == 'admin' || sessionScope.member.seller == '1'}">
 	<div class="card" style="border: none; width: 1080px; margin-bottom: 50px;">		
 		<div class="card-body" style="text-align: center;">
 			<button type="button" class="btn btn-info btn-lg btn-block" id="btn-write"

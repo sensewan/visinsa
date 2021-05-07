@@ -47,7 +47,7 @@ $(function() {
 </script>
 
 <article>
-<h1>비타민 상세보기 테스트!!!!!!!!!!!!!!</h1>
+
 
 <form name="checkForm" id="checkForm">
 	<input type="hidden" name="no" id="no" value="${ product.no }"/>
@@ -91,6 +91,12 @@ $(function() {
 		<td class="contentTh">대표기능</td>
 		<td class="contentTd">${ product.typicalFunction }</td>
 	</tr>	
+	<tr>		
+		<td class="readContent" colspan="4">
+			<pre>${ product.productExplain }</pre>
+			<img alt="그림" src="resources/upload/${ product.image }"/>
+		</td>
+	</tr>	
 	<tr>
 		<td class="contentTh">첨부 이미지 이름: </td>
 		<td class="contentTd" colspan="3">
@@ -102,12 +108,6 @@ $(function() {
 		</c:if>
 		</td>		
 	</tr>
-	<tr>		
-		<td class="readContent" colspan="4">
-			<pre>${ product.productExplain }</pre>
-			<img alt="그림" src="resources/upload/${ product.image }"/>
-		</td>
-	</tr>	
 	<tr>
 		<td colspan="4">&nbsp;</td>
 	</tr>

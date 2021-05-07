@@ -11,7 +11,7 @@
 	</tr>
 	<tr>
 		<td colspan="5">
-			<form name="searchForm" 1`="searchForm">
+			<form name="searchForm" id="searchForm">
 				<select name="type" id="type">						
 					<option value="title">제목</option>
 					<option value="writer">작성자</option>
@@ -86,7 +86,7 @@
 		 	 **/
 		 	 --%>
 		 	<c:if test="${ startPage > pageGroup }">
-				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }
+				<a href="boardList?pageNum=${ startPage - pageGroup }
 					&type=${ type }&keyword=${ keyword }">[이전]</a>
 			</c:if>	
 			<%--
@@ -100,7 +100,7 @@
 					[ ${ i } ]
 				</c:if>			
 				<c:if test="${ i != currentPage }">
-					<a href="CommunityBoardList?pageNum=${ i }&type=${ type }
+					<a href="boardList?pageNum=${ i }&type=${ type }
 						&keyword=${ keyword }">[ ${ i } ]</a>
 				</c:if>			
 			</c:forEach>
@@ -112,7 +112,7 @@
 		 	 **/
 		 	 --%>
 			<c:if test="${ endPage < pageCount }">
-				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }
+				<a href="boardList?pageNum=${ startPage + pageGroup }
 					&type=${ type }&keyword=${ keyword }">[다음]</a>
 			</c:if>		
 		</td>
@@ -128,7 +128,8 @@
 	<tr class="listTr">
 		<td class="listTdNo">${ b.no  }</td>
 		<td class="listTdTitle">
-			<a href="CommunityBoardDetail?no=${ b.no }&pageNum=${ currentPage }" >${ b.title }</a>
+			<a href="boardDetail?no=
+				${ b.no }&pageNum=${ currentPage }" >${ b.title }</a>
 		</td>
 		<td class="listTdWriter">${ b.writer }</td>
 		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" 
@@ -146,7 +147,7 @@
 		 	 **/
 		 	 --%>
 		 	<c:if test="${ startPage > pageGroup }"> 
-				<a href="CommunityBoardList?pageNum=${ startPage - pageGroup }">
+				<a href="boardList?pageNum=${ startPage - pageGroup }">
 					[이전]</a>
 			</c:if>	
 			<%--
@@ -160,7 +161,7 @@
 					[ ${ i } ]
 				</c:if>			
 				<c:if test="${ i != currentPage }">
-					<a href="=CommunityBoardList?pageNum=${ i }">[ ${ i } ]</a>
+					<a href="boardList?pageNum=${ i }">[ ${ i } ]</a>
 				</c:if>			
 			</c:forEach>
 			<%-- 
@@ -171,7 +172,7 @@
 		 	 **/
 		 	 --%>
 			<c:if test="${ endPage < pageCount }">
-				<a href="CommunityBoardList?pageNum=${ startPage + pageGroup }">
+				<a href="boardList?pageNum=${ startPage + pageGroup }">
 					[다음]</a>
 			</c:if>		
 		</td>
