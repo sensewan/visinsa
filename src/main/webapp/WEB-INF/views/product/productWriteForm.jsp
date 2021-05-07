@@ -70,7 +70,7 @@
 			<td colspan="4" class="tdSpan"><input type="reset" value="다시쓰기"/>
 				&nbsp;&nbsp;<input type="submit" value="등록하기" />
 				&nbsp;&nbsp;<input type="button" value="목록보기" 
-					onclick="javascript:window.location.href='boardList'"/></td>
+					onclick="javascript:window.location.href='productList'"/></td>
 		</tr>
 	</table>
 </form>
