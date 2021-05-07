@@ -68,8 +68,46 @@ $(function() {
 				
 	});		
 
-	
 
+
+
+ 	// **** 정남씨 폼체크 ******
+
+	/* 게시 글 상세보기에서 게시 글 수정 폼 요청 처리
+	 * 아래와 같이 hidden 폼을 통해 post 방식으로 처리 할 수 있다.
+	 **/
+	$("#noticeUpdate").on("click", function() {
+			
+		var pass = $("#pass").val();
+		if(pass.length <= 0) {
+			alert("게시 글을 수정하려면 비밀번호를 입력해주세요");
+			return false;
+		}		
+		
+		$("#rPass").val(pass);
+		$("#checkForm").attr("action", "updateNotice");
+		$("#checkForm").submit();
+	});
+	
+	/* 게시 글 상세보기에서 게시 글 삭제 요청 처리
+	 * 아래와 같이 hidden 폼을 통해 post 방식으로 처리 할 수 있다.
+	 **/
+	$("#noticeDelete").on("click", function() {
+			
+		var pass = $("#pass").val();
+		if(pass.length <= 0) {
+			alert("게시 글을 삭제하려면 비밀번호를 입력해주세요");
+			return false;
+		}
+		
+		$("#rPass").val(pass);
+		$("#checkForm").attr("action", "deletenotice");
+		$("#checkForm").attr("method", "post");
+		$("#checkForm").submit();
+		
+	});
+
+	
 
 	// 게시 글 수정 폼 유효성 검사
 	$("#noticeupdateForm").on("submit", function() {
@@ -95,5 +133,16 @@ $(function() {
 		}
 	});
 	
+
+	// 게시 글 리스트, 검색 결과 페이지에서 검색 요청 처리
+	$("#noticeSearchForm").on("submit", function() {
+		var keyword = $("#keyword").val();
+		if(keyword.length <= 0) {
+			alert("검색어가 입력되지 않았습니다.\n검색어를 입력해주세요");
+			return false;
+		}		
+		$(this).attr("method", "post");
+		$(this).attr("action", "noticeList");		
+	});	
 
 });
