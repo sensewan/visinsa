@@ -1,5 +1,8 @@
 package com.project.dao;
 
+import java.util.List;
+
+import com.project.domain.Basket;
 import com.project.domain.Member;
 
 
@@ -21,7 +24,12 @@ public interface MemberDao {
 	public Member getMember(String id);
 	
 	public Member getMemberNk(String nk);
-
+	// 장바구니 넣기
+	public void addBasket(Basket basket);
+	
+	// 내 장바구니 확인
+	public List<Basket> getBasket(String id);
+	
 	// 회원 정보를 회원 테이블에 저장하는 메서드
 	public void addMember(Member member);
 	

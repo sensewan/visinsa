@@ -183,6 +183,21 @@
 		</where>	
 	</select>
 	
+	<select id="mainBody" resultType="MainBody" parameterType="String">
+		SELECT
+			s.symptomName
+		FROM
+		(SELECT
+			s.*, b.bodyCode
+		FROM symptom s, body_symptom1 b
+		WHERE s.symptomCode in
+		(SELECT
+			symptomCode
+		FROM body_symptom1
+		WHERE bodyCode REGEXP #{code}) and s.symptomCode = b.symptomCode) s
+		WHERE bodyCode REGEXP #{code}
+	</select>
+	
 	<!--
 		no에 해당하는 게시 글 하나를 가져오는 맵핑 구문
 		

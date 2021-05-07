@@ -20,6 +20,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,6 +31,7 @@ import com.project.service.BoardService;
 
 //스프링 MVC의 컨트롤러임을 선언하고 있다.
 @Controller
+@SessionAttributes("mainBody")
 public class BoardController {
 	
 	// 업로드한 파일 저장할 폴더 경로
@@ -176,10 +178,10 @@ public class BoardController {
 	
 	@RequestMapping(value= {"/home", "/main"})
 	public String test_main() {
+		
+		
 		return "main";
 	}
-	
-	
 	
 	
 	@RequestMapping(value= {"/boardList", "/list"})

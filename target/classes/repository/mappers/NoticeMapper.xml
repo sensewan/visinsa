@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.project.mapper.NoticeMapper">
+
+
+	<select id="noticeList" resultType="Notice" parameterType="hashmap">
+			SELECT
+			*
+			FROM VisinsaNotice
+			ORDER BY no DESC
+			LIMIT #{startRow}, #{num}
+	</select>
+	
+	<select id="getNoticeCount" resultType="int">
+			SELECT
+			COUNT(no)
+			FROM VisinsaNotice
+	</select>
+	
+	<select id="getNotice" resultType="Notice" resultMap="noticeResultMap">
+			SELECT
+			*
+			FROM VisinsaNotice
+			WHERE no = #{no}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="no">
+	INSERT INTO VisinsaNotice(title,writer,pass,content,reg_date,hits,state)
+	VALUES(#{title}, #{writer}, #{pass}, #{content}, now(), #{hits}, #{state})
+	</insert>
+	
+	<select id="isPassCheck" resultType="String">
+			SELECT
+			pass
+			FROM VisinsaNotice
+			WHERE no = #{no}
+	</select>
+	
+	<update id="updateNotice" parameterType="Notice">
+			UPDATE VisinsaNotice
+			SET title = #{title}, content = #{content},
+			reg_date = now()
+			WHERE no = #{no}
+	</update>
+	
+	<delete id="deleteNotice">
+			DELETE FROM VisinsaNotice
+			WHERE no = #{no}
+	</delete>
+	
+	<update id="incrementHits">
+			UPDATE VisinsaNotice
+			SET hits = hits + 1
+			WHERE no = #{no}
+	</update>
+
+	<resultMap id="noticeResultMap" type="Notice">
+		<id property="no" column="no" />
+		<result property="title" column="title" />
+		<result property="writer" column="writer" />
+		<result property="pass" column="pass" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+		<result property="hits" column="hits" />
+		<result property="state" column="state" />
+	</resultMap>
+</mapper>

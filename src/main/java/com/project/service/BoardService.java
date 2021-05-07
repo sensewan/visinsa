@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.domain.Board;
+import com.project.domain.MainBody;
 import com.project.domain.Reply;
 
 public interface BoardService {
@@ -18,6 +19,10 @@ public interface BoardService {
 	 * 현재 페이지에 해당하는 게시 글 리스트를 읽어와 반환 하는 메소드
 	 **/
 	public abstract List<Board> boardList();
+	
+	// 메인페이지 사람 클릭
+	public abstract List<MainBody> mainBody(String code);
+	
 	
 	/* BoardDao를 이용해 게시판 테이블에서
 	 * no에 해당하는 게시 글 을 읽어와 반환하는 메서드 
