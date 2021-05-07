@@ -69,6 +69,10 @@ CREATE TABLE IF NOT EXISTS reply(
 	replyid VARCHAR(20) NOT NULL,
 	replydate TIMESTAMP NOT NULL,	
     replyrecommend INTEGER default 0 NOT NULL, 
+    replymedic int,
+    replybusinessName VARCHAR(2000),
+    replybusinessAdd VARCHAR(10000),
+    
 	CONSTRAINT replyno_fk FOREIGN KEY(bbs_no) REFERENCES community(no),
     CONSTRAINT replyid_fk FOREIGN KEY(replyid) REFERENCES member(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -89,5 +93,8 @@ INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '땡큐~ �
 
 commit;
 SELECT * FROM community;
-SELECT * FROM reply;
-                
+SELECT * FROM VisinsaNotice;
+SELECT replybusinessAdd FROM reply;
+select * from member;
+SELECT * FROM reply WHERE bbs_no = 1 ORDER BY no DESC;
+
