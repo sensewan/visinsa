@@ -98,10 +98,6 @@
 			<jsp:include page="${ param.body }" />
 		</div>
 		</c:if>	
-		
 	</div>
-	
-
-
 </body>
 </html>
