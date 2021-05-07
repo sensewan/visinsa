@@ -38,19 +38,16 @@
     			<param-value>UTF-8</param-value>
    		</init-param>
    		
-
-	</filter>
+   		<init-param>
+  			<param-name>forceEncoding</param-name>
+  			<param-value>true</param-value>
+  		</init-param> 
+   		</filter>
+   		
 	<filter-mapping>
    		<filter-name>encodingFilter</filter-name>
     	<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-
-
-  	<init-param>
-  		<param-name>forceEncoding</param-name>
-  		<param-value>true</param-value>
-  	</init-param>  	
+	</filter-mapping> 	
 
 
 	  <resource-ref>
@@ -61,4 +58,3 @@
 	  </resource-ref>    
 	  
 </web-app>
-
