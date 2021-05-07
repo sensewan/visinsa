@@ -19,4 +19,16 @@
 		WHERE bodyCode REGEXP #{code}
 	</select>
 	
+	<select id="bodySym" resultType="MainBody" parameterType="java.util.List">
+		SELECT
+			a.disease_name diseaseName, GROUP_CONCAT(a.medicalName SEPARATOR ',') as 'medicalName'
+		FROM (SELECT d.disease_name, m.medicalName FROM disease_test d, medical m
+		WHERE
+		<foreach collection="list" item="item" separator="and">
+			sympton_code REGEXP #{item}
+		</foreach>
+		and d.medical_code REGEXP m.medicalCode) a
+		GROUP BY a.disease_name;
+	</select>	
+	
 </mapper>	

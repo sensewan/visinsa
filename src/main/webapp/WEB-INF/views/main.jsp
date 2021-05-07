@@ -6,15 +6,24 @@
 
 </style>
 <script>
-
+	//증상클릭 이벤트
 	$(function(){
 		$("#symptomCheck").on("click", function(){
-			var symptom = [];
+			var symCode = [];
 			$("input[id=symptom]:checked").each(function(){
 				var chk = $(this).val();
-				symptom.push(chk);
+				symCode.push(chk);
 			});
-			console.log(symptom);
+			console.log(symCode);
+			$(".modal").hide();
+			$("#modalForm *").remove();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/mainBodySymCode?symCode=" + symCode,
+				type : "get",
+				success : function(data) {
+				
+				}
+			});
 		});
 	});
 	// 머리 클릭 이벤트
@@ -44,12 +53,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 144) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -65,12 +74,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 77) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -565,6 +574,25 @@
 				</div>
 				<div class="modal-body">
 					<form action="" id="modalForm">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="symptomCheck">확인</button>
+					<button type="button" class="btn btn-secondary" id="modalClose">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal2">
+		<div class="modal-dialog" role="document" style="max-width: 100%; width: auto; display: table;">
+			<div class="modal-content">
+				<div class="modal-header" style="margin: auto;">
+					<h5 class="modal-title" >이러한 질병들이 예상됩니다.</h5>
+				</div>
+				<div class="modal-body">
+					<form action="" id="modalForm2">
 					</form>
 				</div>
 				<div class="modal-footer">

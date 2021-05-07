@@ -2,7 +2,7 @@ package com.project.domain;
 
 public class MainBody {
 
-	private String symptomName, symptomCode, bodyCode;
+	private String symptomName, symptomCode, bodyCode, medicalCode, diseaseName;
 	
 	public MainBody() { }
 	
@@ -11,6 +11,32 @@ public class MainBody {
 		this.symptomName = symptomName;
 		this.symptomCode = symptomCode;
 		this.bodyCode = bodyCode;
+	}
+	
+	
+	public MainBody(String medicalCode, String diseaseName) {
+		this.medicalCode = medicalCode;
+		this.diseaseName = diseaseName;
+	}
+
+
+	public String getMedicalCode() {
+		return medicalCode;
+	}
+
+
+	public void setMedicalCode(String medicalCode) {
+		this.medicalCode = medicalCode;
+	}
+
+
+	public String getDiseaseName() {
+		return diseaseName;
+	}
+
+
+	public void setDiseaseName(String diseaseName) {
+		this.diseaseName = diseaseName;
 	}
 
 
