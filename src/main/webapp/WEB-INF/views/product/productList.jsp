@@ -2,209 +2,71 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+	.donation_img {
+		width: 700px;
+	}
 
-<article>
-<h1>비타민 테스트!!!!!!!!!!!!!!</h1>
-
-
-<table class="listTable">
-	<tr>
-		<td class="boardTitle" colspan="5">
-			<h2>게시 글 리스트</h2>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5">
-			<form name="searchForm" id="searchForm">
-				<select name="type" id="type">						
-					<option value="title">상품명</option>
-					<option value="writer">브랜드</option>
-					<option value="content">설명</option>
-				</select>
-				<input type="text" name="keyword" id="keyword" />
-				<input type="submit" value="검색" />
-			</form>
-		</td>
-	</tr>
-	
-	<%-- 검색 요청일 경우만 아래를 화면에 표시 한다. --%>
-	<c:if test="${ searchOption }">
-	<tr>
-		<td colspan="5" id="searchComment">
-			"${ word  }" 검색 결과</td>
-	</tr>
-	<tr>
-		<%-- 검색 요청일 경우 일반 게시 글 리스트로 이동할 수 있도록 링크를 설정했다. --%>
-		<td colspan="2" class="boardListLink"><a href="productList">리스트</a></td>
-		<td colspan="3" class="listWrite"><a href="productWriteForm">글쓰기</a></td>
-	</tr>	
+</style>
+<!-- 쓰기는 관리자 모드에서 보이게 하고 세부 정보 보기의 하단부에 수정, 삭제 버튼과 같이 있음 -->
+<div class="container">
+	<c:if test="${ not empty productList }">
+		
+		<div class="row" style="width: 1110px; margin-top: 20px;">
+		<c:forEach var="b" items="${productList }" varStatus="status">
+		  <div class="col-sm-6" style="width: 555px; height:400px; margin-top: 30px;">
+		  
+		    <div class="card" style="width: 300px; height: 260px">
+		    
+		      <div class="card-header"><h6 class="card-title">${ b.productName }</h6></div>
+		      		    	
+		      <div class="card-body">		       
+		        <p><img src="resources/upload/${ b.image }" class="card-img-top" alt="..."></p>
+		        <p class="card-text">${ b.productExplain }</p>
+		        <a class="btn btn-success" href="productDetail?no=${ b.no }&pageNum=${ currentPage }">내용보기 >></a>		        
+		      </div>
+		      
+		    </div>
+		  </div>
+		 </c:forEach>
+		 </div>
+		 		
 	</c:if>
-	<c:if test="${ not searchOption }">
-	<tr>			
-		<td colspan="5" class="listWrite"><a href="productWriteForm">글쓰기</a></td>
-	</tr>
+	<c:if test="${ empty productList }">
+		<div class="row">
+			<div>상품이 존재하지 않습니다.</div>
+		</div>
 	</c:if>
 	
-	<tr>
-		<th class="listThNo">NO</th>
-		<th class="listThTitle">상품명</th>
-		<th class="listThWriter">브랜드</th>
-		<th class="listThRegDate">등록일</th>
-		<th class="listThReadCount">대표성분</th>
-	</tr>
-<%-- 
-	*** 검색 요청 이면서 검색된 리스트가 존재할 경우 ***
-	게시 글 상세보기로 링크에 type과 keyword 파라미터를 적용해 링크를 설정한다. 
---%>	
-<c:if test="${ searchOption and not empty boardList }">
-	<c:forEach var="b" items="${ productList }" varStatus="status">		
-	<tr class="listTr">
-		<td class="listTdNo">${ b.no  }</td>
-		<td class="listTdTitle">
-			<%--  
-			/* IE에서 링크로 요청 시 파라미터에 한글이 포함되면 IE는 URLEncoding을
-			 * 하지 않고 서버로 전송하는데 톰캣 7.06x 버전에서 정상적으로 동작하던
-			 * 것이 7.07x 버전에서는 Invalid character found in the request 
-			 * target 이라는 에러가 발생한다. 이 문제를 해결하기 위해 Service에서
-			 * keyword를 java.net 패키지의 URLEncoder 클래스를 이용해 
-			 * URLEncoding을 처리하였다.
-			 * 크롬 브라우저는 링크로 요청 시 파라미터에 한글이 포함되어 있으면 브라우저 
-			 * 주소창에는 한글 그대로 표시되지만 UTF-8로 URLEncoding을 해준다.
-			 **/
-			--%>			
-			<a href="productDetail?no=${ b.no }&pageNum=${ currentPage }&type=${ type }&keyword=${ keyword }">${ b.productName }</a>
-		</td>
-		<td class="listTdWriter">${ b.productName }</td>
-		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-		<td class="listTdReadCount">${ b.typicalIngredient }</td>
-	</tr>
-	</c:forEach>
-	
-	<!-- ********* 페이징 처리 ********* -->
-	<tr>
-		<td colspan="5" class="listPage">
-			<%--
-			/* 현재 페이지 그룹의 시작 페이지가 pageGroup보다 크다는 것은
-			 * 이전 페이지 그룹이 존재한다는 것으로 
-			 * 현재 페이지 그룹의 시작 페이지에 pageGroup을 마이너스 하여 링크를 설정하면 
-			 * 이전 페이지 그룹의 startPage로 이동할 수 있다.
-		 	 **/
-		 	 --%>
-		 	<c:if test="${ startPage > pageGroup }">
-				<a href="productList?pageNum=${ startPage - pageGroup }
-					&type=${ type }&keyword=${ keyword }">[이전]</a>
-			</c:if>	
-			<%--
-			/* 현재 페이지 그룹의 startPage 부터 endPage 만큼 반복하면서
-		 	 * 현재 페이지와 같은 그룹에 속한 페이지를 화면에 출력하고 링크를 설정한다.
-		 	 * 현재 페이지는 링크를 설정하지 않는다.
-		 	 **/
-		 	--%>
-			<c:forEach var="i" begin="${ startPage }" end="${ endPage }">
-				<c:if test="${ i == currentPage }">
-					[ ${ i } ]
-				</c:if>			
-				<c:if test="${ i != currentPage }">
-					<a href="productList?pageNum=${ i }&type=${ type }&keyword=${ keyword }">[ ${ i } ]</a>
-				</c:if>			
-			</c:forEach>
-			<%-- 
-			/* 현재 페이지 그룹의 마지막 페이지가 전체 페이지 보다 작다는 것은
-			 * 다음 페이지 그룹이 존재한다는 것으로 
-			 * 현재 페이지 그룹의 시작 페이지에 pageGroup을 플러스 하여 링크를 설정하면 
-			 * 다음 페이지 그룹의 startPage로 이동할 수 있다.
-		 	 **/
-		 	 --%>
-			<c:if test="${ endPage < pageCount }">
-				<a href="productList?pageNum=${ startPage + pageGroup }&type=${ type }&keyword=${ keyword }">[다음]</a>
+	<!-- 아래는 관리자 모드에서만 보임 -->
+	<c:if test="${sessionScope.member.id == 'admin' && sessionScope.member.seller == '1'}">
+	<div class="card" style="border: none; width: 1080px; margin-bottom: 50px;">		
+		<div class="card-body" style="text-align: center;">
+			<button type="button" class="btn btn-info btn-lg btn-block" id="btn-write"
+	    		onclick="location.href='productWriteForm'">상품등록하기</button>	    	
+	   </div>
+	</div>
+	</c:if>
+		<nav aria-label="Page navigation example" style="width: 1080px; margin-top: 50px; margin-bottom: 50px;">
+		  <ul class="pagination justify-content-center">
+		  <c:if test="${ startPage > pageGroup }">
+		  	<li class="page-item">
+		   		<a class="page-link" href="productList?pageNum=${ startPage - pageGroup }">이전</a>
+		   	</li>
+		  </c:if>	    
+		  <c:forEach var="i" begin="${ startPage }" end="${ endPage }">
+		  	<c:if test="${ i == currentPage }">
+				<li class="page-item active"><span class="page-link">${ i }</span></li>
+			</c:if>			
+			<c:if test="${ i != currentPage }">
+				<li class="page-item"><a class="page-link" href="productList?pageNum=${ i }">${ i }</a></li>			
 			</c:if>		
-		</td>
-	</tr>
-</c:if>	
-
-
-
-<%-- 
-	*** 일반 게시 글 리스트 요청 이면서 게시 글 리스트가 존재할 경우 ***
-	게시 글 상세보기로 링크를 적용할 때 type과 keyword 	파라미터는 필요 없다. 
---%>	
-<c:if test="${ not searchOption and not empty productList }">
-	<c:forEach var="b" items="${ productList }" varStatus="status">		
-	<tr class="listTr">
-		<td class="listTdNo">${ b.no  }</td>
-		<td class="listTdTitle">
-			<a href="productDetail?no=${ b.no }&pageNum=${ currentPage }" >${ b.productName }</a>
-		</td>
-		<td class="listTdWriter">${ b.productBrand }</td>
-		<td class="listTdRegDate"><fmt:formatDate value="${ b.regDate }" 
-			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-		<td class="listTdReadCount">${ b.typicalIngredient }</td>
-	</tr>
-	</c:forEach>
-	
-	
-	<!-- *********** 페이징 처리 ************* -->
-	<tr>
-		<td colspan="5" class="listPage">
-			<%--
-			/* 현재 페이지 그룹의 시작 페이지가 pageGroup보다 크다는 것은
-			 * 이전 페이지 그룹이 존재한다는 것으로 현재 페이지 그룹의 시작 페이지에
-			 * pageGroup을 마이너스 하여 링크를 설정하면 이전 페이지 그룹의
-			 * startPage로 이동할 수 있다.
-		 	 **/
-		 	 --%>
-		 	<c:if test="${ startPage > pageGroup }"> 
-				<a href="productList?pageNum=${ startPage - pageGroup }">[이전]</a>
-			</c:if>	
-			
-			<%--
-			/* 현재 페이지 그룹의 startPage 부터 endPage 만큼 반복하면서
-		 	 * 현재 페이지와 같은 그룹에 속한 페이지를 화면에 출력하고 링크를 설정한다.
-		 	 * 현재 페이지는 링크를 설정하지 않는다.
-		 	 **/
-		 	--%>
-			<c:forEach var="i" begin="${ startPage }" end="${ endPage }">
-				<c:if test="${ i == currentPage }">
-					[ ${ i } ]
-				</c:if>			
-				<c:if test="${ i != currentPage }">
-					<a href="productList?pageNum=${ i }">[ ${ i } ]</a>
-				</c:if>			
-			</c:forEach>
-			<%-- 
-			/* 현재 페이지 그룹의 마지막 페이지가 전체 페이지 보다 작다는 것은
-			 * 다음 페이지 그룹이 존재한다는 것으로 현재 페이지 그룹의 시작 페이지에
-			 * pageGroup을 플러스 하여 링크를 설정하면 다음 페이지 그룹의
-			 * startPage로 이동할 수 있다.
-		 	 **/
-		 	 --%>
-			<c:if test="${ endPage < pageCount }">
-				<a href="productList?pageNum=${ startPage + pageGroup }">[다음]</a>
-			</c:if>		
-		</td>
-	</tr>
-</c:if>
-
-
-<%-- 검색 요청이면서 검색된 리스트가 존재하지 않을 경우 --%>
-<c:if test="${ searchOption and empty productList }">
-	<tr>
-		<td colspan="5" class="listTdSpan">
-			"${ keyword }"가 포함된 게시 글이 존재하지 않습니다.</td>
-	</tr>
-</c:if>
-<%-- 일반 게시 글 리스트 요청이면서 게시 글 리스트가 존재하지 않을 경우 --%>
-<c:if test="${ not searchOption and empty productList }">
-	<tr>
-		<td colspan="5" class="listTdSpan">게시 글이 존재하지 않습니다.</td>
-	</tr>
-</c:if>
-</table>
-
-
-
-
-</article>
-
-
-
+		  </c:forEach>
+		  <c:if test="${ endPage < pageCount }">
+		    <li class="page-item">
+		      <a class="page-link" href="productList?pageNum=${ startPage + pageGroup }">다음</a>
+		    </li>		
+		  </c:if>    
+		  </ul>
+		</nav>		
+</div>
