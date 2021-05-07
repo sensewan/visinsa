@@ -9,24 +9,37 @@ public class Reply {
 	private int no;
 	private int bbsNo;
 	private String replyContent;
-	private String replyWriter;
-	private Timestamp regDate;
+	private String replyid;
+	private Timestamp replydate;
+	private int replyrecommend;
 	
 	public Reply() { }
-	public Reply(int bbsNo, String replyContent, String replyWriter) {
+	public Reply(int bbsNo, String replyContent, String replyid) {
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replyWriter = replyWriter;
+		this.replyid = replyid;
 	}	
 	public Reply(int no, int bbsNo, String replyContent, 
-			String replyWriter, Timestamp regDate) {
+			String replyid, Timestamp replydate, int replyrecommend) {
 		
 		this.no = no;
 		this.bbsNo = bbsNo;
 		this.replyContent = replyContent;
-		this.replyWriter = replyWriter;
-		this.regDate = regDate;
+		this.replyid = replyid;
+		this.replydate = replydate;
+		this.replyrecommend = replyrecommend;
 	}
+	
+	public Reply(int bbsNo, String replyContent, 
+			String replyid, Timestamp replydate, int replyrecommend) {
+		
+		this.bbsNo = bbsNo;
+		this.replyContent = replyContent;
+		this.replyid = replyid;
+		this.replydate = replydate;
+		this.replyrecommend = replyrecommend;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -45,16 +58,28 @@ public class Reply {
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
 	}
-	public String getReplyWriter() {
-		return replyWriter;
+
+	public String getReplyid() {
+		return replyid;
 	}
-	public void setReplyWriter(String replyWriter) {
-		this.replyWriter = replyWriter;
+	public void setReplyid(String replyid) {
+		this.replyid = replyid;
 	}
-	public Timestamp getRegDate() {
-		return regDate;
+	public Timestamp getReplydate() {
+		return replydate;
 	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
-	}			
+	public void setReplydate(Timestamp replydate) {
+		this.replydate = replydate;
+	}
+	public int getReplyrecommend() {
+		return replyrecommend;
+	}
+	public void setReplyrecommend(int replyrecommend) {
+		this.replyrecommend = replyrecommend;
+	}
+
+	
+	
+	
+
 }

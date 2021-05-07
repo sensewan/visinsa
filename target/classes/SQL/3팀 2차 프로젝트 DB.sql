@@ -42,6 +42,4 @@ INSERT INTO VisinsaNotice (title,writer,pass,content,reg_date,hits,state) VALUES
 INSERT INTO VisinsaNotice (title,writer,pass,content,reg_date,hits,state) VALUES ('특정 IP에서의 아이디 도용 시도에 관한 안내','파이썬','1234','특정 IP에서의 아이디 도용 시도에 관한 안내 말씀 드립니다.',now(),10,0);
 COMMIT;
 
-SELECT * FROM VisinsaNotice ORDER BY no DESC;
-SELECT * FROM VisinsaNotice ORDER BY (hits+0) DESC;
-
+SELECT * FROM VisinsaNotice ORDER BY state desc, no DESC;

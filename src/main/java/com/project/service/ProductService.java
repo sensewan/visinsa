@@ -39,5 +39,9 @@ public interface ProductService {
 	// 상품 수정하기
 	public abstract void updateProduct(Product product);
 	
+	
+	// 상품 삭제하기
+	public abstract void deleteProduct(int no);
+	
 
 }

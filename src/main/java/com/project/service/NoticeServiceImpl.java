@@ -18,8 +18,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private static final int PAGE_SIZE = 15;
 	
 	private static final int PAGE_GROUP = 10;
-	
-	
+
 	@Autowired
 	private NoticeDao noticeDao;
 	public void setNoticeDao(NoticeDao noticeDao) {

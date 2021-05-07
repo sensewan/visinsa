@@ -20,14 +20,12 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.Board;
-import com.project.domain.MainBody;
 import com.project.domain.Reply;
 import com.project.service.BoardService;
 
@@ -532,7 +530,7 @@ public class BoardController {
 	 * 대한 설명과 @RequestParam에 대한 설명은 boardList() 메서드의 주석을 
 	 * 참고하기 바란다.
 	 **/
-	@RequestMapping(value="/update")
+	@RequestMapping(value="/updateeeeeeeeeeeeeee")
 	public String updateBoard(Model model, HttpServletResponse response, 
 			PrintWriter out, int no, String pass,
 			@RequestParam(value="pageNum", required=false, 
@@ -766,7 +764,7 @@ public class BoardController {
 	 * 대한 설명과 @RequestParam에 대한 설명은 boardList() 메서드의 주석을 
 	 * 참고하기 바란다.
 	 **/
-	@RequestMapping({"/delete", "deleteBoard"})
+	@RequestMapping({"/deleteEE", "deleteBoardDDD"})
 	public String deleteBoard(HttpServletResponse response, 
 			PrintWriter out, int no, String pass,
 			RedirectAttributes reAttrs, 
