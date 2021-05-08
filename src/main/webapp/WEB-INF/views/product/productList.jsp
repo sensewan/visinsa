@@ -3,10 +3,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-
+	#search{
+		margin-top: 30px;
+		margin-bottom: -20px;
+	}
 
 </style>
+
+<script>
+$(function() {
+	
+	// 상품 검색하기
+	$("#ProductSearchForm").on("submit", function() {
+		var keyword = $("#keyword").val();
+		if(keyword.length <= 0) {
+			alert("검색어가 입력되지 않았습니다.\n검색어를 입력해주세요");
+			return false;
+		}		
+		$(this).attr("method", "post");
+		$(this).attr("action", "productList");		
+	});	
+	
+});
+</script>
+
 <div class="container">
+
+	<div id="search">
+		<form name="ProductSearchForm" id="ProductSearchForm">
+			<select name="type" id="type" class="btn btn-success disabled">
+				<option value="productName">상품명</option>
+				<option value="typicalIngredient">대표성분</option>
+				<option value="typicalFunction">대표기능</option>
+				<option value="productBrand">브랜드</option>
+			</select> 
+			<input type="text" class="btn btn-secondary" name="keyword" id="keyword" /> 
+			<input type="submit" class="btn btn-success disabled" value="검색" />
+		</form>
+	</div>
+
 	<c:if test="${ not empty productList }">
 		
 		<div class="row justify-content-center" style="width: 1200px; margin-top: 20px;">
