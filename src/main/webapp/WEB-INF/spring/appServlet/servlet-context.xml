@@ -14,7 +14,7 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
-	
+
 	<context:component-scan base-package="com.project" />
 
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
