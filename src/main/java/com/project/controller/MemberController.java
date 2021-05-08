@@ -5,9 +5,13 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -154,10 +158,10 @@ public class MemberController {
 		}		
 		
 		int countBasket = memberService.countBasket(id);
-		System.out.println("countBasket = " + countBasket);
 		
 		model.addAttribute("countBasket", countBasket);
-		
+
+		System.out.println("countBasket = " + countBasket);
 		Member member = memberService.getMember(id);
 		session.setAttribute("isLogin", true);
 		
@@ -396,7 +400,7 @@ public class MemberController {
 	@ResponseBody
 	public void Basket(@RequestParam("num") int num, 
 			@RequestParam("id") String id, @RequestParam("count") int count,
-			Basket basket) {
+			Basket basket, Model model) {
 		System.out.println("여기까진 왔어");
 		System.out.println("id = " + id);
 		System.out.println("num = " + num);
@@ -407,6 +411,9 @@ public class MemberController {
 		basket.setCount(count);
 		
 		memberService.addBasket(basket);
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
 	}
 	// 구매시 장바구니 삭제 및 구매내역 넣기
 	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
@@ -414,11 +421,28 @@ public class MemberController {
 	public void Basket(HttpServletRequest request, @RequestParam("productName") List<String> productName,
 			@RequestParam("count") List<Integer> count,
 			@RequestParam("price") List<Integer> price,
-			@RequestParam("num") List<Integer> num) {
+			@RequestParam("num") List<Integer> num, Model model) {
 
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
 		String id = member.getId();
+		int birth = member.getBirth();
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy");
+		
+		Date time = new Date();
+		String time1 = format1.format(time);
+		int now = Integer.parseInt(time1);
+		int time2 = 0;
+		if(birth / 10000 > 22) {
+			time2 = now - 1900 - (birth / 10000) + 1;
+		} else {
+			time2 = now - 2000 - (birth / 10000) + 1;
+		}
+		time2 = time2 / 10 * 10;
+		
+		String age = Integer.toString(time2)+ "대";
+		System.out.println("age = " + age);
 		Basket basket = new com.project.domain.Basket();
 		System.out.println("productName = " + productName);
 		System.out.println("count = " + count);
@@ -431,10 +455,14 @@ public class MemberController {
 			basket.setPrice(price.get(i));
 			basket.setNum(num.get(i));
 			basket.setId(id);
+			basket.setAge(age);
 			memberService.addPurchase(basket);
 		}
 		
 		memberService.deleteBasket(basket);
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
 	}
 	
 	@RequestMapping("/basket")
@@ -460,14 +488,37 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/MyPage")
-	public String MyPage(HttpServletRequest request,Model model) {
+	public String MyPage(HttpServletRequest request,Model model,
+			@RequestParam(value="pageNum", required=false, 
+			defaultValue="1") int pageNum) {
+		int begin = 0;
+		int end = 0;
 		
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
 		String id = member.getId();
-		List<Basket> basket = memberService.getPurchase(id);
+		
+		int startRow = (pageNum-1) * 10;
+		if(pageNum - 2 >= 1) {
+			begin = pageNum - 2;
+		} else {
+			begin = 1;
+		}
+		int pageCount = memberService.countPurchase(id);
+		if(pageCount % 10 == 0) {
+			end = pageCount / 10;
+		} else {
+			end = pageCount / 10 + 1;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("startRow", startRow);
+		List<Basket> basket = memberService.getPurchase(map);
 		if(basket.size() != 0) {
 			model.addAttribute("purchase", basket);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("end", end);
+			model.addAttribute("begin", begin);
 		}
 		
 		return "member/MyPage";

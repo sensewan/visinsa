@@ -31,4 +31,27 @@
 		GROUP BY a.disease_name;
 	</select>	
 	
+	<!-- 부위 중간 검색 -->
+	<select id="getBodyName" resultType="String" parameterType="java.util.List">
+		SELECT
+			b.bodyName bodyName
+		FROM body b, body_symptom1 s
+		WHERE b.bodyCode = s.bodyCode
+		<foreach collection="list" item="item">
+			and s.symptomCode = #{item}
+		</foreach>
+		GROUP BY b.bodyName
+	</select>
+	
+	<!-- 추천 검색 -->
+	<select id="getIngredient" resultType="String">
+		SELECT GROUP_CONCAT(a.typicalIngredient) as typicalIngredient
+		FROM
+		(SELECT
+			typicalIngredient
+		FROM product
+		WHERE typicalFunction = #{typicalFunction}
+		GROUP BY typicalIngredient) a
+	</select>
+	
 </mapper>	

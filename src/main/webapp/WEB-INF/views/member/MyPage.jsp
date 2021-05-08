@@ -39,34 +39,34 @@
 						<td class="listTdRegDate">${ p.buyDate }</td>
 					</tr>
 				</c:forEach>
-<%-- 				<tr>
+ 				<tr>
 					<td colspan="4" class="listPage">
 						<ul class="pagination pagination-sm" style="margin-left: 45%">
 							<c:if test="${ pageNum > 1 }">
 								<li class="page-item">
-									<a class="page-link" href="mypage.mvc?pageNum=${ pageNum - 1 }">&laquo;</a>
+									<a class="page-link" href="MyPage?pageNum=${ pageNum - 1 }">&laquo;</a>
 								</li>
 							</c:if>
 							<c:forEach var="i" begin="${ begin }" end="${ end }" step="1">
 								<c:if test="${ i == pageNum}">
 									<li class="page-item active">
-										<a class="page-link" href="mypage.mvc?pageNum=${ i }"> ${ i } </a>
+										<a class="page-link" href="MyPage?pageNum=${ i }"> ${ i } </a>
 									</li>
 								</c:if>
 								<c:if test="${ i != pageNum}">
 									<li class="page-item">
-										<a class="page-link" href="mypage.mvc?pageNum=${ i }"> ${ i } </a>
+										<a class="page-link" href="MyPage?pageNum=${ i }"> ${ i } </a>
 									</li>
 								</c:if>
 							</c:forEach>
 							<c:if test="${ pageNum < lastPage }">
 								<li class="page-item">
-									<a class="page-link" href="mypage.mvc?pageNum=${ pageNum + 1 }">&raquo;</a>
+									<a class="page-link" href="MyPage?pageNum=${ pageNum + 1 }">&raquo;</a>
 								</li>
 							</c:if>
 						</ul>
 					</td>
-				</tr> --%>
+				</tr>
 				</c:if>
 				<c:if test="${ empty purchase }">
 				<tr>

@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,7 +201,12 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public List<Basket> getPurchase(String id) {
-		return sqlSession.selectList(NAME_SPACE + ".getPurchase", id);
+	public List<Basket> getPurchase(Map<String, Object> map) {
+		return sqlSession.selectList(NAME_SPACE + ".getPurchase", map);
+	}
+
+	@Override
+	public int countPurchase(String id) {
+		return sqlSession.selectOne(NAME_SPACE + ".countPurchase", id);
 	}
 }

@@ -11,5 +11,11 @@ public interface MainDao {
 
 	// 증상선택시
 	public abstract List<MainBody> bodySym(List<String> symCode);
+
+	// 부위 중간검색
+	public abstract String getBodyName(List<String> symCode);
+
+	// 추천 검색
+	public abstract String getIngredient(String typicalFunction);
 	
 }

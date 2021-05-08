@@ -25,5 +25,15 @@ public class MainServiceImpl implements MainService {
 	public List<MainBody> bodySym(List<String> symCode) {
 		return mainDao.bodySym(symCode);
 	}
+
+	@Override
+	public String getBodyName(List<String> symCode) {
+		return mainDao.getBodyName(symCode);
+	}
+
+	@Override
+	public String getIngredient(String typicalFunction) {
+		return mainDao.getIngredient(typicalFunction);
+	}
 	
 }
