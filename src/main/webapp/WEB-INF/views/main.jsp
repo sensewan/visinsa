@@ -8,20 +8,46 @@
 <script>
 	//증상클릭 이벤트
 	$(function(){
+		$("#modal2").hide();
 		$("#symptomCheck").on("click", function(){
 			var symCode = [];
+			var f1 = "";
 			$("input[id=symptom]:checked").each(function(){
 				var chk = $(this).val();
 				symCode.push(chk);
 			});
 			console.log(symCode);
-			$(".modal").hide();
+			$("#modal1").hide();
 			$("#modalForm *").remove();
 			$.ajax({
 				url : "${pageContext.request.contextPath}/mainBodySymCode?symCode=" + symCode,
 				type : "get",
 				success : function(data) {
-				
+					console.log(data);
+					if(data.length == 0) {
+						f1 += "<div>";
+						f1 += "예상되는 질병이 없습니다.";
+						f1 += "</div>";
+					} else {
+						f1 += "<div>";
+						for(i=0; i < data.length; i++){
+							medi = data[i].medicalName.split(",");
+							f1 += "<a href='#'>";
+							f1 += data[i].diseaseName;
+							f1 += "</a>,&nbsp;";
+							f1 += "진료과 :";
+							for(j=0; j < medi.length; j++){
+								if(j == 0) {
+									f1 += "<a href='#'>" + medi[j] + "</a>";
+								} else {
+									f1 += "<a href='#'>," + medi[j] + "</a>";
+								}
+							}
+							f1 += "<br>";
+						}
+					}
+					$("#modalForm2").append(f1);
+					$("#modal2").show();
 				}
 			});
 		});
@@ -29,7 +55,7 @@
 	// 머리 클릭 이벤트
 	function map1(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000007%7CB000004%7CB000002%7CB000017%7CB000015",
@@ -160,7 +186,7 @@
 	// 목 클릭 이벤트
 	function map2(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000008",
@@ -195,7 +221,7 @@
 	// 가슴 클릭 이벤트
 	function map3(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000020%7CB000014",
@@ -260,7 +286,7 @@
 	// 배 클릭 이벤트
 	function map4(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000006%7CB000010%7CB000019",
@@ -347,7 +373,7 @@
 	// 팔 클릭 이벤트
 	function map5(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000012%7CB000018",
@@ -413,7 +439,7 @@
 	// 다리 클릭 이벤트
 	function map6(){
 		var dd = "";
-		$(".modal").show();
+		$("#modal1").show();
 		console.log("여기까지");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/mainBody?code=B000001%7CB000005%7CB000009%7CB000011%7CB000013",
@@ -543,9 +569,19 @@
 	}
 	
 	$(function(){
-		$("#modalClose").click(function(){
-			$(".modal").hide();
+		$("#modalClose1").click(function(){
+			$("#modal1").hide();
 			$("#modalForm *").remove();
+		});
+		
+		$("#modalClose2").click(function(){
+			$("#modal2").hide();
+			$("#modalForm2 *").remove();
+		});
+		
+		$("#symptomCheck2").click(function(){
+			$("#modal2").hide();
+			$("#modalForm2 *").remove();
 		});
 	});
 </script>
@@ -566,7 +602,7 @@
 		</map>
 	</div>
 	
-	<div class="modal">
+	<div class="modal" id="modal1" style="overflow: auto;">
 		<div class="modal-dialog" role="document" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header" style="margin: auto;">
@@ -578,14 +614,14 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="symptomCheck">확인</button>
-					<button type="button" class="btn btn-secondary" id="modalClose">취소</button>
+					<button type="button" class="btn btn-secondary" id="modalClose1">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	
-	<div class="modal2">
+	<div class="modal" id="modal2" style="overflow: auto;">
 		<div class="modal-dialog" role="document" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header" style="margin: auto;">
@@ -596,8 +632,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="symptomCheck">확인</button>
-					<button type="button" class="btn btn-secondary" id="modalClose">취소</button>
+					<button type="button" class="btn btn-primary" id="symptomCheck2">확인</button>
+					<button type="button" class="btn btn-secondary" id="modalClose2">취소</button>
 				</div>
 			</div>
 		</div>

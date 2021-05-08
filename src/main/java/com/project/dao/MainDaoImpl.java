@@ -30,8 +30,6 @@ public class MainDaoImpl implements MainDao {
 	// 증상선택시
 	@Override
 	public List<MainBody> bodySym(List<String> symCode) {
-		System.out.println("symCode Dao 확인 = " + symCode);
-		System.out.println("bodySym Dao 확인 = " + sqlSession.selectList(NAME_SPACE + ".bodySym", symCode));
 		return sqlSession.selectList(NAME_SPACE + ".bodySym", symCode);
 	}
 }

@@ -47,7 +47,6 @@ public class MainController {
 		
 		System.out.println("symCode = " + symCode);
 		System.out.println("symCode.getClass().getName() = " + symCode.getClass().getName());
-		return null;
-	
+		return bodySym;
 	}
 }
