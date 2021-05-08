@@ -121,12 +121,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 12) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -142,12 +142,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 193) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -163,12 +163,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 184) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -205,7 +205,7 @@
  	 	 	 			dd += "<div>";
  	 				}
  	 				
- 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
 
  	 				if(i % 10 == 9 && i != data.length - 1) {
  	 	 	 			dd += "</div>";
@@ -242,12 +242,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 8) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -263,12 +263,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 62) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -308,12 +308,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 63) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -329,12 +329,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 7) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -350,12 +350,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 135) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -394,12 +394,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 23) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -415,12 +415,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 54) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -463,12 +463,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 87) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -484,12 +484,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 41) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -505,12 +505,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 176) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -526,12 +526,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 157) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
@@ -547,12 +547,12 @@
  						}
  	 					if(j % 10 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}else if(j % 10 == 9 && i != 110) {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' value='" + data[i].symptomName + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
  	 					}
  						j++;
 	 					
