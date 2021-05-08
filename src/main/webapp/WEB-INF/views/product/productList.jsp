@@ -83,7 +83,7 @@ $(function() {
 		        	<img src="resources/upload/${ b.image }" class="card-img-top" style="width:300px; height: 290px; " alt="..."/>
 		        </a>		        
 		        <p class="card-text">제조사: ${ b.productBrand }</p>
-		        <p class="card-text">가격: ${ b.productPrice }</p>
+		        <p class="card-text"><fmt:formatNumber value="${ b.productPrice }" type="currency"/></p>
 		        
 		      </div>
 		      
@@ -136,7 +136,7 @@ $(function() {
 		        	<img src="resources/upload/${ b.image }" class="card-img-top" style="width:300px; height: 290px; " alt="..."/>
 		        </a>		        
 		        <p class="card-text">제조사: ${ b.productBrand }</p>
-		        <p class="card-text">가격: ${ b.productPrice }</p>
+		        <p class="card-text"><fmt:formatNumber value="${ b.productPrice }" type="currency"/></p>
 		        
 		      </div>
 		      

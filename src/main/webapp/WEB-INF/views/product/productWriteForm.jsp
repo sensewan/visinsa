@@ -9,7 +9,7 @@
 	<table class="readTable">
 		<tr>
 			<td colspan="4" class="boardTitle">
-				<h2>상품들록하기</h2>
+				<h2>상품등록하기</h2>
 			</td>
 		</tr>
 		<tr>
