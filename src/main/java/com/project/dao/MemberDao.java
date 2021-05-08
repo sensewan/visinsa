@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.project.domain.Basket;
 import com.project.domain.Member;
@@ -50,5 +51,8 @@ public interface MemberDao {
 	public void addPurchase(Basket basket);
 
 	// 구매내역 가져오기
-	public List<Basket> getPurchase(String id);
+	public List<Basket> getPurchase(Map<String, Object> map);
+
+	// 구매내역 카운트
+	public int countPurchase(String id);
 }

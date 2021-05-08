@@ -1,6 +1,7 @@
 package com.project.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,7 +102,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Basket> getPurchase(String id) {
-		return memberDao.getPurchase(id);
+	public List<Basket> getPurchase(Map<String, Object> map) {
+		return memberDao.getPurchase(map);
+	}
+
+	@Override
+	public int countPurchase(String id) {
+		return memberDao.countPurchase(id);
 	}
 }

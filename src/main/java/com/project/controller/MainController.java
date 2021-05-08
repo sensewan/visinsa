@@ -43,10 +43,19 @@ public class MainController {
 
 		
 		List<MainBody> bodySym = mainService.bodySym(symCode);
+		String typicalFunction = mainService.getBodyName(symCode);
+		System.out.println("typicalFunction = " + typicalFunction);
+		String typicalIngredient = mainService.getIngredient(typicalFunction);
+		System.out.println("typicalIngredient = " + typicalIngredient);
+		System.out.println("bodySym = " + bodySym);
+		
+		MainBody test = new MainBody();
+		test.setTypicalIngredient(typicalIngredient);
+		
+		bodySym.add(test);
 		System.out.println("bodySym = " + bodySym);
 		
 		System.out.println("symCode = " + symCode);
-		System.out.println("symCode.getClass().getName() = " + symCode.getClass().getName());
 		return bodySym;
 	}
 }

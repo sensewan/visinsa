@@ -3,7 +3,7 @@ package com.project.domain;
 public class MainBody {
 
 	private String symptomName, symptomCode, bodyCode, 
-		medicalCode, diseaseName, medicalName;
+		medicalCode, diseaseName, medicalName, typicalIngredient;
 	
 	public MainBody() { }
 	
@@ -18,6 +18,16 @@ public class MainBody {
 	public MainBody(String diseaseName, String medicalName) {
 		this.diseaseName = diseaseName;
 		this.medicalName = medicalName;
+	}
+
+
+	public String getTypicalIngredient() {
+		return typicalIngredient;
+	}
+
+
+	public void setTypicalIngredient(String typicalIngredient) {
+		this.typicalIngredient = typicalIngredient;
 	}
 
 

@@ -88,18 +88,26 @@
 	<!-- 구매내역 넣기 -->
 	<insert id="addPurchase" parameterType="Basket">
 		INSERT INTO purchase
-			(id, productName, count, price, buyDate)
-		VALUES(#{id},#{productName},#{count},#{price}, now())
+			(id, productName, count, price, age, buyDate)
+		VALUES(#{id},#{productName},#{count},#{price},#{age}, now())
 	</insert>
 	
 	<!-- 구매내역 가져오기 -->
-	<select id="getPurchase" resultType="Basket">
+	<select id="getPurchase" resultType="Basket" parameterType="hashMap">
 		SELECT
 			productName, count, price, buyDate
 		FROM purchase
 		WHERE id = #{id}
+		LIMIT #{startRow}, 10
 	</select>
 	
+	<!-- 구매내역 카운트 -->
+	<select id="countPurchase" resultType="Integer">
+		SELECT
+			count(*)
+		FROM purchase
+		WHERE id = #{id}
+	</select>
 	
 	
 	<!-- 장바구니 전체 삭제 -->

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Basket {
 	
 	private int num, count, price, productPrice;
-	private String id, productName, image;
+	private String id, productName, image, age;
 	private Timestamp buyDate;
 	
 	
@@ -17,11 +17,12 @@ public class Basket {
 		this.id = id;
 	}	
 	
-	public Basket(String id, String productName, int count, int price) {
+	public Basket(String id, String productName, int count, int price, String age) {
 		this.id = id;
 		this.productName = productName;
 		this.count = count;
 		this.price = price;
+		this.age = age;
 	}
 	
 	public Basket(String productName, int count, int price, Timestamp buyDate) {
@@ -47,6 +48,14 @@ public class Basket {
 		this.id = id;
 	}
 	
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
 	public Timestamp getBuyDate() {
 		return buyDate;
 	}

@@ -29,6 +29,12 @@ lon = 126.9786567;
 				url : "${pageContext.request.contextPath}/mainBodySymCode?symCode=" + symCode,
 				type : "get",
 				success : function(data) {
+					var last = data.length - 1;
+					var ing = data[last].typicalIngredient;
+					if(ing != null) {
+						var ti = ing.split(",");
+						console.log(ti);
+					}
 					console.log(data);
 					if(data.length == 0) {
 						f1 += "<div>";
@@ -36,7 +42,7 @@ lon = 126.9786567;
 						f1 += "</div>";
 					} else {
 						f1 += "<div>";
-						for(i=0; i < data.length; i++){
+						for(i=0; i < data.length-1; i++){
 							medi = data[i].medicalName.split(",");
 							f1 += "<a href='#'>";
 							f1 += data[i].diseaseName;
@@ -51,6 +57,21 @@ lon = 126.9786567;
 								}
 							}
 							f1 += "<br>";
+						}
+						if(ing != null) {
+							f1 += "<br>";
+							f1 += "<div style='border-top: 1px solid black'>";
+							f1 += "<br>";
+		 					for(k=0; k < ti.length; k++){
+								if(k == 0) {
+									f1 += "<a href='#'>" + ti[k] + "</a>";
+								} else {
+									f1 += "<span>,</span>";
+									f1 += "<a href='#'>" + ti[k] + "</a>";
+								}
+							}
+							f1 += "<strong>을(를) 추천드립니다.</strong>";
+							f1 += "</div>";
 						}
 					}
 					$("#modalForm2").append(f1);
