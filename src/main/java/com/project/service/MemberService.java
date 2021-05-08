@@ -48,6 +48,12 @@ public interface MemberService {
 	
 	// 회원 정보를 DAO를 이용해 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member);
+
+	// 구매내역 추가
+	public void addPurchase(Basket basket);
+
+	// 구매내역 가져오기
+	public List<Basket> getPurchase(String id);
 	
 	
 }

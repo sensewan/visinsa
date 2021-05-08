@@ -45,4 +45,10 @@ public interface MemberDao {
 	
 	// 회원 정보를 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member);
+
+	// 구매내역 넣기
+	public void addPurchase(Basket basket);
+
+	// 구매내역 가져오기
+	public List<Basket> getPurchase(String id);
 }

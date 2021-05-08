@@ -1,9 +1,13 @@
 package com.project.domain;
 
+import java.sql.Timestamp;
+
 public class Basket {
 	
 	private int num, count, price, productPrice;
 	private String id, productName, image;
+	private Timestamp buyDate;
+	
 	
 	public Basket() {}
 
@@ -11,6 +15,20 @@ public class Basket {
 		this.count = count;
 		this.num = num;
 		this.id = id;
+	}	
+	
+	public Basket(String id, String productName, int count, int price) {
+		this.id = id;
+		this.productName = productName;
+		this.count = count;
+		this.price = price;
+	}
+	
+	public Basket(String productName, int count, int price, Timestamp buyDate) {
+		this.productName = productName;
+		this.count = count;
+		this.price = price;
+		this.buyDate = buyDate;
 	}
 	
 	public Basket(int num, String id, int count,
@@ -29,7 +47,14 @@ public class Basket {
 		this.id = id;
 	}
 	
-	
+	public Timestamp getBuyDate() {
+		return buyDate;
+	}
+
+	public void setBuyDate(Timestamp buyDate) {
+		this.buyDate = buyDate;
+	}
+
 	public int getNum() {
 		return num;
 	}

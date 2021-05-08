@@ -94,4 +94,14 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteBasket(Basket basket) {
 		memberDao.deleteBasket(basket);
 	}
+
+	@Override
+	public void addPurchase(Basket basket) {
+		memberDao.addPurchase(basket);
+	}
+
+	@Override
+	public List<Basket> getPurchase(String id) {
+		return memberDao.getPurchase(id);
+	}
 }
