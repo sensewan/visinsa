@@ -6,7 +6,8 @@
 
 
 <article>
-<form name="ProductUpdateForm" id="ProductUpdateForm" action="updateProductProcess" method="post">
+<form name="ProductUpdateForm" id="ProductUpdateForm" action="updateProductProcess" method="post"
+	enctype="multipart/form-data">
 	<%--
 		no는 DB에서 게시 글을 수정하기 위해 필요하고 pageNum은 게시 글이 
 		수정된 후에 이전에 사용자가 머물렀던 게시 글 리스트의 동일한 페이지로
