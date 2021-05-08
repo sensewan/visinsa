@@ -111,13 +111,14 @@
 					</tr>
 				</thead>
 				
-				
 					<tr>
-				
+						<td>번호가나</td>
+						<td>질병이 나옴</td>
 						<td>
-
-
-							<a href="#" class="dept">지도야!</a>
+			
+							<a href="#" class="dept">
+							이비인후과
+							</a>
 
 						</td>
 					</tr>
@@ -271,6 +272,7 @@
 			var ps = new kakao.maps.services.Places(); 
 			
 			// 키워드로 장소를 검색합니다
+			//               ↱a태그의 텍스트 즉 검색 키워드가 들어감	
 			ps.keywordSearch(id, placesSearchCB, {
 				location : new kakao.maps.LatLng(lat, lon),
 				radius : 3000
@@ -284,12 +286,12 @@
 			        // LatLngBounds 객체에 좌표를 추가합니다
 			        var bounds = new kakao.maps.LatLngBounds();
 			        
-
 			        for (var i=0; i<data.length; i++) {
 			            displayMarker(data[i]);
 			            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 			        }       
-					
+					 
+					 
 			        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 			        //map.setBounds(bounds);
 			    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
@@ -303,6 +305,7 @@
 			        return;
 
 			    }
+			    
 			}
 
 			// 지도에 마커를 표시하는 함수입니다
