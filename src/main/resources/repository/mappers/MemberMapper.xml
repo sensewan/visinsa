@@ -85,14 +85,28 @@
 				#{birth}, #{phone}, #{medic} , null, null, 0)
 	</insert>
 	
-	<!-- 장바구니 삭제 -->
+	<!-- 구매내역 넣기 -->
+	<insert id="addPurchase" parameterType="Basket">
+		INSERT INTO purchase
+			(id, productName, count, price, buyDate)
+		VALUES(#{id},#{productName},#{count},#{price}, now())
+	</insert>
+	
+	<!-- 구매내역 가져오기 -->
+	<select id="getPurchase" resultType="Basket">
+		SELECT
+			productName, count, price, buyDate
+		FROM purchase
+		WHERE id = #{id}
+	</select>
+	
+	
+	
+	<!-- 장바구니 전체 삭제 -->
 	<delete id="deleteBasket" parameterType="Basket">
 		DELETE FROM basket
 		WHERE id = #{id}
-		<if test="num != 0">
-			AND num = #{num}
-		</if>
-	</delete>	
+	</delete>
 	
 	<!-- 장바구니 담기 -->
 	<insert id="addBasket" parameterType="Basket">
@@ -125,7 +139,6 @@
 		FROM member
 		WHERE id = #{id}
 	</select>
-	
 	<!--
 		회원 정보를 수정하는 맵핑 구문  
 	-->

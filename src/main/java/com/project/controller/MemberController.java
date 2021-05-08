@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -407,14 +408,31 @@ public class MemberController {
 		
 		memberService.addBasket(basket);
 	}
-	// 장바구니 삭제
+	// 구매시 장바구니 삭제 및 구매내역 넣기
 	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
 	@ResponseBody
-	public void Basket(@RequestParam("id") String id,
-			Basket basket) {
-		int num = 0;
-		basket.setNum(num);
-		basket.setId(id);
+	public void Basket(HttpServletRequest request, @RequestParam("productName") List<String> productName,
+			@RequestParam("count") List<Integer> count,
+			@RequestParam("price") List<Integer> price,
+			@RequestParam("num") List<Integer> num) {
+
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		Basket basket = new com.project.domain.Basket();
+		System.out.println("productName = " + productName);
+		System.out.println("count = " + count);
+		System.out.println("price = " + price);
+		System.out.println("num = " + num);
+		System.out.println("id = " + id);
+		for(int i=0; i < productName.size(); i++) {
+			basket.setProductName(productName.get(i));
+			basket.setCount(count.get(i));
+			basket.setPrice(price.get(i));
+			basket.setNum(num.get(i));
+			basket.setId(id);
+			memberService.addPurchase(basket);
+		}
 		
 		memberService.deleteBasket(basket);
 	}
@@ -442,7 +460,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/MyPage")
-	public String MyPage() {
+	public String MyPage(HttpServletRequest request,Model model) {
+		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		List<Basket> basket = memberService.getPurchase(id);
+		if(basket.size() != 0) {
+			model.addAttribute("purchase", basket);
+		}
 		
 		return "member/MyPage";
 	}

@@ -3,15 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/main_css.css" />
-<script src="js/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
@@ -19,8 +11,23 @@
 	IMP.init('imp19285602');
 	$(function(){
 		$("#test").on("click", function(){
-			$.ajax({
-				url : "${pageContext.request.contextPath}/deleteBasket?id=${ member.id }",
+			var len = $("input[name=productName]").length;
+			var productName = new Array(len);
+			var count = new Array(len);
+			var price = new Array(len);
+			var num = new Array(len);
+			for(var i = 0; i<len; i++){
+				productName[i] = $("input[name=productName]").eq(i).val();
+				count[i] = $("input[name=count]").eq(i).val();
+				price[i] = $("input[name=price]").eq(i).val();
+				num[i] = $("input[name=num]").eq(i).val();
+			}
+			console.log(productName);
+			console.log(count);
+			console.log(price);
+  			$.ajax({
+				url : "${pageContext.request.contextPath}/deleteBasket?productName="+ productName + "&count="
+						+ count + "&price=" + price + "&num=" + num,
 				type : "get",
 				success : function(data) {
 					alert("결제가 완료되었습니다.");
@@ -34,7 +41,7 @@
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : '주문명:결제테스트',
-			    amount : ${total} ,
+			    amount : '${total}' ,
 			    buyer_email : 'sju04015@naver.com',
 			    buyer_name : '우광현',
 			    buyer_tel : '010-6414-9034',
@@ -85,19 +92,11 @@
 		});
 	});
 </script>
-</head>
 <body>
 	<div class="wrap">
 		<div class="content">
 		</div>
-	<div class="tb">
-		<div class="btn-group-vertical" id="button" style="margin: 10px;">
-			<button type="button" name="MemberUpdate" id="MemberUpdate" class="btn btn-primary">개인정보 변경하기</button>
-			<button type="button" name="MyContent" id="MyContent" class="btn btn-primary">나의 작성글</button>
-			<button type="button" name="MemberDel" id="MemberDel" class="btn btn-primary">회원 탈퇴</button>
-		</div>
-	</div>
-		<div class="container" style="width: 860px; min-width:400px; margin-top: -140px;">
+		<div class="container" style="width: 860px; min-width:400px;">
 			<div id="h2" class="row" style="text-align:center; margin:0 auto;">
 				<h2 class="col-sm-8" style="margin-bottom: 30px;">장바구니</h2>
 				<c:if test="${ not empty basket }">
@@ -117,6 +116,10 @@
 				<!-- 게시 글이 있는 경우 - 게시 글 리스트가 비어있지 않으면 -->
 				<c:if test="${ not empty basket }">
 				<c:forEach var="b" items="${ basket }" varStatus="status">
+					<input type="hidden" name="productName" value="${b.productName}">
+					<input type="hidden" name="count" value="${b.count}">
+					<input type="hidden" name="price" value="${b.price}">
+					<input type="hidden" name="num" value="${b.num}">
 					<tr class="listTr">
 						<td class="listTdTitle" style="text-align:left;"><a href="productDetail?no=${ b.num }">${b.productName }</a></td>
 						<td class="listTdNo"><fmt:formatNumber value="${ b.productPrice }" type="currency"/></td>
@@ -141,4 +144,3 @@
 		</div>
 	</div>
 </body>
-</html>
