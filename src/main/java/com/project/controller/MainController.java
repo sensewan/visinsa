@@ -24,7 +24,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/mainBody", method = RequestMethod.GET)
 	@ResponseBody
-	public List<MainBody> idCheck(@RequestParam("code") String code) {
+	public List<MainBody> mainBody(@RequestParam("code") String code) {
 		System.out.println("여기까진 왔어");
 		
 		List<MainBody> mainBody = mainService.mainBody(code);
@@ -35,5 +35,18 @@ public class MainController {
 		System.out.println("mainBodyType = " + mainBody.getClass().getName());
 		
 		return mainBody;
+	}
+	
+	@RequestMapping(value = "/mainBodySymCode", method = RequestMethod.GET)
+	@ResponseBody
+	public List<MainBody> mainSym(@RequestParam("symCode") List<String> symCode){
+
+		
+		List<MainBody> bodySym = mainService.bodySym(symCode);
+		System.out.println("bodySym = " + bodySym);
+		
+		System.out.println("symCode = " + symCode);
+		System.out.println("symCode.getClass().getName() = " + symCode.getClass().getName());
+		return bodySym;
 	}
 }

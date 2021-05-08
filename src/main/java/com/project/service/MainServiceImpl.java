@@ -20,5 +20,10 @@ public class MainServiceImpl implements MainService {
 		
 		return mainDao.mainBody(code);
 	}
+
+	@Override
+	public List<MainBody> bodySym(List<String> symCode) {
+		return mainDao.bodySym(symCode);
+	}
 	
 }

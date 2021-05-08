@@ -143,6 +143,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.5</version>
 		</dependency>
+		
+		<!-- dependencies 안에 추가합니다 -->
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.14</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
@@ -181,5 +188,12 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+	</build>
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 </project>

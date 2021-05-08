@@ -24,6 +24,12 @@ public class Basket {
 		this.price = price;
 	}
 
+	public Basket(int num, String id) {
+		this.num = num;
+		this.id = id;
+	}
+	
+	
 	public int getNum() {
 		return num;
 	}
