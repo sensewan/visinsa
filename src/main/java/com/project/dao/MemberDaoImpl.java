@@ -209,4 +209,9 @@ public class MemberDaoImpl implements MemberDao {
 	public int countPurchase(String id) {
 		return sqlSession.selectOne(NAME_SPACE + ".countPurchase", id);
 	}
+
+	@Override
+	public void deleteBasketOne(int no) {
+		sqlSession.delete(NAME_SPACE + ".deleteBasketOne", no);
+	}
 }

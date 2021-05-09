@@ -417,6 +417,20 @@ public class MemberController {
 		
 		model.addAttribute("countBasket", countBasket);
 	}
+	
+	// 장바구니 하나 삭제
+	@RequestMapping(value = "/deleteBasketOne", method = RequestMethod.GET)
+	@ResponseBody
+	public void delBasket(HttpServletRequest request, @RequestParam("no") int no, Model model) {
+		memberService.deleteBasketOne(no);
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
+	}
+	
 	// 구매시 장바구니 삭제 및 구매내역 넣기
 	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
 	@ResponseBody

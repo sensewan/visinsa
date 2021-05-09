@@ -116,6 +116,12 @@
 		WHERE id = #{id}
 	</delete>
 	
+	<!-- 장바구니 하나 삭제 -->
+	<delete id="deleteBasketOne" parameterType="Integer">
+		DELETE FROM basket
+		WHERE no = #{no}
+	</delete>
+	
 	<!-- 장바구니 담기 -->
 	<insert id="addBasket" parameterType="Basket">
 		INSERT INTO basket
@@ -126,7 +132,7 @@
 	<!-- 내 장바구니 확인 -->
 	<select id="getBasket" resultType="Basket">
 		SELECT
-			b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
+			b.no, b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
 		FROM basket b, product p
 		WHERE b.num = p.no AND b.id = #{id}
 	</select>

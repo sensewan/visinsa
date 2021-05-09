@@ -7,9 +7,29 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+	
+	
+	
 	var IMP = window.IMP;
 	IMP.init('imp19285602');
 	$(function(){
+		
+		//장바구니 삭제
+		$("button").click(function(){
+			if($.isNumeric($(this).val())){  			
+				$.ajax({
+					url : "${pageContext.request.contextPath}/deleteBasketOne?no="+ $(this).val(),
+					type : "get",
+					success : function(data) {
+						location.href="basket"
+					}
+				});
+			}
+		});
+		
+		
+		
+		
 		$("#test").on("click", function(){
 			var len = $("input[name=productName]").length;
 			var productName = new Array(len);
@@ -110,7 +130,7 @@
 						<th scope="col">상품</th>
 						<th scope="col">금액</th>
 						<th scope="col">개수</th>
-						<th scope="col">합계</th>
+						<th scope="col" colspan="2">합계</th>
 					</tr>
 				</thead>
 				<!-- 게시 글이 있는 경우 - 게시 글 리스트가 비어있지 않으면 -->
@@ -125,12 +145,13 @@
 						<td class="listTdNo"><fmt:formatNumber value="${ b.productPrice }" type="currency"/></td>
 						<td class="listTdRegDate">${ b.count }개</td>
 						<td class="listTdNo"><fmt:formatNumber value="${ b.price }" type="currency"/></td>
+						<td class="listTdNo"><button class="btn btn-primary" value="${ b.no }">삭제</button></td>
 					</tr>
 				</c:forEach>
 				</c:if>
 				<c:if test="${ empty basket }">
 				<tr>
-					<td colspan="4" class="listTdSpan">담은 상품이 존재하지 않습니다.</td>
+					<td colspan="5" class="listTdSpan">담은 상품이 존재하지 않습니다.</td>
 				</tr>
 				</c:if>
 			</table>
