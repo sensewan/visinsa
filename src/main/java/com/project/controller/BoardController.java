@@ -175,14 +175,7 @@ public class BoardController {
 	 **/	
 	
 	
-	
-	@RequestMapping(value= {"/home", "/main"})
-	public String test_main() {
-		
-		
-		return "main";
-	}
-	
+
 	
 	@RequestMapping(value= {"/boardList", "/list"})
 	public String boardList(Model model, 

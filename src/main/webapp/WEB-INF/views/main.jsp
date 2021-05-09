@@ -809,7 +809,7 @@ lon = 126.9786567;
 
 <article>
 
-	<h1>테스트 메인 페이지4</h1>
+	<h1>아픈 부위나 관심 있는 부위를 선택해 주세요.</h1>
 	<div class="content">
 		<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
 		<map name="bodymap">
@@ -859,6 +859,9 @@ lon = 126.9786567;
 			</div>
 		</div>
 	</div>
+
+
+
 	
 
 	
