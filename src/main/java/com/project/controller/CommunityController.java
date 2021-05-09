@@ -178,7 +178,7 @@ public class CommunityController {
 	   }
 	   
 	   reAttrs.addAttribute("pageNum", pageNum); 
-	   return  "redirect:/community/CommunityBoardList"; 
+	   return  "redirect:/CommunityBoardList"; 
 	   }
 	   
 	   
@@ -203,11 +203,13 @@ public class CommunityController {
 	   
 	   if(searchOption) {
 	   
-	   reAttrs.addAttribute("keyword", keyword); reAttrs.addAttribute("type", type);
+	   reAttrs.addAttribute("keyword", keyword); 
+	   
+	   reAttrs.addAttribute("type", type);
 	   }
 	   
-	   reAttrs.addAttribute("pageNum", pageNum); return
-	   "redirect:/community/CommunityBoardList";
+	   reAttrs.addAttribute("pageNum", pageNum); 
+	   return  "redirect:/CommunityBoardList";
 	   }
 	  
 }
