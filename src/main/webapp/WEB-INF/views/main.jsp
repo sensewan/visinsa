@@ -64,10 +64,10 @@ lon = 126.9786567;
 							f1 += "<br>";
 		 					for(k=0; k < ti.length; k++){
 								if(k == 0) {
-									f1 += "<a href='#'>" + ti[k] + "</a>";
+									f1 += "<a href='productList?type=typicalIngredient&keyword=" + ti[k] + "'>" + ti[k] + "</a>";
 								} else {
 									f1 += "<span>,</span>";
-									f1 += "<a href='#'>" + ti[k] + "</a>";
+									f1 += "<a href='productList?type=typicalIngredient&keyword=" + ti[k] + "'>" + ti[k] + "</a>";
 								}
 							}
 							f1 += "<strong>을(를) 추천드립니다.</strong>";

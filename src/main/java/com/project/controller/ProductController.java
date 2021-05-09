@@ -37,6 +37,25 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
+	@RequestMapping(value= {"/productList"}, method = RequestMethod.GET)
+	public String MainproductList(Model model, 
+			@RequestParam(value="pageNum", required=false, 
+					defaultValue="1") int pageNum,
+			@RequestParam(value="type", required=false,  
+					defaultValue="null") String type,
+			@RequestParam(value="keyword", required=false,
+					defaultValue="null") String keyword) {
+
+		
+		// service를 이용해 게시글 리스트 갖고오기 (일반 게시글 요청인지, 검색 요청인지 체크해서 반환 함)
+		Map<String, Object> modelMap = productService.productList(pageNum, type, keyword);
+		
+		model.addAllAttributes(modelMap);
+		
+		return "product/productList";
+	}
+	
+	
 	
 //	*** 상품 리스트 ***
 	@RequestMapping(value= {"/productList"})

@@ -55,4 +55,7 @@ public interface MemberDao {
 
 	// 구매내역 카운트
 	public int countPurchase(String id);
+
+	// 장바구니 하나 삭제
+	public void deleteBasketOne(int no);
 }

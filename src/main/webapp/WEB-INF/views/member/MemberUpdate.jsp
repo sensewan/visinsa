@@ -117,47 +117,6 @@
 </script>
 <script type="text/javascript">
 	
-	//아이디 중복체크
-	$(function(){
-		$("#success-id").hide();
-		$("#danger-id").hide();
-		$("#danger-id2").hide();
-		$("#id").keyup(function(){
-			var check_id = $("#id").val();
-			if(check_id.length != 0){
-				if(check_id.length >= 4){
-					$("#danger-id2").hide();
-					$.ajax({
-						url : "${pageContext.request.contextPath}/idCheck?checkId="+ check_id,
-						type : "get",
-						success : function(data) {
-							console.log("data = " + data);
-							if (data == 1) {
-								$("#danger-id").show();
-								$("#success-id").hide();
-								$("#submit_check_id").val("0");
-							} else {
-								$("#success-id").show();
-								$("#danger-id").hide();
-								$("#submit_check_id").val("1");
-							}
-						}
-					});
-				} else {
-					$("#danger-id2").show();
-					$("#success-id").hide();
-					$("#danger-id").hide();
-				}
-			} else {
-				$("#success-id").hide();
-				$("#danger-id").hide();
-				$("#danger-id2").hide();
-				$("#submit_check_id").val("0");
-			}
-		});
-	});
-	
-	
 	//비밀번호 확인
 	$(function(){
 		$("#alert-success").hide();
@@ -401,18 +360,6 @@
 				</div>
 				
 				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
-					<label for="id" class="col-sm-3 col-form-label">아이디 : </label>
-					<div class="row">
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="id" id="id" placeholder="Id" maxlength="20">
-					</div>
-					</div>
-					<div class="alert alert-success" id="success-id" style="margin-top: 10px">사용가능한 아이디입니다.</div> 
-					<div class="alert alert-danger" id="danger-id" style="margin-top: 10px">사용할수없는 아이디입니다.</div>
-					<div class="alert alert-danger" id="danger-id2" style="margin-top: 10px">4~20자를 사용하세요.</div>
-				</div>
-				
-				<div class="form-group" style="font-size: 16px; margin-left: 150px;">
 					<label for="pwd1" class="col-sm-3 col-form-label">비밀번호 : </label>
 					<div class="row">
 					<div class="col-sm-10">
@@ -582,4 +529,3 @@
 	</div>
 	</div>
 </body>
-

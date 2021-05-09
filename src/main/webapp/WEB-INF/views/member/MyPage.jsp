@@ -9,13 +9,13 @@
 		<div class="content">
 		</div>
 		<div class="tb">
-			<div class="btn-group-vertical" id="button" style="margin: 10px;">
+			<div class="btn-group-vertical" id="button" style="margin: 10px; float: left;">
 				<button type="button" name="MemberUpdate" id="MemberUpdate" class="btn btn-primary">개인정보 변경하기</button>
 				<button type="button" name="MyContent" id="MyContent" class="btn btn-primary">나의 작성글</button>
 				<button type="button" name="MemberDel" id="MemberDel" class="btn btn-primary">회원 탈퇴</button>
 			</div>
 		</div>
-		<div class="container" style="width: 860px; min-width:400px; margin-top: -100px;">
+		<div class="container" style="width: 860px; min-width:400px;">
 			<div id="h2" class="row" style="text-align:center; margin:0 auto;">
 				<h2 class="col-sm-8" style="margin-bottom: 30px;">구매내역</h2>
 			</div>

@@ -110,4 +110,9 @@ public class MemberServiceImpl implements MemberService {
 	public int countPurchase(String id) {
 		return memberDao.countPurchase(id);
 	}
+
+	@Override
+	public void deleteBasketOne(int no) {
+		memberDao.deleteBasketOne(no);
+	}
 }
