@@ -88,8 +88,8 @@
 	<!-- 구매내역 넣기 -->
 	<insert id="addPurchase" parameterType="Basket">
 		INSERT INTO purchase
-			(id, productName, count, price, age, buyDate)
-		VALUES(#{id},#{productName},#{count},#{price},#{age}, now())
+			(id, productName, productCode, count, price, age, buyDate)
+		VALUES(#{id},#{productName},#{productCode},#{count},#{price},#{age}, now())
 	</insert>
 	
 	<!-- 구매내역 가져오기 -->
@@ -125,14 +125,14 @@
 	<!-- 장바구니 담기 -->
 	<insert id="addBasket" parameterType="Basket">
 		INSERT INTO basket
-			(num, id, count)
-		VALUES(#{num}, #{id}, #{count})
+			(num, productCode, id, count)
+		VALUES(#{num}, #{productCode}, #{id}, #{count})
 	</insert>
 	
 	<!-- 내 장바구니 확인 -->
 	<select id="getBasket" resultType="Basket">
 		SELECT
-			b.no, b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
+			b.no, b.productCode, b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
 		FROM basket b, product p
 		WHERE b.num = p.no AND b.id = #{id}
 	</select>

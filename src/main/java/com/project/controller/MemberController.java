@@ -401,16 +401,18 @@ public class MemberController {
 	@RequestMapping(value = "/addBasket", method = RequestMethod.GET)
 	@ResponseBody
 	public void Basket(@RequestParam("num") int num, 
-			@RequestParam("id") String id, @RequestParam("count") int count,
-			Basket basket, Model model) {
+			@RequestParam("id") String id, @RequestParam("productCode") String productCode,
+			@RequestParam("count") int count, Basket basket, Model model) {
 		System.out.println("여기까진 왔어");
 		System.out.println("id = " + id);
 		System.out.println("num = " + num);
 		System.out.println("count = " + count);
+		System.out.println("productCode = " + productCode);
 		
 		basket.setNum(num);
 		basket.setId(id);
 		basket.setCount(count);
+		basket.setProductCode(productCode);
 		
 		memberService.addBasket(basket);
 		int countBasket = memberService.countBasket(id);
@@ -435,6 +437,7 @@ public class MemberController {
 	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
 	@ResponseBody
 	public void Basket(HttpServletRequest request, @RequestParam("productName") List<String> productName,
+			@RequestParam("productCode") List<String> productCode,
 			@RequestParam("count") List<Integer> count,
 			@RequestParam("price") List<Integer> price,
 			@RequestParam("num") List<Integer> num, Model model) {
@@ -461,12 +464,14 @@ public class MemberController {
 		System.out.println("age = " + age);
 		Basket basket = new com.project.domain.Basket();
 		System.out.println("productName = " + productName);
+		System.out.println("productCode = " + productCode);
 		System.out.println("count = " + count);
 		System.out.println("price = " + price);
 		System.out.println("num = " + num);
 		System.out.println("id = " + id);
 		for(int i=0; i < productName.size(); i++) {
 			basket.setProductName(productName.get(i));
+			basket.setProductCode(productCode.get(i));
 			basket.setCount(count.get(i));
 			basket.setPrice(price.get(i));
 			basket.setNum(num.get(i));

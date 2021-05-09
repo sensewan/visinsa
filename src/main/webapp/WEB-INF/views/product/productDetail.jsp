@@ -31,7 +31,7 @@ $(function() {
 		//count = $("#count2").val();
 		console.log('장바구니용 카운트:', count);
 		$.ajax({
-			url : "${pageContext.request.contextPath}/addBasket?num=${ product.no }&id=${ member.id }&count=" + count,
+			url : "${pageContext.request.contextPath}/addBasket?num=${ product.no }&id=${ member.id }&productCode=${ product.productCode }&count=" + count,
 			type : "get",
 			success : function(data) {
 				var result = confirm("장바구니에 담았습니다.\n장바구니를 확인하시겠습니까?");
