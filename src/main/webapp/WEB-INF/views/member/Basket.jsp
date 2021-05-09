@@ -33,20 +33,24 @@
 		$("#test").on("click", function(){
 			var len = $("input[name=productName]").length;
 			var productName = new Array(len);
+			var productCode = new Array(len);
 			var count = new Array(len);
 			var price = new Array(len);
 			var num = new Array(len);
 			for(var i = 0; i<len; i++){
 				productName[i] = $("input[name=productName]").eq(i).val();
+				productCode[i] = $("input[name=productCode]").eq(i).val();
 				count[i] = $("input[name=count]").eq(i).val();
 				price[i] = $("input[name=price]").eq(i).val();
 				num[i] = $("input[name=num]").eq(i).val();
 			}
 			console.log(productName);
+			console.log(productCode);
 			console.log(count);
 			console.log(price);
   			$.ajax({
-				url : "${pageContext.request.contextPath}/deleteBasket?productName="+ productName + "&count="
+				url : "${pageContext.request.contextPath}/deleteBasket?productName="+ productName + 
+						"&productCode="+ productCode + "&count="
 						+ count + "&price=" + price + "&num=" + num,
 				type : "get",
 				success : function(data) {
@@ -137,6 +141,7 @@
 				<c:if test="${ not empty basket }">
 				<c:forEach var="b" items="${ basket }" varStatus="status">
 					<input type="hidden" name="productName" value="${b.productName}">
+					<input type="hidden" name="productCode" value="${b.productCode}">
 					<input type="hidden" name="count" value="${b.count}">
 					<input type="hidden" name="price" value="${b.price}">
 					<input type="hidden" name="num" value="${b.num}">
