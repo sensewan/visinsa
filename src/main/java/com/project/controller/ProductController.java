@@ -295,11 +295,12 @@ public class ProductController {
 			@RequestParam(value="keyword", required=false,
 					defaultValue="null") String keyword,
 			String productCode, String productName, String typicalIngredient, String typicalFunction, int productPrice,
-			String productBrand, String productExplain,
+			String productBrand, String productExplain, int no,
 			@RequestParam(value="image", required=false) MultipartFile multipartFile) throws Exception {		
 		
 
 		Product product = new Product();
+		product.setNo(no);
 		product.setProductCode(productCode);
 		product.setProductName(productName);
 		product.setTypicalIngredient(typicalIngredient);
@@ -364,6 +365,7 @@ public class ProductController {
 		 * 일반 게시 글 리스트를 요청하는 것으로 간주하여 false 값을 갖게 한다.
 		 **/
 		boolean searchOption = (type.equals("null")	|| keyword.equals("null")) ? false : true; 
+		System.out.println("업데이트되어라!!!"+product.getProductName());
 		
 
 		reAttrs.addAttribute("searchOption", searchOption);

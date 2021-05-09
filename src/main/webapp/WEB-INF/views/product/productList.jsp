@@ -72,7 +72,7 @@ $(function() {
 	<c:if test="${ searchOption and not empty productList }">
 		<div class="row justify-content-center" style="width: 1200px; margin-top: 20px;">
 		<c:forEach var="b" items="${productList }" varStatus="status">
-		  <div class="col-sm-4" style="width: 400px; height:400px; margin-top: 30px; margin-bottom: 40px;">
+		  <div class="col-sm-4" style="width: 400px; height:400px; margin-top: 30px; margin-bottom: 50px;">
 		  
 		    <div class="card" style="width: 350px; height: 450px">
 		    
@@ -125,7 +125,7 @@ $(function() {
 	<c:if test="${ not searchOption and not empty productList }">
 		<div class="row justify-content-center" style="width: 1200px; margin-top: 20px;">
 		<c:forEach var="b" items="${productList }" varStatus="status">
-		  <div class="col-sm-4" style="width: 400px; height:400px; margin-top: 30px; margin-bottom: 40px;">
+		  <div class="col-sm-4" style="width: 400px; height:400px; margin-top: 30px; margin-bottom: 50px;">
 		  
 		    <div class="card" style="width: 350px; height: 450px">
 		    
