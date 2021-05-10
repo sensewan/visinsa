@@ -809,8 +809,8 @@ lon = 126.9786567;
 
 <article>
 
-	<h1>테스트 메인 페이지4</h1>
-	<div class="content">
+	<h1>아픈 부위나 관심 있는 부위를 선택해 주세요.</h1>
+	<div class="content" style="position: absolute;">
 		<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
 		<map name="bodymap">
 			<area shape="circle" coords="300,101,79" id="map1" onclick="map1();" onmouseover="if(document,images)mainImg.src='resources/images/human_head.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
@@ -859,6 +859,20 @@ lon = 126.9786567;
 			</div>
 		</div>
 	</div>
+
+
+
+	<div class="card bg-secondary mb-3" style="width: 330px; margin: 10px 15px; float: right; margin-right: 230px;">
+ 			<div class="card-header" style="text-align: center;"><h5 class="text-warning">공지사항</h5></div>
+ 			<c:if test="${miniNoticeList != null }">	  			
+ 			<ul class="list-group list-group-flush">	  			
+ 				<c:forEach var="notice" items="${miniNoticeList }">
+			  <li class="list-group-item"><a href="noticeDetail?no=${ notice.no }&pageNum=1">${ notice.title }</a></li>					 
+			</c:forEach>
+		</ul>
+		</c:if>
+	</div>
+
 	
 
 	

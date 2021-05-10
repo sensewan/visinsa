@@ -84,4 +84,15 @@ public class NoticeDaoImpl implements NoticeDao {
 	public void deleteNotice(int no) {
 		sqlSession.delete(NAME_SPACE + ".deleteNotice", no);
 	}
+
+	
+	// 홈에 뿌려줄 미니 리스
+	@Override
+	public List<Notice> miniNoticeList(int startRow, int endRow) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startRow", startRow);
+		params.put("endRow", endRow);
+		
+		return sqlSession.selectList(NAME_SPACE + ".miniNoticeList", params);
+	}
 }

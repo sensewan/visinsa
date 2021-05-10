@@ -186,26 +186,26 @@ $(function() {
 	</tr>
 	
 	<tr>
-		<td class="table-info">상품명</td>
+		<td class="table-info" style="width: 110px;">상품명</td>
 		<td class="contentTdSpan" colspan="3">${ product.productName }</td>		
 	</tr>
 	<tr>
-		<td class="table-info">브랜드</td>
-		<td class="contentTd">${ product.productBrand }</td>
-		<td class="table-info">등록일</td>
+		<td class="table-info" style="width: 110px;">브랜드</td>
+		<td class="contentTd" style="width: 200px;">${ product.productBrand }</td>
+		<td class="table-info" style="width: 110px;">등록일</td>
 		<td class="contentTd"><fmt:formatDate value="${ product.regDate }" pattern="yyyy-MM-dd" /></td>	
 	</tr>
 	<tr>		
-		<td class="table-info">대표성분</td>
-		<td class="contentTd">${ product.typicalIngredient }</td>
-		<td class="table-info">대표기능</td>
+		<td class="table-info" style="width: 110px;">대표성분</td>
+		<td class="contentTd" style="width: 200px;">${ product.typicalIngredient }</td>
+		<td class="table-info" style="width: 110px;">대표기능</td>
 		<td class="contentTd">${ product.typicalFunction }</td>
 	</tr>
 	
 	<!-- 관리자 및 판매자만 이미지 이름 확인 -->
 	<c:if test="${sessionScope.member.id == 'admin' || sessionScope.member.seller == '1'}">	
 	<tr>
-		<td class="table-info">첨부 이미지 이름: </td>
+		<td class="table-info" style="width: 110px;">첨부 이미지 이름</td>
 		<td class="contentTd" colspan="3">
 		<c:if test="${ empty product.image }">
 			이미지 없음
