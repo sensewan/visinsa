@@ -72,8 +72,10 @@ public class MainController {
 	// *** 메인 홈으로 이동 시키기 ***
 	@RequestMapping(value= {"/home", "/main"})
 	public String test_main(Model model) {
-
+		// service를 이용해 게시글 리스트 갖고오기 (일반 게시글 요청인지, 검색 요청인지 체크해서 반환 함)
+		Map<String, Object> modelMap = noticeService.miniNoticeList(1, 3);
 		
+		model.addAllAttributes(modelMap);
 		
 		return "main";
 	}

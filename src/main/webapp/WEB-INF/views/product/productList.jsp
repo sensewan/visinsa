@@ -195,7 +195,7 @@ $(function() {
 	<!-- 아래는 관리자 모드 및 판매자에서만 보임 -->
 	<c:if test="${sessionScope.member.id == 'admin' || sessionScope.member.seller == '1'}">
 	<div class="card" style="border: none; width: 1080px; margin-bottom: 50px;">		
-		<div class="card-body" style="text-align: center;">
+		<div class="card-body" style="text-align: center; margin-top: -20px;">
 			<button type="button" class="btn btn-info btn-lg btn-block" id="btn-write"
 	    		onclick="location.href='productWriteForm'">상품등록하기</button>	    	
 	   </div>

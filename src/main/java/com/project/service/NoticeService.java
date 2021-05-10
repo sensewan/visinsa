@@ -18,4 +18,8 @@ public interface NoticeService {
 	public abstract void updateNotice(Notice notice);
 	
 	public abstract void deleteNotice(int no);
+	
+	
+	public abstract Map<String, Object> miniNoticeList(int startRow, int endRow); 
+	
 }

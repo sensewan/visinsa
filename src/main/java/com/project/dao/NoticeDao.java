@@ -20,4 +20,6 @@ public interface NoticeDao {
 	public abstract void updateNotice(Notice notice);
 	
 	public abstract void deleteNotice(int no);
+	
+	public abstract List<Notice> miniNoticeList(int startRow, int endRow);
 }
