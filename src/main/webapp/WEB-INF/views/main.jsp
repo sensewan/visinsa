@@ -886,7 +886,7 @@ lon = 126.9786567;
 		</map>
 	</div>
 	
-	<div class="modal" id="modal1" style="overflow: auto;">
+	<div class="modal" id="modal1" style="overflow: auto; white-space: nowrap;">
 		<div class="modal-dialog" role="document" style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<div class="modal-header" style="margin: auto;">
