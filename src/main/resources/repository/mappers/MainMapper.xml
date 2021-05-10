@@ -32,7 +32,7 @@
 	</select>	
 	
 	<!-- 부위 중간 검색 -->
-	<select id="getBodyName" resultType="String" parameterType="java.util.List">
+	<select id="getBodyName" resultType="String" parameterType="hashmap">
 		SELECT
 			b.bodyName bodyName
 		FROM body b, body_symptom1 s
@@ -44,13 +44,16 @@
 	</select>
 	
 	<!-- 추천 검색 -->
-	<select id="getIngredient" resultType="String">
+	<select id="getIngredient" resultType="String" parameterType="hashmap">
 		SELECT GROUP_CONCAT(a.typicalIngredient) as typicalIngredient
 		FROM
 		(SELECT
 			typicalIngredient
 		FROM product
-		WHERE typicalFunction REGEXP #{typicalFunction}
+		WHERE 
+		<foreach collection="list" item="item" separator="and">
+		typicalFunction REGEXP #{item}
+		</foreach>
 		GROUP BY typicalIngredient) a
 	</select>
 	
