@@ -35,16 +35,14 @@
 		  </button>
 		
 		  <div class="collapse navbar-collapse" id="navbarColor01">
-		    <ul class="navbar-nav mr-auto" id=nav_ul style="margin-left: 120px;">
+		    <ul class="navbar-nav mr-auto" id=nav_ul style="margin-left: 150px;">
 		      <li class="nav-item active">
 		        <a class="nav-link" href="home">Home</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="best">BEST</a>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="kakao">건강정보</a>
-		      </li>
+
 		      <li class="nav-item">
 		        <a class="nav-link" href="productList">비타민</a>
 		      </li>
@@ -53,9 +51,6 @@
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="noticeList">공지사항</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="boardList">테스트</a>
 		      </li>
 		    </ul>
 		    
