@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS community;
 CREATE TABLE IF NOT EXISTS community(
 
 	no INTEGER AUTO_INCREMENT PRIMARY KEY,
-	id VARCHAR(10) NOT NULL,
+	id VARCHAR(500) NOT NULL,
 	category VARCHAR(900) NOT NULL,
 	title VARCHAR(4000) NOT NULL,
 	content VARCHAR(5000) NOT NULL,
@@ -68,9 +68,10 @@ CREATE TABLE IF NOT EXISTS reply(
 	reply_content VARCHAR(500) NOT NULL,
 	replyid VARCHAR(20) NOT NULL,
 	replydate TIMESTAMP NOT NULL,	
-    replyrecommend INTEGER default 0 NOT NULL, 
-	CONSTRAINT replyno_fk FOREIGN KEY(bbs_no) REFERENCES community(no),
-    CONSTRAINT replyid_fk FOREIGN KEY(replyid) REFERENCES member(id)
+    replyrecommend INTEGER default 0 NOT NULL,
+    replymedic INTEGER,
+    replybusinessName VARCHAR(500),
+    replybusinessAdd VARCHAR(1000)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -90,4 +91,4 @@ INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '땡큐~ �
 commit;
 SELECT * FROM community;
 SELECT * FROM reply;
-                
+SELECT * FROM member;

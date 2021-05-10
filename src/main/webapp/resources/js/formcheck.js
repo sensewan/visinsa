@@ -136,6 +136,7 @@ $(function() {
 	});
 	
 
+
 	// 게시 글 리스트, 검색 결과 페이지에서 검색 요청 처리
 	$("#noticeSearchForm").on("submit", function() {
 		var keyword = $("#keyword").val();
