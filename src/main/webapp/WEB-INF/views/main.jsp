@@ -862,7 +862,7 @@ lon = 126.9786567;
 
 
 
-	<div class="card bg-secondary mb-3" style="width: 330px; margin: 10px 15px; float: right; margin-right: 150px;">
+	<div class="card bg-secondary mb-3" style="width: 400px; margin: 10px 15px; float: right; margin-right: 150px;">
  			<div class="card-header" style="text-align: center;"><h5 class="text-warning">공지사항</h5></div>
  			<c:if test="${miniNoticeList != null }">	  			
  			<ul class="list-group list-group-flush">	  			
