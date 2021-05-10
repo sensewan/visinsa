@@ -5,7 +5,15 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +35,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.project.domain.Basket;
 import com.project.domain.Member;
 import com.project.service.MemberService;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 
 // 스프링 MVC의 컨트롤러임을 선언하고 있다.
 @Controller
@@ -49,9 +62,15 @@ import com.project.service.MemberService;
  * 
  * @SessionAttributes()를 사용해 member와 m 두 개의 모델 이름을 지정했다. 
  **/
-@SessionAttributes({"member", "m"})
+@SessionAttributes({"member", "m", "countBasket"})
 public class MemberController {
 	private MemberService memberService;
+	private IamportClient api;
+	
+	public MemberController() {
+		this.api = new IamportClient("8134985003699769",
+				"7BWxqsSezbExZaA3whZw1EucBL0ao6rwHo37QVmp70W6bxaHOadQOI3pu3zS91pRptZfolFwmCDy9OfY");
+	}
 	
 	/* @Autowired annotation을 사용해 MemberService 구현체를 셋터 주입하고 있다. 
 	 * 스프링이 기본 생성자를 통해 이 클래스의 인스턴스를 생성한 후 setter 주입
@@ -104,7 +123,7 @@ public class MemberController {
 			HttpSession session, HttpServletResponse response) 
 					throws ServletException, IOException, NoSuchAlgorithmException {
 		
-
+		
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.update(pwd.getBytes());
 		String hex = String.format("%064x", new BigInteger(1, md.digest()));
@@ -140,6 +159,11 @@ public class MemberController {
 			return null;
 		}		
 		
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
+
+		System.out.println("countBasket = " + countBasket);
 		Member member = memberService.getMember(id);
 		session.setAttribute("isLogin", true);
 		
@@ -377,20 +401,90 @@ public class MemberController {
 	@RequestMapping(value = "/addBasket", method = RequestMethod.GET)
 	@ResponseBody
 	public void Basket(@RequestParam("num") int num, 
-			@RequestParam("id") String id, @RequestParam("count") int count,
-			Basket basket) {
+			@RequestParam("id") String id, @RequestParam("productCode") String productCode,
+			@RequestParam("count") int count, Basket basket, Model model) {
 		System.out.println("여기까진 왔어");
 		System.out.println("id = " + id);
 		System.out.println("num = " + num);
 		System.out.println("count = " + count);
+		System.out.println("productCode = " + productCode);
 		
 		basket.setNum(num);
 		basket.setId(id);
 		basket.setCount(count);
+		basket.setProductCode(productCode);
 		
 		memberService.addBasket(basket);
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
 	}
 	
+	// 장바구니 하나 삭제
+	@RequestMapping(value = "/deleteBasketOne", method = RequestMethod.GET)
+	@ResponseBody
+	public void delBasket(HttpServletRequest request, @RequestParam("no") int no, Model model) {
+		memberService.deleteBasketOne(no);
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
+	}
+	
+	// 구매시 장바구니 삭제 및 구매내역 넣기
+	@RequestMapping(value = "/deleteBasket", method = RequestMethod.GET)
+	@ResponseBody
+	public void Basket(HttpServletRequest request, @RequestParam("productName") List<String> productName,
+			@RequestParam("productCode") List<String> productCode,
+			@RequestParam("count") List<Integer> count,
+			@RequestParam("price") List<Integer> price,
+			@RequestParam("num") List<Integer> num, Model model) {
+
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		int birth = member.getBirth();
+		
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy");
+		
+		Date time = new Date();
+		String time1 = format1.format(time);
+		int now = Integer.parseInt(time1);
+		int time2 = 0;
+		if(birth / 10000 > 22) {
+			time2 = now - 1900 - (birth / 10000) + 1;
+		} else {
+			time2 = now - 2000 - (birth / 10000) + 1;
+		}
+		time2 = time2 / 10 * 10;
+		
+		String age = Integer.toString(time2)+ "대";
+		System.out.println("age = " + age);
+		Basket basket = new com.project.domain.Basket();
+		System.out.println("productName = " + productName);
+		System.out.println("productCode = " + productCode);
+		System.out.println("count = " + count);
+		System.out.println("price = " + price);
+		System.out.println("num = " + num);
+		System.out.println("id = " + id);
+		for(int i=0; i < productName.size(); i++) {
+			basket.setProductName(productName.get(i));
+			basket.setProductCode(productCode.get(i));
+			basket.setCount(count.get(i));
+			basket.setPrice(price.get(i));
+			basket.setNum(num.get(i));
+			basket.setId(id);
+			basket.setAge(age);
+			memberService.addPurchase(basket);
+		}
+		
+		memberService.deleteBasket(basket);
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
+	}
 	
 	@RequestMapping("/basket")
 	public String Basket(HttpServletRequest request,Model model) {
@@ -399,13 +493,54 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("member");
 		String id = member.getId();
 		List<Basket> basket = memberService.getBasket(id);
-		model.addAttribute("basket", basket);
-		System.out.println("장바구니 id = " + id);
+		if(basket.size() != 0) {
+			System.out.println("basket" + basket);
+			model.addAttribute("basket", basket);
+			int total = 0;
+			for(int i=0; i < basket.size(); i++) {
+				total += basket.get(i).getPrice();
+			}
+			System.out.println("total = " + total);
+			System.out.println("장바구니 id = " + id);
+			
+			model.addAttribute("total", total);
+		}
 		return "member/Basket";
 	}
 	
 	@RequestMapping("/MyPage")
-	public String MyPage() {
+	public String MyPage(HttpServletRequest request,Model model,
+			@RequestParam(value="pageNum", required=false, 
+			defaultValue="1") int pageNum) {
+		int begin = 0;
+		int end = 0;
+		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		String id = member.getId();
+		
+		int startRow = (pageNum-1) * 10;
+		if(pageNum - 2 >= 1) {
+			begin = pageNum - 2;
+		} else {
+			begin = 1;
+		}
+		int pageCount = memberService.countPurchase(id);
+		if(pageCount % 10 == 0) {
+			end = pageCount / 10;
+		} else {
+			end = pageCount / 10 + 1;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("startRow", startRow);
+		List<Basket> basket = memberService.getPurchase(map);
+		if(basket.size() != 0) {
+			model.addAttribute("purchase", basket);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("end", end);
+			model.addAttribute("begin", begin);
+		}
 		
 		return "member/MyPage";
 	}
@@ -420,5 +555,16 @@ public class MemberController {
 	public String Login() {
 		
 		return "member/Login";
+	}
+	
+	//결제 확인
+	@ResponseBody
+	@RequestMapping("/payments/complete")
+	public IamportResponse<Payment> paymentByImpUid(Model model,
+			Locale locale, HttpSession session,
+			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException,
+	IOException{
+		System.out.println("컨트롤러까진 오냐?");
+		return api.paymentByImpUid(imp_uid);
 	}
 }

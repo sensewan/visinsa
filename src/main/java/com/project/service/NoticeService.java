@@ -1,6 +1,5 @@
 package com.project.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.project.domain.Notice;
@@ -19,4 +18,8 @@ public interface NoticeService {
 	public abstract void updateNotice(Notice notice);
 	
 	public abstract void deleteNotice(int no);
+	
+	
+	public abstract Map<String, Object> miniNoticeList(int startRow, int endRow); 
+	
 }

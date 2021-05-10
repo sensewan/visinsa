@@ -37,6 +37,25 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
+	@RequestMapping(value= {"/productList"}, method = RequestMethod.GET)
+	public String MainproductList(Model model, 
+			@RequestParam(value="pageNum", required=false, 
+					defaultValue="1") int pageNum,
+			@RequestParam(value="type", required=false,  
+					defaultValue="null") String type,
+			@RequestParam(value="keyword", required=false,
+					defaultValue="null") String keyword) {
+
+		
+		// service를 이용해 게시글 리스트 갖고오기 (일반 게시글 요청인지, 검색 요청인지 체크해서 반환 함)
+		Map<String, Object> modelMap = productService.productList(pageNum, type, keyword);
+		
+		model.addAllAttributes(modelMap);
+		
+		return "product/productList";
+	}
+	
+	
 	
 //	*** 상품 리스트 ***
 	@RequestMapping(value= {"/productList"})
@@ -287,24 +306,85 @@ public class ProductController {
 
 	// *** 상품 수정 진행 ***
 	@RequestMapping(value="updateProductProcess", method=RequestMethod.POST)
-	public String updateBoard(HttpServletResponse response, 
-			Product product,
-			RedirectAttributes reAttrs, 
+	public String updateBoard(HttpServletResponse response, HttpServletRequest request, RedirectAttributes reAttrs, 
 			@RequestParam(value="pageNum", required=false, 
 					defaultValue="1") int pageNum,
 			@RequestParam(value="type", required=false,  
 					defaultValue="null") String type,
 			@RequestParam(value="keyword", required=false,
-					defaultValue="null") String keyword) throws Exception {		
+					defaultValue="null") String keyword,
+			String productCode, String productName, String typicalIngredient, String typicalFunction, int productPrice,
+			String productBrand, String productExplain, int no,
+			@RequestParam(value="image", required=false) MultipartFile multipartFile) throws Exception {		
+		
+
+		Product product = new Product();
+		product.setNo(no);
+		product.setProductCode(productCode);
+		product.setProductName(productName);
+		product.setTypicalIngredient(typicalIngredient);
+		product.setTypicalFunction(typicalFunction);
+		product.setProductPrice(productPrice);
+		product.setProductBrand(productBrand);
+		product.setProductExplain(productExplain);
+		
+		
+		/* 업로드한 Multipart 데이터(파일)에 접근하기
+		 * 
+		 * - MultipartFile 인터페이스를 이용한 접근
+		 * - @RequestParam 애노테이션을 이용한 접근
+		 * - MultipartHttpServletRequest를 이용한 접근
+		 * - 커맨드 객체를 이용한 접근
+		 *   커맨드 클래스에 MultipartFile 타입의 프로퍼티가 있어야 한다. 
+		 * - 서블릿 3의 Part를 이용한 접근
+		 * 
+		 * 이 예제는 MultipartHttpServletRequest를 이용한 파일 업로드
+		 * 방법을 소개하고 있다.
+		 **/		
+		if(!multipartFile.isEmpty()) { // 업로드된 파일 데이터가 존재하면
+			
+			// Request 객체를 이용해 파일이 저장될 실제 경로를 구한다.
+			String filePath = request.getServletContext().getRealPath(DEFAULT_PATH);
+			
+			/* UUID(Universally Unique Identifier, 범용 고유 식별자)
+			 * 소프트웨어 구축에 쓰이는 식별자의 표준으로 네트워크 상에서 서로 모르는
+			 * 개체들을 식별하고 구별하기 위해서 사용된다. UUID 표준에 따라 이름을
+			 * 부여하면 고유성을 완벽하게 보장할 수는 없지만 실제 사용상에서 중복될 
+			 * 가능성이 거의 없다고 인정되기 때문에 실무에서 많이 사용되고 있다.
+			 * 
+			 * 파일 이름의 중복을 막고 고유한 파일 이름으로 저장하기 위해 java.util
+			 * 패키지의 UUID 클래스를 이용해 랜덤한 UUID 값을 생성한다.
+			 **/
+			UUID uid = UUID.randomUUID();
+			String saveName = uid.toString() + "_" + multipartFile.getOriginalFilename();
+			
+			File file = new File(filePath, saveName);
+			System.out.println("상품수정 이미지 새로운 이름-> " + file.getName());			
+			
+			// 업로드 되는 파일을 upload 폴더로 저장한다.
+			multipartFile.transferTo(file);
+			
+			/* 아래와 같이 스프링이 지원하는 FileCopyUtils 클래스를
+			 * 이용해 업로드 되는 파일을 upload 폴더로 저장할 수 있다.
+			 **/
+			//byte[] in = multipartFile.getBytes();
+			//FileCopyUtils.copy(in, file);
+			
+			// 업로드된 파일 명을 Board 객체에 저장한다.
+			product.setImage(saveName);
+			System.out.println("디비에 저장된 상품 수정 이미지 이름-> "+saveName);
+		}
+		
+		// BoardService 클래스를 이용해 게시판 테이블에서 게시 글을 수정한다.
+		productService.updateProduct(product);
+		
 		
 		
 		/* 요청 파라미터에서 type이나 keyword가 비어 있으면 
 		 * 일반 게시 글 리스트를 요청하는 것으로 간주하여 false 값을 갖게 한다.
 		 **/
 		boolean searchOption = (type.equals("null")	|| keyword.equals("null")) ? false : true; 
-		
-		// BoardService 클래스를 이용해 게시판 테이블에서 게시 글을 수정한다.
-		productService.updateProduct(product);
+		System.out.println("업데이트되어라!!!"+product.getProductName());
 		
 
 		reAttrs.addAttribute("searchOption", searchOption);
@@ -339,6 +419,8 @@ public class ProductController {
 		//reAttrs.addFlashAttribute("test", "1회용 파라미터 받음 - test");
 		return "redirect:productList";
 	}
+	
+	
 	
 	
 	// 게시글 삭제하기

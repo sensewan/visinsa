@@ -104,4 +104,18 @@ public class NoticeServiceImpl implements NoticeService {
 	public void deleteNotice(int no) {
 		noticeDao.deleteNotice(no);
 	}
+
+	
+	// 메인에 뿌려줄 미니 리스트
+	@Override
+	public Map<String, Object> miniNoticeList(int startRow, int endRow) {
+
+		List<Notice> miniNoticeList = noticeDao.miniNoticeList(startRow, endRow);
+		
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		modelMap.put("miniNoticeList", miniNoticeList);
+
+		return modelMap;
+
+	}
 }

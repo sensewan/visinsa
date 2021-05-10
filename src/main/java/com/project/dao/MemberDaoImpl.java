@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,5 +181,37 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<Basket> getBasket(String id) {
 		return sqlSession.selectList(NAME_SPACE + ".getBasket", id);
+	}
+
+	@Override
+	public int countBasket(String id) {
+		return sqlSession.selectOne(NAME_SPACE + ".countBasket", id);
+	}
+	
+	
+	
+	@Override
+	public void deleteBasket(Basket basket) {
+		sqlSession.delete(NAME_SPACE + ".deleteBasket", basket);
+	}
+
+	@Override
+	public void addPurchase(Basket basket) {
+		sqlSession.insert(NAME_SPACE + ".addPurchase", basket);
+	}
+
+	@Override
+	public List<Basket> getPurchase(Map<String, Object> map) {
+		return sqlSession.selectList(NAME_SPACE + ".getPurchase", map);
+	}
+
+	@Override
+	public int countPurchase(String id) {
+		return sqlSession.selectOne(NAME_SPACE + ".countPurchase", id);
+	}
+
+	@Override
+	public void deleteBasketOne(int no) {
+		sqlSession.delete(NAME_SPACE + ".deleteBasketOne", no);
 	}
 }

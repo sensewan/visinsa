@@ -66,6 +66,7 @@ $(function() {
 		$("#catfilter").val($(this).attr("id"));
 		$("#categoryForm").submit();
 				
+
 	});		
 
 
@@ -172,4 +173,6 @@ $(function() {
 		$(this).attr("action", "noticeList");		
 	});	
 
+
+	});		
 });

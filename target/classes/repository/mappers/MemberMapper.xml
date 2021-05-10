@@ -42,6 +42,11 @@
 		SELECT pw FROM member WHERE id = #{id}
 	</select>
 	
+	<!-- 로그인시 장바구니 개수 확인 -->
+	<select id="countBasket" resultType="Integer">
+		SELECT count(*) FROM basket WHERE id = #{id}
+	</select>
+	
 	<!--
 		회원 id에 해당하는 회원 정보를 반환하는 맵핑 구문
 		테이블의 컬럼명은 일반적으로 언더스코어 표기법("_")을 사용하는 경우가
@@ -80,18 +85,54 @@
 				#{birth}, #{phone}, #{medic} , null, null, 0)
 	</insert>
 	
+	<!-- 구매내역 넣기 -->
+	<insert id="addPurchase" parameterType="Basket">
+		INSERT INTO purchase
+			(id, productName, productCode, count, price, age, buyDate)
+		VALUES(#{id},#{productName},#{productCode},#{count},#{price},#{age}, now())
+	</insert>
+	
+	<!-- 구매내역 가져오기 -->
+	<select id="getPurchase" resultType="Basket" parameterType="hashMap">
+		SELECT
+			productName, count, price, buyDate
+		FROM purchase
+		WHERE id = #{id}
+		LIMIT #{startRow}, 10
+	</select>
+	
+	<!-- 구매내역 카운트 -->
+	<select id="countPurchase" resultType="Integer">
+		SELECT
+			count(*)
+		FROM purchase
+		WHERE id = #{id}
+	</select>
+	
+	
+	<!-- 장바구니 전체 삭제 -->
+	<delete id="deleteBasket" parameterType="Basket">
+		DELETE FROM basket
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 장바구니 하나 삭제 -->
+	<delete id="deleteBasketOne" parameterType="Integer">
+		DELETE FROM basket
+		WHERE no = #{no}
+	</delete>
 	
 	<!-- 장바구니 담기 -->
 	<insert id="addBasket" parameterType="Basket">
 		INSERT INTO basket
-			(num, id, count)
-		VALUES(#{num}, #{id}, #{count})
+			(num, productCode, id, count)
+		VALUES(#{num}, #{productCode}, #{id}, #{count})
 	</insert>
 	
 	<!-- 내 장바구니 확인 -->
 	<select id="getBasket" resultType="Basket">
 		SELECT
-			b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
+			b.no, b.productCode, b.num, b.id, b.count, p.productName, p.image, p.productPrice, (p.productPrice * b.count) as price
 		FROM basket b, product p
 		WHERE b.num = p.no AND b.id = #{id}
 	</select>
@@ -112,7 +153,6 @@
 		FROM member
 		WHERE id = #{id}
 	</select>
-	
 	<!--
 		회원 정보를 수정하는 맵핑 구문  
 	-->

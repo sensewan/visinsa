@@ -10,8 +10,16 @@
 					<span>${member.nickName}님</span>
 				</c:if>
 				
-				<span class="login_m">${ sessionScope.isLogin == true ?
-					"<a href='MyPage'>MyPage&nbsp;⎥&nbsp;</a><a href='logout'>로그아웃</a>" : "<a href='SignUp'>회원가입&nbsp;⎥&nbsp;</a><a href='login'>로그인</a>" }</span>
+				<span class="login_m">
+					<c:choose>
+						<c:when test="${ sessionScope.isLogin == true }">
+							<a href='MyPage'>MyPage&nbsp;⎥&nbsp;</a><a href='basket'>장바구니[${countBasket}]&nbsp;⎥&nbsp;</a><a href='logout'>로그아웃</a>
+						</c:when>
+						<c:when test="${ sessionScope.isLogin != true }">
+							<a href='SignUp'>회원가입&nbsp;⎥&nbsp;</a><a href='login'>로그인</a>
+						</c:when>
+					</c:choose>
+				</span>
 			</div>
 			<div style="text-align: center;">
 			  <a class="navbar-brand" href="main" id="logo">
@@ -35,7 +43,7 @@
 		        <a class="nav-link" href="">BEST</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">건강정보</a>
+		        <a class="nav-link" href="kakao">건강정보</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="productList">비타민</a>

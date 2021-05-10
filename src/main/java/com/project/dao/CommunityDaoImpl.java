@@ -81,8 +81,12 @@ public class CommunityDaoImpl implements CommunityDao {
 	  
 	  @Override 
 	  public void deleteBoard(int no) {
+		  
+		  
+		  sqlSession.delete(NAME_SPACE + ".beforedeleteBoard", no);
+		  sqlSession.delete(NAME_SPACE + ".deleteBoard", no);
 	  
-	  sqlSession.delete(NAME_SPACE + ".deleteBoard", no); }
+	  }
 	  
 	  
 	  public void updateRecommend(int no, String recommend) {

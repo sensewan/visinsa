@@ -228,4 +228,5 @@
 </c:if>
 </table>
 </div>
+
 </article>

@@ -120,7 +120,7 @@ public class ProductDaoImpl implements ProductDao {
 	// DB에 상품 수정하기
 	@Override
 	public void updateProduct(Product product) {
-		
+		System.out.println("업데이트 DAO-> "+product.getProductName());
 		sqlSession.update(NAME_SPACE+".updateProduct", product);
 		
 	}

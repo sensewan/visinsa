@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="css/main_css.css" />
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/member.js"></script>
-<script src="js/formcheck.js"></script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -378,7 +369,6 @@
 	});
 
 </script>
-</head>
 <body>
 	<div class="wrap">
 	<div class="container" style="width: 960px;">
@@ -592,5 +582,4 @@
 	</div>
 	</div>
 </body>
-</html>
 
