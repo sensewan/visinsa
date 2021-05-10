@@ -45,13 +45,14 @@ public class MainController {
 	@ResponseBody
 	public List<MainBody> mainSym(@RequestParam("symCode") List<String> symCode){
 
-		
+
+		System.out.println("symCode = " + symCode);
 		List<MainBody> bodySym = mainService.bodySym(symCode);
+		System.out.println("bodySym = " + bodySym);
 		List<String> typicalFunction = mainService.getBodyName(symCode);
 		System.out.println("typicalFunction = " + typicalFunction);
 		String typicalIngredient = mainService.getIngredient(typicalFunction);
 		System.out.println("typicalIngredient = " + typicalIngredient);
-		System.out.println("bodySym = " + bodySym);
 		
 		
 		

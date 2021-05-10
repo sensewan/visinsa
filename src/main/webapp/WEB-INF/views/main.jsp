@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
+	label{ display:inline-block; width:200px; line-height:50px; }
 
 </style>
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
@@ -37,7 +38,7 @@ lon = 126.9786567;
 						console.log(ti);
 					}
 					console.log(data);
-					if(data.length == 0) {
+					if(data.length == 1) {
 						f1 += "<div>";
 						f1 += "예상되는 질병이 없습니다.";
 						f1 += "</div>";
@@ -295,14 +296,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade active show' id='head'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 144) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 	 	 				dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 144) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -316,14 +320,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='eye'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 77) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 77) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -337,14 +344,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='ear'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 12) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 12) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -358,14 +368,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='nose'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 193) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 193) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -379,14 +392,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='mouth'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 184) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 184) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -419,13 +435,14 @@ lon = 126.9786567;
 	 			dd += "<div class='tab-pane fade active show' id='head'>";
   				for(i=0; i < data.length; i++){
   					
- 	 				if(i % 10 == 0) {
+ 	 				if(i % 7 == 0) {
  	 	 	 			dd += "<div>";
  	 				}
- 	 				
- 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
 
- 	 				if(i % 10 == 9 && i != data.length - 1) {
+						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+						dd += "<label>" + data[i].symptomName + "</label>";
+
+ 	 				if(i % 7 == 6 && i != data.length - 1) {
  	 	 	 			dd += "</div>";
  	 				}
 				}
@@ -458,14 +475,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='breast'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 8) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 8) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -479,14 +499,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade active show' id='chest'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 62) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 62) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -524,14 +547,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade active show' id='stomach'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 63) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 63) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -545,14 +571,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='waist'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 7) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 7) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -566,14 +595,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='skin'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 135) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 135) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -610,14 +642,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade active show' id='hand'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 23) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 23) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -631,14 +666,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='arm'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 54) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 54) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -679,14 +717,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade active show' id='leg'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 87) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 87) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -700,14 +741,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='pelvis'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 41) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 41) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -721,14 +765,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='hip'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 176) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 176) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -742,14 +789,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='genital'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 157) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 157) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
@@ -763,14 +813,17 @@ lon = 126.9786567;
  	 						var j = 0;
  	 	 					dd += "<div class='tab-pane fade' id='foot'>";
  						}
- 	 					if(j % 10 == 0) {
+ 	 					if(j % 7 == 0) {
  	 	 	 				dd += "<div>";
- 	 	 	 				dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
- 	 					}else if(j % 10 == 9 && i != 110) {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
+ 	 					}else if(j % 7 == 6 && i != 110) {
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 	 	 				dd += "</div>";
  	 					} else {
- 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>" + data[i].symptomName + "&nbsp;";
+ 	 						dd += "<input type='checkbox' id='symptom' value='" + data[i].symptomCode + "'>";
+ 	 						dd += "<label>" + data[i].symptomName + "</label>";
  	 					}
  						j++;
 	 					
