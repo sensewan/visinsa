@@ -5,7 +5,7 @@
 	<!-- 헤더영역 -->
 	<div class="header" >
 		<div>
-			<div class="login_bar" style="float: right;">
+			<div class="login_bar" style="float: right; margin-right: 15px;">
 				<c:if test="${ not empty member }">
 					<span>${member.nickName}님</span>
 				</c:if>
@@ -35,12 +35,12 @@
 		  </button>
 		
 		  <div class="collapse navbar-collapse" id="navbarColor01">
-		    <ul class="navbar-nav mr-auto" id=nav_ul>
+		    <ul class="navbar-nav mr-auto" id=nav_ul style="margin-left: 120px;">
 		      <li class="nav-item active">
 		        <a class="nav-link" href="home">Home</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="">BEST</a>
+		        <a class="nav-link" href="best">BEST</a>
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link" href="kakao">건강정보</a>
