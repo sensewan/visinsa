@@ -100,8 +100,8 @@
           '<span style=\'font-weight:bold;color:#1976d2;\'>${ top1Name[0] }</span>',
           '<span style=\'font-weight:bold;color:#424242;\'>${ top1Name[1] }</span>',
           '<span style=\'font-weight:bold;color:#388e3c;\'>${ top1Name[2] }</span>',
-          '<span style=\'font-weight:bold;color:#ffa000;\'>Omnetpp.org</span>',
-          '<span style=\'font-weight:bold;color:#7b1fa2;\'>Promodel.com</span>'
+          '<span style=\'font-weight:bold;color:#ffa000;\'>${ top1Name[3] }</span>',
+          '<span style=\'font-weight:bold;color:#7b1fa2;\'>${ top1Name[4] }</span>'
         ],
         rules: [{
             backgroundColor: '#1976d2',
@@ -163,7 +163,7 @@
           visible: false
         },
         plotLabel: {
-          text: '%data-browser: %v% of total',
+          text: '%data-browser: %v개',
           padding: '8px',
           alpha: 0.9,
           backgroundColor: 'white',
@@ -249,7 +249,7 @@
           data: {
             crosshairX: {
               plotLabel: {
-                text: '%v% of total',
+                text: '%v개',
                 borderColor: bgColors[p.nodeindex],
                 rules: []
               }
