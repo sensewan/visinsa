@@ -872,19 +872,36 @@ lon = 126.9786567;
 </style>
 <article>
 
-	<h1 class="btn btn-success disabled" id="main_title">반가워요~ 저를 클릭해 보세요~</h1>
-	<div class="content" style="width:960px; margin:auto; position: absolute;">
-		<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
-		<map name="bodymap">
-			<area shape="circle" coords="300,101,79" id="map1" onclick="map1();" onmouseover="if(document,images)mainImg.src='resources/images/human_head.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="265,181,334,195" id="map2" onclick="map2();" onmouseover="if(document,images)mainImg.src='resources/images/human_neck.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="243,198,369,261" id="map3" onclick="map3();" onmouseover="if(document,images)mainImg.src='resources/images/human_chest.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="246,264,382,326" id="map4" onclick="map4();" onmouseover="if(document,images)mainImg.src='resources/images/human_stomach.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="238,206,142,291,83,284,60,344,112,365,238,263" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="370,182,372,249,482,167,537,168,549,136,520,126,477,138,471,109,446,142" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="384,334,387,493,407,529,365,535,320,499,318,380,272,502,237,549,201,524,230,487,267,333" id="map6" onclick="map6();" onmouseover="if(document,images)mainImg.src='resources/images/human_leg.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-		</map>
+	<div class="content" style="width:1080px; margin:auto;">
+		<div style="float:left;">
+			<h1 class="btn btn-success disabled" id="main_title">반가워요~ 저를 클릭해 보세요~</h1>
+			<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
+			<map name="bodymap">
+				<area shape="circle" coords="300,101,79" id="map1" onclick="map1();" onmouseover="if(document,images)mainImg.src='resources/images/human_head.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="265,181,334,195" id="map2" onclick="map2();" onmouseover="if(document,images)mainImg.src='resources/images/human_neck.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="243,198,369,261" id="map3" onclick="map3();" onmouseover="if(document,images)mainImg.src='resources/images/human_chest.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="246,264,382,326" id="map4" onclick="map4();" onmouseover="if(document,images)mainImg.src='resources/images/human_stomach.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="238,206,142,291,83,284,60,344,112,365,238,263" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="370,182,372,249,482,167,537,168,549,136,520,126,477,138,471,109,446,142" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="384,334,387,493,407,529,365,535,320,499,318,380,272,502,237,549,201,524,230,487,267,333" id="map6" onclick="map6();" onmouseover="if(document,images)mainImg.src='resources/images/human_leg.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+			</map>
+		</div>
+		<div style="float:left; width: 480px; height: 400px; margin-top: 30px;">
+			<a href="productList"><img src="resources/images/mainchart.png" alt="chart" width="600px"></a>
+		</div>
+		
+		<div class="card bg-secondary mb-3" style="width: 400px; margin: 10px 15px;">
+	 			<div class="card-header" style="text-align: center;"><h5 class="text-warning">공지사항</h5></div>
+	 			<c:if test="${miniNoticeList != null }">	  			
+	 			<ul class="list-group list-group-flush">	  			
+	 				<c:forEach var="notice" items="${miniNoticeList }">
+				  <li class="list-group-item"><a href="noticeDetail?no=${ notice.no }&pageNum=1">${ notice.title }</a></li>					 
+				</c:forEach>
+			</ul>
+			</c:if>
+		</div>
 	</div>
+
 	
 	<div class="modal" id="modal1" style="overflow: auto; white-space: nowrap;">
 		<div class="modal-dialog" role="document" style="max-width: 100%; width: auto; display: table;">
@@ -923,22 +940,6 @@ lon = 126.9786567;
 		</div>
 	</div>
 
-
-
-	<div class="card bg-secondary mb-3" style="width: 400px; margin: 10px 15px; float: right; margin-right: 150px;">
- 			<div class="card-header" style="text-align: center;"><h5 class="text-warning">공지사항</h5></div>
- 			<c:if test="${miniNoticeList != null }">	  			
- 			<ul class="list-group list-group-flush">	  			
- 				<c:forEach var="notice" items="${miniNoticeList }">
-			  <li class="list-group-item"><a href="noticeDetail?no=${ notice.no }&pageNum=1">${ notice.title }</a></li>					 
-			</c:forEach>
-		</ul>
-		</c:if>
-	</div>
-
-	
-
-	
 	<!-- 지도 -->
 	<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
