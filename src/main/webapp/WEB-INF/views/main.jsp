@@ -808,9 +808,18 @@ lon = 126.9786567;
 		
 </script>
 
+<style>
+#main_title{
+	display: block;
+    width: 500px;
+    margin-left: 50px;
+    margin-top: 30px;
+    font-size: 20px;
+}
+</style>
 <article>
 
-	<h1>아픈 부위나 관심 있는 부위를 선택해 주세요.</h1>
+	<h1 class="btn btn-success disabled" id="main_title">반가워요~ 저를 클릭해 보세요~</h1>
 	<div class="content" style="width:960px; margin:auto; position: absolute;">
 		<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
 		<map name="bodymap">
