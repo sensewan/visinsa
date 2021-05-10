@@ -101,11 +101,23 @@
 				VALUES(#{title}, #{id}, #{content}, #{medic}, DEFAULT, 0, #{category})
 	</insert>
 	
-	<update id="updateBoard" parameterType="Board">
+	<update id="updateCommunityBoard" parameterType="Board">
 		UPDATE community SET title = #{title}, content = #{content},
 				regdate = Now()
 		WHERE no = #{no}
 	</update>
+	
+	
+	<delete id="beforeDeleteBoard">
+		DELETE FROM reply
+		WHERE no = #{no}
+	</delete>
+	
+	<delete id="beforedeleteBoard">
+		DELETE FROM reply
+		WHERE no = #{no}
+	</delete>
+	
 	
 	<delete id="deleteBoard">
 		DELETE FROM community
