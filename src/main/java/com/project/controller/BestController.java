@@ -1,13 +1,16 @@
 package com.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.domain.Best;
 import com.project.service.BestService;
 
@@ -22,7 +25,7 @@ public class BestController {
 	}
 	
 	@RequestMapping(value = {"/best"})
-	public String bestBody(Model model, Best best) {
+	public String bestBody(Model model, Best best) throws Exception {
 		
 		/*
 		{ // Data store
@@ -32,16 +35,14 @@ public class BestController {
 	  		omnetpp: [['omnet', 19.29], ['inet', 11.04], ['omnet tutorial', 5.3], ['omnet download', 3.64], ['omnet tutorial for beginners ...', 2.69]],
 	  		promodel: [['promodel', 12.63], ['gsa ebuy', 9.83], ['process simulator', 4.9], ['promodel corporation', 4.47, ['promodel download', 2.54]]]
 		} 
-		
-		
-		['Mathworks.com', 'Ansys.com', 'Arenasimulation.com', 'Omnetpp.org', 'Promodel.com']
+			
 		
 		
 		[59.90, 41.30, 51.20, 48.40, 23.50]
 		
 		 * */
 		
-		
+	
 		// 20~60대 top5 가지고오기
 		List<Best> topAge20 = bestService.getAgeTop5("20대");
 		List<Best> topAge30 = bestService.getAgeTop5("30대");
@@ -55,9 +56,6 @@ public class BestController {
 		List<Object> fortytop5 = new ArrayList<Object>();
 		List<Object> fiftytop5 = new ArrayList<Object>();
 		List<Object> sixtytop5 = new ArrayList<Object>();
-		
-		
-		
 		
 		
 		for (int i = 0; i < 5; i++) {
@@ -82,7 +80,7 @@ public class BestController {
 			
 			sixtySub.add(topAge60.get(i).getProductName());
 			sixtySub.add(topAge60.get(i).getCount());
-			
+						
 			twentytop5.add(twentySub);
 			thirtytop5.add(thirtySub);
 			fortytop5.add(fortySub);
@@ -91,15 +89,42 @@ public class BestController {
 			
 		}
 		
+		// 20대 ~ 60대 각 세대의 세부 데이터
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("twentytop5", twentytop5);
+		map.put("thirtytop5", thirtytop5);
+		map.put("fortytop5", fortytop5);
+		map.put("fiftytop5", fiftytop5);
+		map.put("sixtytop5", sixtytop5);
 		
+		ObjectMapper m = new ObjectMapper();
+		String generationDetail = m.writeValueAsString(map);
+		model.addAttribute("generationDetail", generationDetail);
+		
+		
+		// 20대 ~ 60대 각 세대의 판매량1위 저장
+		List<Integer> generationTop1 = new ArrayList<Integer>();
+		generationTop1.add(topAge20.get(0).getCount());
+		generationTop1.add(topAge30.get(0).getCount());
+		generationTop1.add(topAge40.get(0).getCount());
+		generationTop1.add(topAge50.get(0).getCount());
+		generationTop1.add(topAge60.get(0).getCount());
+		
+		List<String> top1Name = new ArrayList<String>();
+		top1Name.add(topAge20.get(0).getProductName());
+		top1Name.add(topAge30.get(0).getProductName());
+		top1Name.add(topAge40.get(0).getProductName());
+		top1Name.add(topAge50.get(0).getProductName());
+		top1Name.add(topAge60.get(0).getProductName());
+		
+		m = new ObjectMapper();
+		String generationSum = m.writeValueAsString(generationTop1);
+		model.addAttribute("generationSum", generationSum);
 
+		model.addAttribute("top1Name", top1Name);
 		
 		
-		model.addAttribute("topAge20", topAge20);
-		model.addAttribute("topAge30", topAge30);
-		model.addAttribute("topAge40", topAge40);
-		model.addAttribute("topAge50", topAge50);
-		model.addAttribute("topAge60", topAge60);
+		model.addAttribute("twentytop5", twentytop5);
 		
 		return "/best/Best";
 	}

@@ -23,6 +23,7 @@ public class BestDaoImpl implements BestDao {
 	@Override
 	public List<Best> getAgeTop5(String age) {
 		return sqlSession.selectList(NAME_SPACE + ".getAgeTop5", age);
-	}	
+	}
+
 	
 }

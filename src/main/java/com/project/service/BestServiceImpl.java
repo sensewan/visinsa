@@ -18,5 +18,6 @@ public class BestServiceImpl implements BestService {
 	public List<Best> getAgeTop5(String age) {
 		return bestDao.getAgeTop5(age);
 	}
+
 	
 }
