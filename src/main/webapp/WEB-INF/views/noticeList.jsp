@@ -122,52 +122,7 @@
 </c:if>	
 
 <c:if test="${ not searchOption and not empty noticeList }">
-	<c:forEach var="n" items="${ noticeList }" varStatus="status">
-	<c:if test="${n.state == 1 }">
-			<tr class="listTr table-primary">
-				<td class="listTdNo">${ n.no }</td>
-				<td class="listTdTitle">
-				<a href="noticeDetail?no=
-			${ n.no }&pageNum=${ currentPage }" >${ n.title }</a>
-			</td>
-			<td class="listTdWriter">${ n.writer }</td>
-			<td class="listTdRegDate"><fmt:formatDate value="${ n.regDate }"
-			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			<td class="listTdHits">${ n.hits }</td>
-			</tr>
-	</c:if>
-	<c:if test="${n.state == 2 }">
-			<tr class="listTr table-primary">
-				<td class="listTdNo">${ n.no }</td>
-				<td class="listTdTitle">
-				<a href="noticeDetail?no=
-			${ n.no }&pageNum=${ currentPage }" >${ n.title }</a>
-			</td>
-			<td class="listTdWriter">${ n.writer }</td>
-			<td class="listTdRegDate"><fmt:formatDate value="${ n.regDate }"
-			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			<td class="listTdHits">${ n.hits }</td>
-			</tr>
-	</c:if>
-	
-	
-	<c:if test="${n.state ==0 }">
-			<tr class="listTr">
-				<td class="listTdNo">${ n.no }</td>
-				<td class="listTdTitle">
-				<a href="noticeDetail?no=
-			${ n.no }&pageNum=${ currentPage }" >${ n.title }</a>
-			</td>
-			<td class="listTdWriter">${ n.writer }</td>
-			<td class="listTdRegDate"><fmt:formatDate value="${ n.regDate }"
-			pattern="yyyy-MM-dd HH:mm:ss" /></td>
-			<td class="listTdHits">${ n.hits }</td>
-			</tr>
-	</c:if>
-	</c:forEach>
 
-	
-	
 		<c:forEach var="n" items="${ noticeList }" varStatus="status">
    			<c:if test="${n.state == 1 }">
          		<tr class="listTr table-danger">
