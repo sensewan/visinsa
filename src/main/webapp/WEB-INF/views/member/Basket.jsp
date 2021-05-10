@@ -28,37 +28,6 @@
 		});
 		
 		
-		
-		
-		$("#test").on("click", function(){
-			var len = $("input[name=productName]").length;
-			var productName = new Array(len);
-			var productCode = new Array(len);
-			var count = new Array(len);
-			var price = new Array(len);
-			var num = new Array(len);
-			for(var i = 0; i<len; i++){
-				productName[i] = $("input[name=productName]").eq(i).val();
-				productCode[i] = $("input[name=productCode]").eq(i).val();
-				count[i] = $("input[name=count]").eq(i).val();
-				price[i] = $("input[name=price]").eq(i).val();
-				num[i] = $("input[name=num]").eq(i).val();
-			}
-			console.log(productName);
-			console.log(productCode);
-			console.log(count);
-			console.log(price);
-  			$.ajax({
-				url : "${pageContext.request.contextPath}/deleteBasket?productName="+ productName + 
-						"&productCode="+ productCode + "&count="
-						+ count + "&price=" + price + "&num=" + num,
-				type : "get",
-				success : function(data) {
-					alert("결제가 완료되었습니다.");
-					location.href="basket"
-				}
-			});
-		});
 		$("#pay").on("click", function(){
 			IMP.request_pay({
 			    pg : 'kakaopay',
@@ -98,11 +67,31 @@
 			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 			    		}
 			    	}).always(function() {		
-			    		$.ajax({
-							url : "${pageContext.request.contextPath}/deleteBasket?id=${ member.id }",
+						var len = $("input[name=productName]").length;
+						var productName = new Array(len);
+						var productCode = new Array(len);
+						var count = new Array(len);
+						var price = new Array(len);
+						var num = new Array(len);
+						for(var i = 0; i<len; i++){
+							productName[i] = $("input[name=productName]").eq(i).val();
+							productCode[i] = $("input[name=productCode]").eq(i).val();
+							count[i] = $("input[name=count]").eq(i).val();
+							price[i] = $("input[name=price]").eq(i).val();
+							num[i] = $("input[name=num]").eq(i).val();
+						}
+						console.log(productName);
+						console.log(productCode);
+						console.log(count);
+						console.log(price);
+			  			$.ajax({
+							url : "${pageContext.request.contextPath}/deleteBasket?productName="+ productName + 
+									"&productCode="+ productCode + "&count="
+									+ count + "&price=" + price + "&num=" + num,
 							type : "get",
 							success : function(data) {
 								alert("결제가 완료되었습니다.");
+								location.href="basket"
 							}
 						});
 			    	});
@@ -163,7 +152,6 @@
 			<c:if test="${ not empty basket }">
 				<div>
 					<input type="button" class="btn btn-primary" id="pay" value="결제하기">
-					<input type="button" class="btn btn-primary" id="test" value="테스트">
 				</div>
 			</c:if>
 			</div>
