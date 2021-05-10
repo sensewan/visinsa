@@ -90,14 +90,17 @@
 			]]>
 		-->	
 		<where>	
-			<if test="type == 'title'">
-				title LIKE CONCAT('%', #{keyword}, '%')
+			<if test="type == 'productName'">
+				productName LIKE CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="type == 'writer'">
-				writer LIKE CONCAT('%', #{keyword}, '%')
+			<if test="type == 'typicalIngredient'">
+				typicalIngredient LIKE CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="type == 'content'">
-				content LIKE CONCAT('%', #{keyword}, '%')
+			<if test="type == 'typicalFunction'">
+				typicalFunction LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+			<if test="type == 'productBrand'">
+				productBrand LIKE CONCAT('%', #{keyword}, '%')
 			</if>	
 		</where>
 		ORDER BY no DESC

@@ -14,7 +14,7 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
-	
+
 	<context:component-scan base-package="com.project" />
 
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
@@ -71,6 +71,10 @@
 	
 	<!-- 상품 등록 페이지로 이동 -->
 	<view-controller path="/productWriteForm" view-name="product/productWriteForm" />
+	
+	
+	<!-- 지도 테스트 -->
+	<view-controller path="/kakao" view-name="test/kakao" />
 
 
 <!--  	

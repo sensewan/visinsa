@@ -1,9 +1,13 @@
 package com.project.domain;
 
+import java.sql.Timestamp;
+
 public class Basket {
 	
-	private int num, count, price, productPrice;
-	private String id, productName, image;
+	private int num, count, price, productPrice, no;
+	private String id, productName, productCode, image, age;
+	private Timestamp buyDate;
+	
 	
 	public Basket() {}
 
@@ -11,10 +15,26 @@ public class Basket {
 		this.count = count;
 		this.num = num;
 		this.id = id;
+	}	
+	
+	public Basket(String id, String productName, int count, int price, String age) {
+		this.id = id;
+		this.productName = productName;
+		this.count = count;
+		this.price = price;
+		this.age = age;
 	}
 	
-	public Basket(int num, String id, int count,
+	public Basket(String productName, int count, int price, Timestamp buyDate) {
+		this.productName = productName;
+		this.count = count;
+		this.price = price;
+		this.buyDate = buyDate;
+	}
+	
+	public Basket(int no, int num, String id, int count,
 			String productName, String image, int productPrice, int price) {
+		this.no = no;
 		this.count = count;
 		this.num = num;
 		this.id = id;
@@ -22,6 +42,43 @@ public class Basket {
 		this.image = image;
 		this.productPrice = productPrice;
 		this.price = price;
+	}
+
+	public Basket(int num, String id) {
+		this.num = num;
+		this.id = id;
+	}
+	
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public Timestamp getBuyDate() {
+		return buyDate;
+	}
+
+	public void setBuyDate(Timestamp buyDate) {
+		this.buyDate = buyDate;
 	}
 
 	public int getNum() {

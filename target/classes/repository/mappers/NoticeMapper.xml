@@ -7,11 +7,22 @@
 <mapper namespace="com.project.mapper.NoticeMapper">
 
 
-	<select id="noticeList" resultType="Notice" parameterType="hashmap">
+	<select id="noticeList" resultType="Notice" parameterType="hashmap" resultMap="noticeResultMap">
 			SELECT
 			*
 			FROM VisinsaNotice
-			ORDER BY no DESC
+			<where>
+				<if test="type == 'title'">
+					title LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="type == 'writer'">
+					writer LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="type == 'content'">
+					content LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+			</where>
+			ORDER BY state DESC, no DESC
 			LIMIT #{startRow}, #{num}
 	</select>
 	
@@ -19,6 +30,19 @@
 			SELECT
 			COUNT(no)
 			FROM VisinsaNotice
+			<where>
+				<if test="type == 'title'">
+					title LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="type == 'writer'">
+					writer LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="type == 'content'">
+					content LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+			</where>
+			ORDER BY state DESC, no DESC
+		
 	</select>
 	
 	<select id="getNotice" resultType="Notice" resultMap="noticeResultMap">

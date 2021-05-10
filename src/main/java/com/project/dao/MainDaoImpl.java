@@ -26,4 +26,20 @@ public class MainDaoImpl implements MainDao {
 
 		return sqlSession.selectList(NAME_SPACE + ".mainBody", code);
 	}
+
+	// 증상선택시
+	@Override
+	public List<MainBody> bodySym(List<String> symCode) {
+		return sqlSession.selectList(NAME_SPACE + ".bodySym", symCode);
+	}
+
+	@Override
+	public String getBodyName(List<String> symCode) {
+		return sqlSession.selectOne(NAME_SPACE + ".getBodyName", symCode);
+	}
+
+	@Override
+	public String getIngredient(String typicalFunction) {
+		return sqlSession.selectOne(NAME_SPACE + ".getIngredient", typicalFunction);
+	}
 }

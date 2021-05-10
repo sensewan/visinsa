@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script src = "resources/js/formcheck.js"></script>
+<!-- <script src = "resources/js/formcheck.js"></script> -->
 <article>
 	<form name="checkForm" id="checkForm">
 		<input type="hidden" name="no" id="no" value="${ notice.no }"/>
-		<input type="hidden" name="pass" id="rPass" />
+		<input type="hidden" name="pass" id="rPass"/>
 		<input type="hidden" name="pageNum" value="${ pageNum }" />
 		
 		<c:if test="${ searchOption }">
@@ -14,7 +14,7 @@
 			<input type="hidden" name="keyword" value="${ word }" />
 		</c:if>
 	</form>	
-	<table class="contentTable">
+	<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td colspan="4" class="boardTitle">
 				<h2>게시 글 상세보기</h2>
@@ -50,8 +50,8 @@
 		</tr>
 		<tr>
 			<td colspan="4" class="tdSpan">
-			<input type="button" id="detailUpdate" value="수정하기"/>
-			&nbsp;&nbsp;<input type="button" id="detailDelete" value="삭제하기" />
+			<input type="button" id="noticeUpdate" value="수정하기"/>
+			&nbsp;&nbsp;<input type="button" id="noticeDelete" value="삭제하기" />
 			
 			<c:if test="${ not searchOption }">
 			&nbsp;&nbsp;<input type="button" value="목록보기"

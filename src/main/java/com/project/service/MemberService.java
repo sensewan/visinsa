@@ -1,6 +1,7 @@
 package com.project.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.project.domain.Basket;
 import com.project.domain.Member;
@@ -22,11 +23,17 @@ public interface MemberService {
 	 **/
 	public Member getMember(String id);
 	
+	// 장바구니 삭제
+	public void deleteBasket(Basket basket);
+	
 	// 장바구니 담기
 	public void addBasket(Basket basket);
 	
 	// 내 장바구니 확인
 	public List<Basket> getBasket(String id);
+	
+	// 장바구니 개수 확인
+	public int countBasket(String id);
 	
 	// 회원 가입시 DAO를 이용해 아이디 중복을 체크하는 메서드
 	public int overlapIdCheck(String id);
@@ -42,6 +49,18 @@ public interface MemberService {
 	
 	// 회원 정보를 DAO를 이용해 회원 테이블에서 수정하는 메서드
 	public void updateMember(Member member);
+
+	// 구매내역 추가
+	public void addPurchase(Basket basket);
+
+	// 구매내역 가져오기
+	public List<Basket> getPurchase(Map<String, Object> map);
+
+	// 구매내역 페이지 카운트
+	public int countPurchase(String id);
+
+	// 장바구니 하나 삭제
+	public void deleteBasketOne(int no);
 	
 	
 }

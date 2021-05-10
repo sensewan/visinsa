@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	// 한 페이지에 보여 줄 게시글의 수
-	private static final int PAGE_SIZE = 4;
+	private static final int PAGE_SIZE = 6;
 	
 	/* 한 페이지에 보여질 페이지 그룹의 수
 	 * [이전] 1 2 3 4 5 6 7 8 9 10 [다음]	
