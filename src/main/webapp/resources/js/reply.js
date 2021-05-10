@@ -384,9 +384,9 @@ $(document).ready(function() {
 	$(document).on("click", ".deleteReply", function() {	
 		
 		var no = $(this).attr("data-no");
-		var writer = $(this).parent().prev().find(".member").text();
+		var replyid = $(this).parent().prev().find(".member").text();
 		var bbsNo = $("#replyForm input[name=bbsNo]").val();
-		var result = confirm(writer + "님이 작성한 " + no +"번 댓글을 삭제하시겠습니까?");
+		var result = confirm(" 작성하신 " + no +"번 댓글을 삭제하시겠습니까?");
 		
 		var params = "no=" + no + "&bbsNo=" + bbsNo;	
 		if(result) {

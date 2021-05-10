@@ -76,17 +76,17 @@ CREATE TABLE IF NOT EXISTS reply(
 
 
 -- 댓글 데이터 추가하기 - 1번만 실행한다. --
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '항상 감사합니다.\r\n땡큐!~', 'bktest01', '2016-05-08 13:44:32');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '저두 감사드립니다.', 'bktest03', '2018-01-09 05:24:57');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '저두요~ ^_^', 'bktest01', '2018-01-09 09:19:23');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '헤헷~ 감사 합니다.', 'bktest01', '2018-01-09 12:16:51');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '저두 사이트 발전에 관심이 많습니다.\r\n감사합니다.' , 'bktest03', '2018-01-09 14:39:29');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '와~ 대단하네요 우리 사이트~\r\nㅋㅋㅋ~', 'bktest02', '2018-01-09 14:41:18');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '항상 감사합니다.', 'bktest03', '2018-01-15 16:19:23');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(7, '땡큐!~', 'bktest01', '2018-01-16 17:31:45');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '저두요~ 땡큐!~', 'bktest02', '2018-01-19 18:16:51');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '땡큐~ 여기 붙어라~ ^_^', 'bktest01', '2018-01-20 11:33:27');
-INSERT INTO reply(bbs_no, reply_content, replyid, replydate)VALUES(1, '땡큐~ 붙었어요~', 'bktest01', '2018-01-20 13:19:59');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(7, '항상 감사합니다.\r\n땡큐!~', 'bktest01', '2016-05-08 13:44:32', 0);
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)VALUES(7, '저두 감사드립니다.', 'bktest03', '2018-01-09 05:24:57', 2, '나눔약국', '서울시 용산구 청파로3가 55-87');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(7, '저두요~ ^_^', 'bktest01', '2018-01-09 09:19:23', 0);
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(1, '헤헷~ 감사 합니다.', 'bktest01', '2018-01-09 12:16:51', 0);
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)VALUES(7, '저두 사이트 발전에 관심이 많습니다.\r\n감사합니다.' , 'bktest03', '2018-01-09 14:39:29', 2, '호산약국', '서울시 금천구 독산동 279-5');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)VALUES(7, '와~ 대단하네요 우리 사이트~\r\nㅋㅋㅋ~', 'bktest02', '2018-01-09 14:41:18', 1, '세움병원', '서울시 금천구 독산동 97-99');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)VALUES(7, '항상 감사합니다.', 'bktest03', '2018-01-15 16:19:23', 2, '고시촌약국', '서울시 관악구 대학동 55-1');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(7, '땡큐!~', 'bktest01', '2018-01-16 17:31:45', 0);
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic, replybusinessName, replybusinessAdd)VALUES(1, '저두요~ 땡큐!~', 'bktest02', '2018-01-19 18:16:51', 1, '마음약국', '부산광역시 북구 구포동 59-18');
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(1, '땡큐~ 여기 붙어라~ ^_^', 'bktest01', '2018-01-20 11:33:27', 0);
+INSERT INTO reply(bbs_no, reply_content, replyid, replydate, replymedic)VALUES(1, '땡큐~ 붙었어요~', 'bktest01', '2018-01-20 13:19:59', 0);
 
 commit;
 SELECT * FROM community;
