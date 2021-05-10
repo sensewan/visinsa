@@ -13,9 +13,9 @@ public interface MainDao {
 	public abstract List<MainBody> bodySym(List<String> symCode);
 
 	// 부위 중간검색
-	public abstract String getBodyName(List<String> symCode);
+	public abstract List<String> getBodyName(List<String> symCode);
 
 	// 추천 검색
-	public abstract String getIngredient(String typicalFunction);
+	public abstract String getIngredient(List<String> typicalFunction);
 	
 }
