@@ -27,12 +27,12 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public String getBodyName(List<String> symCode) {
+	public List<String> getBodyName(List<String> symCode) {
 		return mainDao.getBodyName(symCode);
 	}
 
 	@Override
-	public String getIngredient(String typicalFunction) {
+	public String getIngredient(List<String> typicalFunction) {
 		return mainDao.getIngredient(typicalFunction);
 	}
 	

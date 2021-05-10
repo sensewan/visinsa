@@ -34,12 +34,12 @@ public class MainDaoImpl implements MainDao {
 	}
 
 	@Override
-	public String getBodyName(List<String> symCode) {
-		return sqlSession.selectOne(NAME_SPACE + ".getBodyName", symCode);
+	public List<String> getBodyName(List<String> symCode) {
+		return sqlSession.selectList(NAME_SPACE + ".getBodyName", symCode);
 	}
 
 	@Override
-	public String getIngredient(String typicalFunction) {
+	public String getIngredient(List<String> typicalFunction) {
 		return sqlSession.selectOne(NAME_SPACE + ".getIngredient", typicalFunction);
 	}
 }
