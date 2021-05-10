@@ -173,6 +173,5 @@ $(function() {
 		$(this).attr("action", "noticeList");		
 	});	
 
-
-	});		
+	
 });
