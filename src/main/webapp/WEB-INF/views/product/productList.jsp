@@ -98,7 +98,7 @@ $(function() {
 		  	<li class="page-item">
 		   		<a class="page-link" href="productList?pageNum=${ startPage - pageGroup }&type=${ type }&keyword=${ keyword }">&laquo;</a>
 		   	</li>
-		  </c:if>	    
+		  </c:if>
 		  <c:forEach var="i" begin="${ startPage }" end="${ endPage }">
 		  	<c:if test="${ i == currentPage }">
 				<li class="page-item active"><span class="page-link">${ i }</span></li>
@@ -114,7 +114,7 @@ $(function() {
 		    <li class="page-item">
 		      <a class="page-link" href="productList?pageNum=${ startPage + pageGroup }&type=${ type }&keyword=${ keyword }">&raquo;</a>
 		    </li>		
-		  </c:if>    
+		  </c:if>
 		  </ul>
 		</nav>		
 		 		

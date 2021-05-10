@@ -253,7 +253,7 @@ $(function() {
 			</c:if>				
 		</td>
 	</tr>
-	
+	<c:if test="${ sessionScope.isLogin == true }">	
 	<tr>
 		<td colspan="4" class="tdSpan" style="text-align: center;">
 			<select class="form-select" id="count">
@@ -270,6 +270,8 @@ $(function() {
 			<input type="button" id="basket" value="장바구니 담기" class="btn btn-warning"/>
 		</td>
 	</tr>
+	</c:if>
+
 </table>
 
 </article>

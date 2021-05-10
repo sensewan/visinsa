@@ -508,6 +508,31 @@ public class MemberController {
 		return "member/Basket";
 	}
 	
+	// 장바구니 count 실시간 변경
+	@RequestMapping(value = "/setCount", method = RequestMethod.GET)
+	@ResponseBody
+	public int SetCount(@RequestParam("num") int num, 
+			@RequestParam("id") String id, @RequestParam("productCode") String productCode,
+			@RequestParam("count") int count, Basket basket, Model model) {
+		System.out.println("여기까진 왔어");
+		System.out.println("id = " + id);
+		System.out.println("num = " + num);
+		System.out.println("count = " + count);
+		System.out.println("productCode = " + productCode);
+		
+		basket.setNum(num);
+		basket.setId(id);
+		basket.setCount(count);
+		basket.setProductCode(productCode);
+		
+		memberService.addBasket(basket);
+		int countBasket = memberService.countBasket(id);
+		
+		model.addAttribute("countBasket", countBasket);
+		return 0;
+	}
+	
+	
 	@RequestMapping("/MyPage")
 	public String MyPage(HttpServletRequest request,Model model,
 			@RequestParam(value="pageNum", required=false, 

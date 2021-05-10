@@ -36,11 +36,11 @@
 		SELECT
 			b.bodyName bodyName
 		FROM body b, body_symptom1 s
-		WHERE b.bodyCode = s.bodyCode
-		<foreach collection="list" item="item">
-			and s.symptomCode = #{item}
+		WHERE b.bodyCode = s.bodyCode and 
+		<foreach collection="list" item="item" open="(" separator="or" close=")">
+			s.symptomCode = #{item}
 		</foreach>
-		GROUP BY b.bodyName
+		 GROUP BY b.bodyName
 	</select>
 	
 	<!-- 추천 검색 -->
