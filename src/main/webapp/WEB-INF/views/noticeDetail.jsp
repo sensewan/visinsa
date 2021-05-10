@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- <script src = "resources/js/formcheck.js"></script> -->
 <article>
-	<form name="checkForm" id="checkForm">
+<div style="width:1080px;margin-left: auto; margin-right: auto;">
+	<form name="checkForm" id="checkForm" style="text-align:center; margin-left: auto; margin-right: auto;">
 		<input type="hidden" name="no" id="no" value="${ notice.no }"/>
 		<input type="hidden" name="pass" id="rPass"/>
 		<input type="hidden" name="pageNum" value="${ pageNum }" />
@@ -17,18 +18,15 @@
 	<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td colspan="4" class="boardTitle">
-				<h2>게시 글 상세보기</h2>
+			<h2>${ notice.title }</h2>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">&nbsp;</td>
 		</tr>
+		
 		<tr>
-			<td class="contentTh">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-			<td class="contentTd" colspan="3">${ notice.title }</td>
-		</tr>
-		<tr>
-			<td class="contentTh">글쓴이</td>
+			<td class="contentTh">작성자</td>
 			<td class="contentTd">${ notice.writer }</td>
 			<td class="contentTh">작성일</td>
 			<td class="contentTd"><fmt:formatDate value="${ notice.regDate }"
@@ -50,21 +48,22 @@
 		</tr>
 		<tr>
 			<td colspan="4" class="tdSpan">
-			<input type="button" id="noticeUpdate" value="수정하기"/>
-			&nbsp;&nbsp;<input type="button" id="noticeDelete" value="삭제하기" />
+			<button type="button" class="btn btn-outline-primary" id="noticeUpdate" value="수정하기">수정하기</button>
+			&nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" id="noticeDelete" value="삭제하기">삭제하기</button>
 			
 			<c:if test="${ not searchOption }">
-			&nbsp;&nbsp;<input type="button" value="목록보기"
+			&nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" value="목록보기"
 				onclick="javascript:window.location.href=
-					'noticeList?pageNum=${ pageNum }'"/>
+					'noticeList?pageNum=${ pageNum }'">목록보기</button>
 			</c:if>
 			
 			<c:if test="${ searchOption }">
-			&nbsp;&nbsp;<input type="button" value="목록보기"
+			&nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" value="목록보기"
 				onclick="javascript:window.location.href=
-				'noticeList?pageNum=${ pageNum }&type=${ type }&keyword=${keyword }'">
+				'noticeList?pageNum=${ pageNum }&type=${ type }&keyword=${keyword }'">목록보기</button>
 			</c:if>
 			</td>
 		</tr>
-	</table>	
+	</table>
+	</div>	
 </article>
