@@ -5,6 +5,7 @@
 <style>
 
 </style>
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cdb0e08bc78164637f460112638cb43d&libraries=services"></script>
 <script>
 
@@ -306,8 +307,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 144){
- 	 						dd +="</div>"
- 	 	 					dd +="</div>"
+ 	 						dd +="</div>";
+ 	 	 					dd +="</div>";
  	 					}
  					}
  					if( i >= 13 && i <= 77) {
@@ -327,8 +328,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 77){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 0 && i <= 12) {
@@ -348,8 +349,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 12){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 185 && i <= 193) {
@@ -369,8 +370,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 193){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 145 && i <= 184) {
@@ -390,8 +391,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 184){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
 				}
@@ -469,8 +470,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 8){
- 	 						dd +="</div>"
- 	 	 					dd +="</div>"
+ 	 						dd +="</div>";
+ 	 	 					dd +="</div>";
  	 					}
  					}
  					if( i >= 9 && i <= 62) {
@@ -490,8 +491,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 62){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
 				}
@@ -535,8 +536,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 63){
- 	 						dd +="</div>"
- 	 	 					dd +="</div>"
+ 	 						dd +="</div>";
+ 	 	 					dd +="</div>";
  	 					}
  					}
  					if( i >= 0 && i <= 7) {
@@ -556,8 +557,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 7){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 64 && i <= 135) {
@@ -577,8 +578,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 135){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
 				}
@@ -621,8 +622,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 23){
- 	 						dd +="</div>"
- 	 	 					dd +="</div>"
+ 	 						dd +="</div>";
+ 	 	 					dd +="</div>";
  	 					}
  					}
  					if( i >= 24 && i <= 54) {
@@ -642,8 +643,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 54){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
 				}
@@ -690,8 +691,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 87){
- 	 						dd +="</div>"
- 	 	 					dd +="</div>"
+ 	 						dd +="</div>";
+ 	 	 					dd +="</div>";
  	 					}
  					}
  					if( i >= 0 && i <= 41) {
@@ -711,8 +712,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 41){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 158 && i <= 176) {
@@ -732,8 +733,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 176){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 111 && i <= 157) {
@@ -753,8 +754,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 157){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
  					if( i >= 88 && i <= 110) {
@@ -774,8 +775,8 @@ lon = 126.9786567;
  						j++;
 	 					
  	 					if(i == 110){
- 	 						dd +="</div>"
- 	 						dd +="</div>"
+ 	 						dd +="</div>";
+ 	 						dd +="</div>";
  	 					}
  					}
 				}
@@ -809,18 +810,21 @@ lon = 126.9786567;
 
 <article>
 
-	<h1>테스트 메인 페이지4</h1>
-	<div class="content">
-		<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
-		<map name="bodymap">
-			<area shape="circle" coords="300,101,79" id="map1" onclick="map1();" onmouseover="if(document,images)mainImg.src='resources/images/human_head.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="265,181,334,195" id="map2" onclick="map2();" onmouseover="if(document,images)mainImg.src='resources/images/human_neck.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="243,198,369,261" id="map3" onclick="map3();" onmouseover="if(document,images)mainImg.src='resources/images/human_chest.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="rect" coords="246,264,382,326" id="map4" onclick="map4();" onmouseover="if(document,images)mainImg.src='resources/images/human_stomach.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="238,206,142,291,83,284,60,344,112,365,238,263" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="370,182,372,249,482,167,537,168,549,136,520,126,477,138,471,109,446,142" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-			<area shape="poly" coords="384,334,387,493,407,529,365,535,320,499,318,380,272,502,237,549,201,524,230,487,267,333" id="map6" onclick="map6();" onmouseover="if(document,images)mainImg.src='resources/images/human_leg.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
-		</map>
+	<div class="content" style="width:960px; margin:auto;">
+		<h1>테스트 메인 페이지4</h1>
+		<div style="float: left;">
+			<img src="resources/images/human_main.png" name="mainImg" alt="Body" usemap="#bodymap" width="600px">
+			<map name="bodymap">
+				<area shape="circle" coords="300,101,79" id="map1" onclick="map1();" onmouseover="if(document,images)mainImg.src='resources/images/human_head.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="265,181,334,195" id="map2" onclick="map2();" onmouseover="if(document,images)mainImg.src='resources/images/human_neck.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="243,198,369,261" id="map3" onclick="map3();" onmouseover="if(document,images)mainImg.src='resources/images/human_chest.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="rect" coords="246,264,382,326" id="map4" onclick="map4();" onmouseover="if(document,images)mainImg.src='resources/images/human_stomach.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="238,206,142,291,83,284,60,344,112,365,238,263" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="370,182,372,249,482,167,537,168,549,136,520,126,477,138,471,109,446,142" id="map5" onclick="map5();" onmouseover="if(document,images)mainImg.src='resources/images/human_arm.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+				<area shape="poly" coords="384,334,387,493,407,529,365,535,320,499,318,380,272,502,237,549,201,524,230,487,267,333" id="map6" onclick="map6();" onmouseover="if(document,images)mainImg.src='resources/images/human_leg.png'" onmouseout="if(document, images)mainImg.src='resources/images/human_main.png'">
+			</map>
+		</div>
+		
 	</div>
 	
 	<div class="modal" id="modal1" style="overflow: auto;">
