@@ -27,7 +27,7 @@
 				<textarea name="content" id="content" rows="20" cols="80" style="margin-left:100px; width:450px;"></textarea>
 			</td>
 		</tr>	
-		
+	
 		<tr>
 			<td class="readTh" colspan="4">&nbsp;
 			<p style="margin-left:20%;">게시할 곳 : 
