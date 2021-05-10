@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springstudy.bbs.mapper.BestMapper" >
+	
+	<select id="getAgeTop5" resultType="Best" parameterType="String">
+		SELECT
+			productName, age, sum(count) as count
+		FROM purchase
+		WHERE age = #{age}
+		GROUP BY productName
+		ORDER BY count DESC
+		LIMIT 5;
+	</select>
+	
+</mapper>	
